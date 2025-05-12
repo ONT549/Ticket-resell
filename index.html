@@ -6,6 +6,43 @@
   <title>Our Ticket - 티켓 중개 플랫폼</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="dropdown.js"></script>
+  <style>
+    .search-container {
+      text-align: center;
+      margin: 40px auto;
+    }
+
+    #searchInput {
+      padding: 10px;
+      font-size: 16px;
+      width: 60%;
+      max-width: 400px;
+    }
+
+    .search-results {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .search-results ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .search-results li {
+      margin: 10px 0;
+    }
+
+    .search-results a {
+      text-decoration: none;
+      color: #0077cc;
+      font-weight: bold;
+    }
+
+    .search-results a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -18,12 +55,7 @@
           <span class="dropdown-toggle">스포츠</span>
           <ul class="dropdown-menu">
             <li><strong>⚾ 야구</strong></li>
-            <li>
-              <a href="doosan.html">두산 베어스</a> <button class="expand" data-target="doosan">+</button>
-              <ul class="sublist" id="doosan">
-                <li><a href="jamsil-weekday.html">잠실야구장 (주중)</a></li>
-              </ul>
-            </li>
+            <li><a href="doosan.html">두산 베어스</a></li>
             <li><a href="lg.html">LG 트윈스</a></li>
             <li><a href="ktwiz.html">KT wiz</a></li>
             <li><a href="samsung.html">삼성 라이온즈</a></li>
@@ -51,27 +83,67 @@
   </header>
 
   <main>
-    <h2>등록된 티켓 목록</h2>
-
-    <div class="ticket-card">
-      <h3>아이유 콘서트</h3>
-      <p>📅 2025.06.15</p>
-      <p>🪑 2층 A열 10번</p>
-      <p>💰 150,000원</p>
-      <p>📱 <a href="https://open.kakao.com/o/example" target="_blank">오픈카톡 링크</a></p>
-    </div>
-
-    <div class="ticket-card">
-      <h3>세븐틴 팬미팅</h3>
-      <p>📅 2025.06.22</p>
-      <p>🪑 VIP석 B구역 3열</p>
-      <p>💰 220,000원</p>
-      <p>📱 <a href="https://open.kakao.com/o/example2" target="_blank">오픈카톡 링크</a></p>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="찾고 싶은 팀이나 경기명을 입력하세요..." />
+      <div class="search-results" id="results"></div>
     </div>
   </main>
 
   <footer>
     <p>&copy; 2025 Our Ticket</p>
   </footer>
+
+  <script>
+    const data = [
+      { name: "두산 베어스", link: "doosan.html" },
+      { name: "LG 트윈스", link: "lg.html" },
+      { name: "KT wiz", link: "ktwiz.html" },
+      { name: "삼성 라이온즈", link: "samsung.html" },
+      { name: "SSG 랜더스", link: "ssg.html" },
+      { name: "한화 이글스", link: "hanwha.html" },
+      { name: "NC 다이노스", link: "nc.html" },
+      { name: "롯데 자이언츠", link: "lotte.html" },
+      { name: "키움 히어로즈", link: "kiwoom.html" },
+      { name: "KIA 타이거즈", link: "kia.html" },
+      { name: "FC 서울", link: "fcseoul.html" },
+      { name: "수원 삼성", link: "suwonsamsung.html" },
+      { name: "울산 현대", link: "ulsanhyundai.html" },
+      { name: "전북 현대", link: "jeonbuk.html" },
+      { name: "포항 스틸러스", link: "pohang.html" },
+      { name: "대구 FC", link: "daegu.html" },
+      { name: "광주 FC", link: "gwangju.html" },
+      { name: "제주 유나이티드", link: "jeju.html" },
+      { name: "인천 유나이티드", link: "incheon.html" },
+      { name: "강원 FC", link: "gangwon.html" }
+    ];
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const keyword = this.value.trim().toLowerCase();
+      const results = data.filter(item => item.name.toLowerCase().includes(keyword));
+      const resultDiv = document.getElementById("results");
+
+      if (keyword === "") {
+        resultDiv.innerHTML = "";
+        return;
+      }
+
+      if (results.length === 0) {
+        resultDiv.innerHTML = "<p>검색 결과가 없습니다.</p>";
+        return;
+      }
+
+      const ul = document.createElement("ul");
+      results.forEach(item => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = item.link;
+        a.textContent = item.name;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      resultDiv.innerHTML = "";
+      resultDiv.appendChild(ul);
+    });
+  </script>
 </body>
 </html>
