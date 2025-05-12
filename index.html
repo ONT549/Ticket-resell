@@ -11,66 +11,60 @@
   <header>
     <h1>🎟️ Our Ticket</h1>
     <nav>
-      <a href="submit.html">티켓 등록</a>
-      <a href="about.html">소개</a>
-
-      <!-- 드롭다운 메뉴 -->
-      <div class="dropdown">
-        <button class="dropbtn">스포츠</button>
-        <div class="dropdown-content">
-          <div class="subcategory">
-            <span>⚾ 야구</span>
-            <ul>
-              <li>
-                두산 베어스 <button class="expand">+</button>
-                <ul class="sublist">
-                  <li>잠실야구장 (주중)</li>
-                  <li>잠실야구장 (주말)</li>
-                </ul>
-              </li>
-              <li>LG 트윈스</li>
-              <li>KT wiz</li>
-              <li>삼성 라이온즈</li>
-              <li>SSG 랜더스</li>
-              <li>한화 이글스</li>
-              <li>NC 다이노스</li>
-              <li>롯데 자이언츠</li>
-              <li>키움 히어로즈</li>
-              <li>KIA 타이거즈</li>
+      <ul class="nav-links">
+        <li><a href="submit.html">티켓 등록</a></li>
+        <li><a href="about.html">소개</a></li>
+        <li class="dropdown">
+          <span class="dropdown-toggle">스포츠</span>
+          <ul class="dropdown-menu">
+            <li><strong>⚾ 야구</strong></li>
+            <li>두산 베어스 <button class="expand" data-target="doosan">+</button></li>
+            <ul class="sublist" id="doosan">
+              <li>잠실야구장 (주중)</li>
             </ul>
-          </div>
-          <div class="subcategory">
-            <span>⚽ 축구</span>
-            <ul>
-              <li>FC 서울</li>
-              <li>수원 삼성</li>
-              <li>울산 현대</li>
-              <li>전북 현대</li>
-              <li>포항 스틸러스</li>
-              <li>대구 FC</li>
-              <li>광주 FC</li>
-              <li>제주 유나이티드</li>
-              <li>인천 유나이티드</li>
-              <li>강원 FC</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+            <li>LG 트윈스</li>
+            <li>KT wiz</li>
+            <li>삼성 라이온즈</li>
+            <li>SSG 랜더스</li>
+            <li>한화 이글스</li>
+            <li>NC 다이노스</li>
+            <li>롯데 자이언츠</li>
+            <li>키움 히어로즈</li>
+            <li>KIA 타이거즈</li>
+            <li><strong>🏟️ 축구</strong></li>
+            <li>FC 서울</li>
+            <li>수원 삼성</li>
+            <li>울산 현대</li>
+            <li>전북 현대</li>
+            <li>포항 스틸러스</li>
+            <li>대구 FC</li>
+            <li>광주 FC</li>
+            <li>제주 유나이티드</li>
+            <li>인천 유나이티드</li>
+            <li>강원 FC</li>
+          </ul>
+        </li>
+      </ul>
     </nav>
   </header>
 
   <main>
-    <h2 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem;">
-      등록된 티켓 목록
-    </h2>
+    <h2>등록된 티켓 목록</h2>
 
-    <!-- 예시 카드 -->
     <div class="ticket-card">
       <h3>아이유 콘서트</h3>
       <p>📅 2025.06.15</p>
       <p>🪑 2층 A열 10번</p>
       <p>💰 150,000원</p>
       <p>📱 <a href="https://open.kakao.com/o/example" target="_blank">오픈카톡 링크</a></p>
+    </div>
+
+    <div class="ticket-card">
+      <h3>세븐틴 팬미팅</h3>
+      <p>📅 2025.06.22</p>
+      <p>🪑 VIP석 B구역 3열</p>
+      <p>💰 220,000원</p>
+      <p>📱 <a href="https://open.kakao.com/o/example2" target="_blank">오픈카톡 링크</a></p>
     </div>
   </main>
 
