@@ -28,17 +28,29 @@ h1 {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  text-align: center; /* 제목 중앙 정렬 */
 }
 
 nav a {
   margin-right: 1.5rem;
   font-size: 1rem;
   color: #333;
+  text-align: center;
 }
 
 main {
+  width: 100%;
   max-width: 700px;
   margin: 0 auto;
+  padding: 1rem; /* 좌우 여백 확보 */
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  text-align: center; /* 제목 중앙 정렬 */
 }
 
 footer {
@@ -92,8 +104,9 @@ input, select, textarea {
 }
 
 .ticket-card p {
-  margin: 0.2rem 0;
+  margin: 0.4rem 0; /* 줄 간 여백 확보 */
   color: #333;
+  line-height: 1.6; /* 텍스트 줄 간격 늘리기 */
 }
 
 .ticket-card a {
