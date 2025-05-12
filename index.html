@@ -3,45 +3,62 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>지역의 정보 공유 | Our Neighborhood Tip</title>
-  <meta name="description" content="우리 동네의 꿀팁을 함께 나누는 지역 정보 공유 플랫폼. 자취, 병원, 미용, 맛집 정보까지!">
-  <meta name="keywords" content="자취, 지역 정보, 맛집, 병원, 미용실, 서울 꿀팁, Our Neighborhood Tip">
-  <meta name="author" content="Our Neighborhood Tip">
+  <title>🎫 티켓마켓 - 중고 티켓 판매 중개</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9M8SW7KVR"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-M9M8SW7KVR');
-  </script>
+  <!-- SEO Meta -->
+  <meta name="description" content="공연, 콘서트, 스포츠, 전시 등 중고 티켓을 사고파는 믿을 수 있는 중개 플랫폼">
+  <meta name="keywords" content="티켓, 중고티켓, 콘서트, 공연, 티켓마켓, TicketMarket, 직거래">
 </head>
 
 <body>
   <header>
-    <h1>🏠 Our Neighborhood Tip</h1>
+    <h1>🎫 티켓마켓</h1>
     <nav>
-      <a href="regions/seoul.html">🔍 지역별 보기</a>
-      <a href="tips.html">💡 자취 꿀팁</a>
-      <a href="submit.html">🧾 제보하기</a>
-      <a href="submitted.html">📬 제보 확인</a>
-      <a href="about.html">📞 소개 / 연락</a>
+      <a href="index.html">홈</a>
+      <a href="categories/concert.html">콘서트</a>
+      <a href="categories/sports.html">스포츠</a>
+      <a href="submit.html">티켓 등록</a>
+      <a href="mypage.html">마이페이지</a>
+      <a href="about.html">문의</a>
     </nav>
   </header>
 
   <main>
-    <h2>✨ 지역 생활정보 공유 플랫폼</h2>
-    <p>우리 동네의 꿀팁을 함께 나눠요! 자취, 병원, 미용, 숨은 맛집 정보까지 🗺️</p>
-    <a href="submit.html" class="button">제보하러 가기</a>
+    <section class="hero">
+      <h2>원하는 티켓, 여기서 찾아보세요</h2>
+      <input type="text" placeholder="이벤트명, 장소 검색...">
+    </section>
+
+    <section class="highlight">
+      <h3>🌟 인기 티켓</h3>
+      <div class="ticket-list">
+        <div class="ticket-card">
+          <p class="event">뉴진스 콘서트</p>
+          <p class="info">서울 KSPO 돔 | 2025.06.12</p>
+          <p class="price">가격: 120,000원</p>
+        </div>
+        <div class="ticket-card">
+          <p class="event">두산 vs LG 야구</p>
+          <p class="info">잠실야구장 | 2025.06.01</p>
+          <p class="price">가격: 20,000원</p>
+        </div>
+        <!-- 더미 데이터 -->
+      </div>
+    </section>
+
+    <section class="categories">
+      <h3>📅 카테고리 바로가기</h3>
+      <div class="category-list">
+        <a href="categories/concert.html">콘서트</a>
+        <a href="categories/sports.html">스포츠</a>
+        <a href="categories/exhibition.html">전시</a>
+        <a href="categories/musical.html">뮤지컬</a>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Our Neighborhood Tip</p>
+    <p>&copy; 2025 Ticket Market. All rights reserved.</p>
   </footer>
 </body>
 
