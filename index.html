@@ -1,65 +1,48 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-  <meta charset="UTF-8">
-  <title>🎫 티켓마켓 - 중고 티켓 판매 중개</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- SEO Meta -->
-  <meta name="description" content="공연, 콘서트, 스포츠, 전시 등 중고 티켓을 사고파는 믿을 수 있는 중개 플랫폼">
-  <meta name="keywords" content="티켓, 중고티켓, 콘서트, 공연, 티켓마켓, TicketMarket, 직거래">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Ticket - 티켓 중개 플랫폼</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <header>
-    <h1>🎫 티켓마켓</h1>
+    <h1>🎟️ Our Ticket</h1>
     <nav>
-      <a href="index.html">홈</a>
-      <a href="categories/concert.html">콘서트</a>
-      <a href="categories/sports.html">스포츠</a>
       <a href="submit.html">티켓 등록</a>
-      <a href="mypage.html">마이페이지</a>
-      <a href="about.html">문의</a>
+      <a href="about.html">소개</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <h2>원하는 티켓, 여기서 찾아보세요</h2>
-      <input type="text" placeholder="이벤트명, 장소 검색...">
-    </section>
+    <h2 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem;">
+      등록된 티켓 목록
+    </h2>
 
-    <section class="highlight">
-      <h3>🌟 인기 티켓</h3>
-      <div class="ticket-list">
-        <div class="ticket-card">
-          <p class="event">뉴진스 콘서트</p>
-          <p class="info">서울 KSPO 돔 | 2025.06.12</p>
-          <p class="price">가격: 120,000원</p>
-        </div>
-        <div class="ticket-card">
-          <p class="event">두산 vs LG 야구</p>
-          <p class="info">잠실야구장 | 2025.06.01</p>
-          <p class="price">가격: 20,000원</p>
-        </div>
-        <!-- 더미 데이터 -->
-      </div>
-    </section>
+    <!-- 예시 카드 1 -->
+    <div class="ticket-card">
+      <h3>아이유 콘서트</h3>
+      <p>📅 2025.06.15</p>
+      <p>🪑 2층 A열 10번</p>
+      <p>💰 150,000원</p>
+      <p>📱 <a href="https://open.kakao.com/o/example" target="_blank">오픈카톡 링크</a></p>
+    </div>
 
-    <section class="categories">
-      <h3>📅 카테고리 바로가기</h3>
-      <div class="category-list">
-        <a href="categories/concert.html">콘서트</a>
-        <a href="categories/sports.html">스포츠</a>
-        <a href="categories/exhibition.html">전시</a>
-        <a href="categories/musical.html">뮤지컬</a>
-      </div>
-    </section>
+    <!-- 예시 카드 2 -->
+    <div class="ticket-card">
+      <h3>세븐틴 팬미팅</h3>
+      <p>📅 2025.06.22</p>
+      <p>🪑 VIP석 B구역 3열</p>
+      <p>💰 220,000원</p>
+      <p>📱 <a href="https://open.kakao.com/o/example2" target="_blank">오픈카톡 링크</a></p>
+    </div>
+
+    <!-- 여기에 더 많은 티켓이 동적으로 추가될 예정 -->
   </main>
 
   <footer>
-    <p>&copy; 2025 Ticket Market. All rights reserved.</p>
+    <p>&copy; 2025 Our Ticket</p>
   </footer>
 </body>
-
 </html>
