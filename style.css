@@ -169,3 +169,46 @@ input, select, textarea {
   font-size: 1rem;
 }
 
+/* 티켓 등록 페이지에만 적용할 스타일 */
+.ticket-form-page main {
+  max-width: 700px;
+  padding: 1rem;
+  text-align: left; /* 입력폼 정렬 */
+}
+
+.ticket-form-page h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.ticket-form-page input,
+.ticket-form-page select,
+.ticket-form-page textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+}
+
+.ticket-form-page button {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ticket-form-page button:hover {
+  background-color: #fff;
+  color: #111;
+  border: 1px solid #111;
+}
