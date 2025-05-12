@@ -1,11 +1,13 @@
-// dropdown.js
-document.addEventListener('DOMContentLoaded', () => {
-  const expandButtons = document.querySelectorAll('.expand');
+document.addEventListener("DOMContentLoaded", () => {
+  const expandButtons = document.querySelectorAll(".expand");
+
   expandButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const sublist = button.nextElementSibling;
-      if (sublist && sublist.classList.contains('sublist')) {
-        sublist.style.display = sublist.style.display === 'block' ? 'none' : 'block';
+    button.addEventListener("click", () => {
+      const targetId = button.dataset.target;
+      const sublist = document.getElementById(targetId);
+      if (sublist) {
+        const isVisible = sublist.style.display === "block";
+        sublist.style.display = isVisible ? "none" : "block";
       }
     });
   });
