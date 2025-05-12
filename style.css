@@ -16,6 +16,7 @@ body {
   padding: 2rem;
 }
 
+/* 헤더 */
 header {
   margin-bottom: 2rem;
   text-align: center;
@@ -26,6 +27,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
+/* 내비게이션 */
 nav {
   display: flex;
   justify-content: center;
@@ -43,7 +45,8 @@ nav {
   position: relative;
 }
 
-.nav-links a, .dropdown-toggle {
+.nav-links a,
+.dropdown-toggle {
   font-size: 1rem;
   color: #333;
   text-decoration: none;
@@ -52,7 +55,8 @@ nav {
   transition: background 0.3s;
 }
 
-.nav-links a:hover, .dropdown-toggle:hover {
+.nav-links a:hover,
+.dropdown-toggle:hover {
   background-color: #f0f0f0;
   border-radius: 0.5rem;
 }
@@ -67,7 +71,7 @@ nav {
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 0.75rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   z-index: 100;
   width: 220px;
 }
@@ -119,7 +123,7 @@ main h2 {
   padding: 1rem;
   margin-bottom: 1.5rem;
   border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
@@ -141,6 +145,7 @@ footer {
   color: #888;
 }
 
+/* 버튼 */
 button {
   padding: 0.75rem 1rem;
   font-size: 1rem;
@@ -158,8 +163,10 @@ button:hover {
   border: 1px solid #111;
 }
 
-/* 입력폼 구성 */
-input, select, textarea {
+/* 입력 폼 공통 */
+input,
+select,
+textarea {
   width: 100%;
   padding: 0.75rem;
   margin-top: 0.3rem;
@@ -169,11 +176,11 @@ input, select, textarea {
   font-size: 1rem;
 }
 
-/* 티켓 등록 페이지에만 적용할 스타일 */
+/* 티켓 등록 페이지 전용 스타일 */
 .ticket-form-page main {
   max-width: 700px;
   padding: 1rem;
-  text-align: left; /* 입력폼 정렬 */
+  text-align: left;
 }
 
 .ticket-form-page h2 {
@@ -187,28 +194,9 @@ input, select, textarea {
 .ticket-form-page input,
 .ticket-form-page select,
 .ticket-form-page textarea {
-  width: 100%;
-  padding: 0.75rem;
-  margin-top: 0.3rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 0.75rem;
-  font-size: 1rem;
+  /* 이미 공통 스타일로 정의되었으므로 중복 정의 제거 가능하지만, 명시적 재정의해도 무방 */
 }
 
 .ticket-form-page button {
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  background-color: #111;
-  color: #fff;
-  border: none;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.ticket-form-page button:hover {
-  background-color: #fff;
-  color: #111;
-  border: 1px solid #111;
+  /* 공통 버튼 스타일로 커버되므로 생략 가능 */
 }
