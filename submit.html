@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>제보하기 - Our Neighborhood Tip</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>티켓 등록하기 - Our Ticket</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>📬 우리 동네 제보하기</h1>
+    <h1>🎟️ 티켓 등록하기</h1>
     <nav>
-      <a href="index.html">홈으로</a>
+      <a href="index.html">🏠 홈으로</a>
     </nav>
   </header>
 
-  <main>
-    <p>여러분이 알고 있는 동네의 꿀팁을 제보해주세요!</p>
+  <main class="form-container">
+    <form action="submitted.html" method="POST">
+      <label for="event">공연명</label>
+      <input type="text" id="event" name="event" placeholder="예: IU 콘서트" required />
 
-    <!-- 여기 아래에 Google Form iframe 삽입 -->
-    <div class="form-container">
-      <!-- 예시 iframe -->
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdVkNopXgcKfYPFAEm3h6glA7D0C5__fv8tomwBXlUk7xnhUA/viewform?embedded=true" width="640" height="688" frameborder="0" marginheight="0" marginwidth="0">로드 중…</iframe>
-    </div>
+      <label for="date">날짜</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="seat">좌석 정보</label>
+      <input type="text" id="seat" name="seat" placeholder="예: 2층 A열 10번" required />
+
+      <label for="price">가격 (원)</label>
+      <input type="number" id="price" name="price" placeholder="예: 150000" required />
+
+      <label for="contact">연락 방법</label>
+      <input type="text" id="contact" name="contact" placeholder="예: 오픈카톡 링크" required />
+
+      <button type="submit">등록하기</button>
+    </form>
   </main>
+
+  <footer>
+    <p>&copy; 2025 Our Ticket</p>
+  </footer>
 </body>
 </html>
