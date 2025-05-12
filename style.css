@@ -117,3 +117,47 @@ input, select, textarea {
 .ticket-card a:hover {
   text-decoration: underline;
 }
+
+/* 드롭다운 메뉴 스타일 */
+.dropdown {
+  margin-bottom: 2rem;
+}
+
+.subcategory {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.sublist {
+  display: none;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #eee;
+  margin-bottom: 1rem;
+}
+
+.sublist li {
+  margin: 0.4rem 0;
+  list-style: none;
+}
+
+.sublist li a {
+  color: #007aff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.sublist li a:hover {
+  text-decoration: underline;
+}
+
+/* 확장 버튼 스타일 */
+.expand {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #007aff;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
