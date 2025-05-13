@@ -23,8 +23,8 @@ header {
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 /* 내비게이션 */
@@ -47,11 +47,11 @@ nav {
 
 .nav-links a,
 .dropdown-toggle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #333;
   text-decoration: none;
   cursor: pointer;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   transition: background 0.3s;
 }
 
@@ -83,7 +83,7 @@ nav {
 .dropdown-menu li {
   margin: 0.4rem 0;
   list-style: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .dropdown-menu .sublist {
@@ -112,48 +112,9 @@ main {
 }
 
 main h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 2rem;
-}
-
-/* 검색 입력 */
-.search-container {
-  text-align: center;
-  margin: 40px auto;
-}
-
-#searchInput {
-  padding: 12px;
-  font-size: 16px;
-  width: 70%;
-  max-width: 450px;
-  border-radius: 0.75rem;
-  border: 1px solid #ddd;
-}
-
-.search-results {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.search-results ul {
-  list-style: none;
-  padding: 0;
-}
-
-.search-results li {
-  margin: 10px 0;
-}
-
-.search-results a {
-  text-decoration: none;
-  color: #0077cc;
-  font-weight: bold;
-}
-
-.search-results a:hover {
-  text-decoration: underline;
+  margin-bottom: 1.5rem;
 }
 
 /* 티켓 카드 */
@@ -228,4 +189,14 @@ textarea {
   margin-bottom: 1.5rem;
   margin-top: 1rem;
   text-align: center;
+}
+
+.ticket-form-page input,
+.ticket-form-page select,
+.ticket-form-page textarea {
+  /* 이미 공통 스타일로 정의되었으므로 중복 정의 제거 가능하지만, 명시적 재정의해도 무방 */
+}
+
+.ticket-form-page button {
+  /* 공통 버튼 스타일로 커버되므로 생략 가능 */
 }
