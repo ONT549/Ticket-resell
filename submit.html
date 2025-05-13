@@ -1,41 +1,59 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>티켓 등록하기 - Our Ticket</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>티켓 등록</title>
 </head>
 <body>
-  <header>
-    <h1>🎟️ 티켓 등록하기</h1>
-    <nav>
-      <a href="index.html">🏠 홈으로</a>
-    </nav>
-  </header>
+  <h1>티켓 등록하기</h1>
+  <form id="ticketForm">
+    <input type="text" name="team" placeholder="팀 이름" required><br>
+    <input type="date" name="date" required><br>
+    <input type="time" name="time" required><br>
+    <input type="text" name="location" placeholder="장소"><br>
+    <input type="number" name="price" placeholder="가격" required><br>
+    <input type="text" name="contact" placeholder="연락처" required><br>
+    <button type="submit">등록하기</button>
+  </form>
 
-  <main class="form-container">
-    <form action="submitted.html" method="POST">
-      <label for="event">공연명</label>
-      <input type="text" id="event" name="event" placeholder="예: IU 콘서트" required />
+  <p id="result"></p>
 
-      <label for="date">날짜</label>
-      <input type="date" id="date" name="date" required />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    // 🧩 여기에 본인의 Supabase 정보 입력
+    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
 
-      <label for="seat">좌석 정보</label>
-      <input type="text" id="seat" name="seat" placeholder="예: 2층 A열 10번" required />
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-      <label for="price">가격 (원)</label>
-      <input type="number" id="price" name="price" placeholder="예: 150000" required />
+    const form = document.getElementById('ticketForm');
+    const result = document.getElementById('result');
 
-      <label for="contact">연락 방법</label>
-      <input type="text" id="contact" name="contact" placeholder="예: 오픈카톡 링크" required />
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-      <button type="submit">등록하기</button>
-    </form>
-  </main>
+      const formData = new FormData(form);
 
-  <footer>
-    <p>&copy; 2025 Our Ticket</p>
-  </footer>
+      const { data, error } = await supabase.from('tickets').insert([
+        {
+          team: formData.get('team'),
+          date: formData.get('date'),
+          time: formData.get('time'),
+          location: formData.get('location') || null,
+          price: parseInt(formData.get('price')),
+          contact: formData.get('contact'),
+        }
+      ]);
+
+      if (error) {
+        result.textContent = '오류 발생: ' + error.message;
+        result.style.color = 'red';
+      } else {
+        result.textContent = '티켓이 성공적으로 등록되었습니다!';
+        result.style.color = 'green';
+        form.reset();
+      }
+    });
+  </script>
 </body>
 </html>
