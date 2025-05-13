@@ -42,10 +42,12 @@
           location: formData.get('location') || null,
           price: parseInt(formData.get('price')),
           contact: formData.get('contact'),
+          status: 'available' // ✅ 여기에 추가
         }
       ]);
 
       if (error) {
+        console.error('삽입 실패:', error); // 콘솔 로그 추가
         result.textContent = '오류 발생: ' + error.message;
         result.style.color = 'red';
       } else {
