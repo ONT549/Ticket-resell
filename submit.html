@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>티켓 등록</title>
@@ -18,42 +18,38 @@
 
   <p id="result"></p>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    // 🧩 여기에 본인의 Supabase 정보 입력
+  <!-- 모듈 방식으로 Supabase import -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
     const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
 
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const form = document.getElementById('ticketForm');
     const result = document.getElementById('result');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      console.log("폼 제출됨"); // 디버깅 메시지 추가
-
       const formData = new FormData(form);
 
-      const { data, error } = await supabase.from('tickets').insert([
-        {
-          team: formData.get('team'),
-          date: formData.get('date'),
-          time: formData.get('time'),
-          location: formData.get('location') || null,
-          price: parseInt(formData.get('price')),
-          contact: formData.get('contact'),
-          status: 'available' // ✅ 여기에 추가
-        }
-      ]);
+      const { data, error } = await supabase.from('tickets').insert([{
+        team: formData.get('team'),
+        date: formData.get('date'),
+        time: formData.get('time'),
+        location: formData.get('location') || null,
+        price: parseInt(formData.get('price')),
+        contact: formData.get('contact'),
+        status: 'available'
+      }]);
 
       if (error) {
-        console.error('삽입 실패:', error); // 콘솔 로그 추가
+        console.error('삽입 실패:', error);
         result.textContent = '오류 발생: ' + error.message;
         result.style.color = 'red';
       } else {
-        console.log("성공적으로 등록된 티켓:", data); // 성공 시 데이터 확인
+        console.log("성공적으로 등록된 티켓:", data);
         result.textContent = '티켓이 성공적으로 등록되었습니다!';
         result.style.color = 'green';
         form.reset();
