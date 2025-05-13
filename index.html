@@ -88,83 +88,13 @@
       <input type="text" id="searchInput" placeholder="찾고 싶은 팀이나 경기명을 입력하세요..." />
       <div class="search-results" id="results"></div>
     </div>
-
-    <div class="ticket-container">
-      <h2>등록된 티켓 목록</h2>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>팀</th>
-            <th>날짜</th>
-            <th>시간</th>
-            <th>장소</th>
-            <th>가격</th>
-            <th>연락처</th>
-            <th>상태</th>
-          </tr>
-        </thead>
-        <tbody id="ticketTableBody">
-        </tbody>
-      </table>
-    </div>
   </main>
 
   <footer>
     <p>&copy; 2025 Our Ticket</p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    // Supabase 설정
-    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // 티켓 정보 불러오기
-    async function loadTickets() {
-      const { data, error } = await supabase.from('tickets').select('*').order('date', { ascending: true });
-
-      if (error) {
-        alert('불러오기 오류: ' + error.message);
-        return;
-      }
-
-      const tbody = document.getElementById('ticketTableBody');
-      tbody.innerHTML = '';
-
-      data.forEach(ticket => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${ticket.team}</td>
-          <td>${ticket.date}</td>
-          <td>${ticket.time}</td>
-          <td>${ticket.location || ''}</td>
-          <td>${ticket.price}</td>
-          <td>${ticket.contact}</td>
-          <td>${ticket.status}</td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
-
-    loadTickets();
-
-    // 가격 유효성 검사
-    const priceInput = document.querySelector("#priceInput"); // 예시로 id "priceInput" 사용
-    const result = document.querySelector("#result");
-
-    priceInput.addEventListener("input", function () {
-      const priceValue = parseInt(priceInput.value);
-      if (isNaN(priceValue)) {
-        result.textContent = '가격은 숫자로 입력해주세요.';
-        result.style.color = 'red';
-        return;
-      }
-      result.textContent = '가격이 정상적으로 입력되었습니다.';
-      result.style.color = 'green';
-    });
-
-    // 검색 기능
     const data = [
       { name: "두산 베어스", link: "baseball/doosan.html" },
       { name: "LG 트윈스", link: "baseball/lg.html" },
@@ -206,10 +136,12 @@
       const ul = document.createElement("ul");
       results.forEach(item => {
         const li = document.createElement("li");
-        li.innerHTML = `<a href="${item.link}">${item.name}</a>`;
+        const a = document.createElement("a");
+        a.href = item.link;
+        a.textContent = item.name;
+        li.appendChild(a);
         ul.appendChild(li);
       });
-
       resultDiv.innerHTML = "";
       resultDiv.appendChild(ul);
     });
