@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>등록된 티켓 보기</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .ticket { border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
+    .ticket h2 { margin: 0 0 10px; }
+    button { padding: 8px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>등록된 티켓 목록</h1>
+  <div id="ticketList">불러오는 중...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    // Supabase 연결 정보
+    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...ETC'; // ← 생략된 부분은 실제 키로 바꿔줘
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const ticketList = document.getElementById('ticketList');
+
+    async function fetchTickets() {
+      const { data, error } = await supabase
+        .from('tickets')
+        .select('*')
+        .eq('status', 'available')
+        .order('date', { ascending: true });
+
+      if (error) {
+        ticketList.innerHTML = '티켓을 불러오는 데 실패했습니다.';
+        console.error(error);
+        return;
+      }
+
+      if (data.length === 0) {
+        ticketList.innerHTML = '등록된 티켓이 없습니다.';
+        return;
+      }
+
+      ticketList.innerHTML = '';
+      data.forEach(ticket => {
+        const div = document.createElement('div');
+        div.className = 'ticket';
+        div.innerHTML = `
+          <h2>${ticket.team}</h2>
+          <p><strong>날짜:</strong> ${ticket.date} ${ticket.time}</p>
+          <p><strong>장소:</strong> ${ticket.location || '미정'}</p>
+          <p><strong>가격:</strong> ${ticket.price}원</p>
+          <p><strong>연락처:</strong> ${ticket.contact}</p>
+          <button onclick="purchaseTicket(${ticket.id})">구매하기</button>
+        `;
+        ticketList.appendChild(div);
+      });
+    }
+
+    function purchaseTicket(id) {
+      alert(`티켓 ID ${id} 구매 페이지로 이동합니다.`);
+      // 실제 구매 페이지로 연결하거나 결제 모듈로 이동 (예: window.location.href = `payment.html?id=${id}`)
+    }
+
+    fetchTickets();
+  </script>
+</body>
+</html>
