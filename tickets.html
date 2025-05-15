@@ -20,53 +20,46 @@
   <div id="ticketList">불러오는 중...</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+<script>
+  const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
 
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    async function loadTickets() {
-      const ticketList = document.getElementById('ticketList');
-      ticketList.textContent = '불러오는 중...';
+  document.addEventListener('DOMContentLoaded', async () => {
+    const ticketList = document.getElementById('ticketList');
 
-      const { data, error } = await supabase.from('tickets').select('*');
+    // 1. Supabase에서 tickets 테이블 조회
+    const { data: tickets, error } = await supabase
+      .from('tickets')
+      .select('*')
+      .eq('status', 'available'); // 'available' 상태만 가져옴
 
-      if (error) {
-        ticketList.textContent = '티켓 불러오기 실패: ' + error.message;
-        console.error('Supabase 오류:', error);
-        return;
-      }
-
-      if (data.length === 0) {
-        ticketList.textContent = '등록된 티켓이 없습니다.';
-        return;
-      }
-
-      ticketList.innerHTML = ''; // 기존 텍스트 초기화
-
-      data.forEach(ticket => {
-        const div = document.createElement('div');
-        div.className = 'ticket-card';
-        div.innerHTML = `
-          <strong>팀:</strong> ${ticket.team}<br>
-          <strong>날짜:</strong> ${ticket.date}<br>
-          <strong>시간:</strong> ${ticket.time}<br>
-          <strong>장소:</strong> ${ticket.location}<br>
-          <strong>가격:</strong> ${ticket.price}원<br>
-          <strong>연락처:</strong> ${ticket.contact}<br>
-          <button onclick="buyTicket(${ticket.id})">구매</button>
-        `;
-        ticketList.appendChild(div);
-      });
+    // 2. 에러 처리
+    if (error) {
+      console.error('티켓 불러오기 오류:', error.message);
+      ticketList.innerHTML = `<li>데이터를 불러오는 데 실패했습니다.</li>`;
+      return;
     }
 
-    function buyTicket(ticketId) {
-      alert('아직 구매 기능은 구현되지 않았습니다. 티켓 ID: ' + ticketId);
-      // 이후 결제 페이지로 연결하거나 모달 띄우기 등 구현 가능
+    // 3. 데이터가 없을 경우
+    if (!tickets || tickets.length === 0) {
+      ticketList.innerHTML = `<li>등록된 티켓이 없습니다.</li>`;
+      return;
     }
 
-    loadTickets();
-  </script>
+    // 4. 데이터가 있을 경우 리스트로 출력
+    ticketList.innerHTML = tickets.map(ticket => `
+      <li>
+        <strong>팀:</strong> ${ticket.team} | 
+        <strong>날짜:</strong> ${ticket.date} | 
+        <strong>시간:</strong> ${ticket.time} | 
+        <strong>장소:</strong> ${ticket.location || '-'} | 
+        <strong>가격:</strong> ${ticket.price}원 | 
+        <strong>연락처:</strong> ${ticket.contact}
+      </li>
+    `).join('');
+  });
+</script>
 </body>
 </html>
