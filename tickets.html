@@ -20,46 +20,43 @@
   <div id="ticketList">불러오는 중...</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
-  const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+  <script>
+    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
 
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { createClient } = supabase;
+    const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const ticketList = document.getElementById('ticketList');
+    document.addEventListener('DOMContentLoaded', async () => {
+      const ticketList = document.getElementById('ticketList');
 
-    // 1. Supabase에서 tickets 테이블 조회
-    const { data: tickets, error } = await supabase
-      .from('tickets')
-      .select('*')
-      .eq('status', 'available'); // 'available' 상태만 가져옴
+      const { data: tickets, error } = await client
+        .from('tickets')
+        .select('*')
+        .eq('status', 'available');
 
-    // 2. 에러 처리
-    if (error) {
-      console.error('티켓 불러오기 오류:', error.message);
-      ticketList.innerHTML = `<li>데이터를 불러오는 데 실패했습니다.</li>`;
-      return;
-    }
+      if (error) {
+        console.error('티켓 불러오기 오류:', error.message);
+        ticketList.innerHTML = `<p>데이터를 불러오는 데 실패했습니다.</p>`;
+        return;
+      }
 
-    // 3. 데이터가 없을 경우
-    if (!tickets || tickets.length === 0) {
-      ticketList.innerHTML = `<li>등록된 티켓이 없습니다.</li>`;
-      return;
-    }
+      if (!tickets || tickets.length === 0) {
+        ticketList.innerHTML = `<p>등록된 티켓이 없습니다.</p>`;
+        return;
+      }
 
-    // 4. 데이터가 있을 경우 리스트로 출력
-    ticketList.innerHTML = tickets.map(ticket => `
-      <li>
-        <strong>팀:</strong> ${ticket.team} | 
-        <strong>날짜:</strong> ${ticket.date} | 
-        <strong>시간:</strong> ${ticket.time} | 
-        <strong>장소:</strong> ${ticket.location || '-'} | 
-        <strong>가격:</strong> ${ticket.price}원 | 
-        <strong>연락처:</strong> ${ticket.contact}
-      </li>
-    `).join('');
-  });
-</script>
+      ticketList.innerHTML = tickets.map(ticket => `
+        <div class="ticket-card">
+          <p><strong>팀:</strong> ${ticket.team}</p>
+          <p><strong>날짜:</strong> ${ticket.date}</p>
+          <p><strong>시간:</strong> ${ticket.time}</p>
+          <p><strong>장소:</strong> ${ticket.location || '-'}</p>
+          <p><strong>가격:</strong> ${ticket.price}원</p>
+          <p><strong>연락처:</strong> ${ticket.contact}</p>
+        </div>
+      `).join('');
+    });
+  </script>
 </body>
 </html>
