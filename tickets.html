@@ -3,56 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <title>등록된 티켓 보기</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .ticket { border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
-    .buy-btn { margin-top: 10px; padding: 8px 12px; background-color: #0077cc; color: white; border: none; cursor: pointer; border-radius: 5px; }
+    body { font-family: sans-serif; padding: 20px; }
+    h1 { color: #333; }
+    .ticket-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: #f9f9f9;
+    }
   </style>
 </head>
 <body>
   <h1>등록된 티켓</h1>
   <div id="ticketList">불러오는 중...</div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
     const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0'; // 본인 키
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+
     const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function loadTickets() {
-      const { data, error } = await supabase.from('tickets').select('*').eq('status', 'available');
+      const ticketList = document.getElementById('ticketList');
+      ticketList.textContent = '불러오는 중...';
 
-      const container = document.getElementById('ticketList');
-      container.innerHTML = '';
+      const { data, error } = await supabase.from('tickets').select('*');
 
       if (error) {
-        container.textContent = '티켓 불러오기 실패: ' + error.message;
+        ticketList.textContent = '티켓 불러오기 실패: ' + error.message;
+        console.error('Supabase 오류:', error);
         return;
       }
 
       if (data.length === 0) {
-        container.textContent = '등록된 티켓이 없습니다.';
+        ticketList.textContent = '등록된 티켓이 없습니다.';
         return;
       }
 
+      ticketList.innerHTML = ''; // 기존 텍스트 초기화
+
       data.forEach(ticket => {
-        const ticketEl = document.createElement('div');
-        ticketEl.className = 'ticket';
-        ticketEl.innerHTML = `
+        const div = document.createElement('div');
+        div.className = 'ticket-card';
+        div.innerHTML = `
           <strong>팀:</strong> ${ticket.team}<br>
           <strong>날짜:</strong> ${ticket.date}<br>
           <strong>시간:</strong> ${ticket.time}<br>
-          <strong>장소:</strong> ${ticket.location || '정보 없음'}<br>
+          <strong>장소:</strong> ${ticket.location}<br>
           <strong>가격:</strong> ${ticket.price}원<br>
           <strong>연락처:</strong> ${ticket.contact}<br>
-          <button class="buy-btn" onclick="buyTicket(${ticket.id})">구매하기</button>
+          <button onclick="buyTicket(${ticket.id})">구매</button>
         `;
-        container.appendChild(ticketEl);
+        ticketList.appendChild(div);
       });
     }
 
     function buyTicket(ticketId) {
-      alert(`이 티켓(ID: ${ticketId})에 대한 결제 기능은 추후 구현 예정입니다.`);
+      alert('아직 구매 기능은 구현되지 않았습니다. 티켓 ID: ' + ticketId);
+      // 이후 결제 페이지로 연결하거나 모달 띄우기 등 구현 가능
     }
 
     loadTickets();
