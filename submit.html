@@ -68,14 +68,34 @@
     <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;" required>
     <br>
 
-    <label>좌석 등급:</label>
-    <input type="text" name="seat_grade" required><br>
+    <label>상대팀/좌석 정보:</label><br>
+    <input type="text" name="seat_info" required placeholder="상대팀/좌석 정보 입력"><br>
 
-    <label>좌석 번호:</label>
-    <input type="text" name="seat_number"><br>
+    <label>구역(존/블럭) 입력:</label><br>
+    <input type="text" name="section" required placeholder="구역(존/블럭) 입력"><br>
 
-    <label>판매 가격 (원):</label>
-    <input type="number" name="price" required><br>
+    <label>열 입력:</label><br>
+    <input type="text" name="row" required placeholder="열 입력"><br>
+
+    <label>선택사항 입력 (최대 10자):</label><br>
+    <input type="text" name="extra_info" maxlength="10" placeholder="선택사항 입력 (최대 10자)"><br>
+
+    <label>판매 가격:</label><br>
+    <input type="number" name="price" required placeholder="판매 가격"><br>
+
+    <label>전체 수량:</label><br>
+    <input type="number" name="total_quantity" required placeholder="전체 수량"><br>
+
+    <label>매수 당 가격:</label><br>
+    <input type="number" name="price_per_unit" required placeholder="매수 당 가격"><br>
+
+    <label>정가 이하 판매 (수수료 무료):</label><br>
+    <input type="checkbox" name="under_market_price" value="yes"> 상품은 일괄 판매되며, 개별 판매는 불가합니다.<br>
+
+    <label>등록 상품 기준:</label><br>
+    <label>최저가: 9,000원</label><br>
+    <label>평균가: 40,609원</label><br>
+    <label>매수 당 정가: -</label><br>
 
     <label>연락처 (카톡ID 등):</label>
     <input type="text" name="contact_method" required><br>
@@ -179,18 +199,22 @@
       : formData.get('stadium_input');
 
     const { data, error } = await supabase.from('tickets').insert([{
-      sport_type: selectedSport,
-      team: formData.get('team'),
-      match_date: formData.get('match_date'),
-      match_time: formData.get('match_time'),
-      stadium: stadium,
-      seat_grade: formData.get('seat_grade'),
-      seat_number: formData.get('seat_number') || null,
-      price: parseInt(formData.get('price')),
-      contact_method: formData.get('contact_method'),
-      ticket_count: parseInt(formData.get('ticket_count')),
-      additional_info: formData.get('additional_info') || null
-    }]);
+    sport_type: formData.get('sport_type'),
+    team: formData.get('team'),
+    match_date: formData.get('match_date'),
+    match_time: formData.get('match_time'),
+    stadium: formData.get('stadium'),
+    seat_info: formData.get('seat_info'),          // 상대팀/좌석 정보
+    section: formData.get('section'),              // 구역(존/블럭) 입력
+    row: formData.get('row'),                      // 열 입력
+    extra_info: formData.get('extra_info') || null, // 선택사항 입력
+    price_per_unit: parseInt(formData.get('price_per_unit')), // 매수 당 가격
+    total_quantity: parseInt(formData.get('total_quantity')), // 전체 수량
+    under_market_price: formData.get('under_market_price') === 'on', // 정가 이하 판매 (수수료 무료)
+    contact_method: formData.get('contact_method'),
+    ticket_count: parseInt(formData.get('ticket_count')),
+    additional_info: formData.get('additional_info') || null
+}]);
 
     if (error) {
       result.textContent = '오류: ' + error.message;
