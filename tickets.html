@@ -82,17 +82,27 @@
         return;
       }
 
-      ticketList.innerHTML = tickets.map(ticket => `
-        <div class="ticket-card">
-          <p><strong>팀:</strong> ${ticket.team}</p>
-          <p><strong>날짜:</strong> ${ticket.date}</p>
-          <p><strong>시간:</strong> ${ticket.time}</p>
-          <p><strong>장소:</strong> ${ticket.location || '-'}</p>
-          <p><strong>가격:</strong> ${ticket.price}원</p>
-          <p><strong>연락처:</strong> ${ticket.contact}</p>
-        </div>
-      `).join('');
+ticketList.innerHTML = ''; // 초기화
+
+    data.forEach(ticket => {
+      const card = document.createElement('div');
+      card.className = 'ticket-card';
+      card.innerHTML = `
+        <strong>종목:</strong> ${ticket.sport_type}<br>
+        <strong>팀:</strong> ${ticket.team}<br>
+        <strong>경기 날짜:</strong> ${ticket.match_date}<br>
+        <strong>경기 시간:</strong> ${ticket.match_time}<br>
+        <strong>경기장:</strong> ${ticket.stadium}<br>
+        <strong>좌석 등급:</strong> ${ticket.seat_grade}<br>
+        <strong>좌석 번호:</strong> ${ticket.seat_number || '정보 없음'}<br>
+        <strong>가격:</strong> ${ticket.price.toLocaleString()}원<br>
+        <strong>연락처:</strong> ${ticket.contact_method}<br>
+        <strong>판매 수량:</strong> ${ticket.ticket_count}장<br>
+        <strong>추가 설명:</strong> ${ticket.additional_info || '없음'}
+      `;
+      ticketList.appendChild(card);
     });
-  </script>
+  });
+</script>
 </body>
 </html>
