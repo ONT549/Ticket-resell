@@ -187,38 +187,59 @@
     e.preventDefault();
 
     const formData = new FormData(form);
+    const sport_type = formData.get('sport_type');
+    const team = formData.get('team');
+    const match_date = formData.get('match_date');
+    const match_time = formData.get('match_time');
 
-    const data = {
-      sport_type: formData.get('sport_type'),
-      team: formData.get('team'),
-      match_date: formData.get('match_date'),
-      match_time: formData.get('match_time'),
-      stadium: formData.get('sport_type') === '야구' ? formData.get('stadium_select') : formData.get('stadium_input'),
-      seat_info: formData.get('seat_info'),
-      section: formData.get('section'),
-      row: formData.get('row'),
-      extra_info: formData.get('extra_info'),
-      total_quantity: parseInt(formData.get('total_quantity')),
-      price_per_unit: parseInt(formData.get('price_per_unit')),
-      under_market_price: formData.get('under_market_price') === 'yes',
-      contact_method: formData.get('contact_method'),
-      additional_info: formData.get('additional_info')
-    };
-
-    const { error } = await supabase.from('tickets').insert([data]);
-
-    if (error) {
-      console.error('티켓 등록 실패:', error.message);
-      result.textContent = '티켓 등록 중 오류가 발생했습니다. 다시 시도해주세요.';
-      result.style.color = 'red';
+    let stadium = '';
+    if (sport_type === '야구') {
+      stadium = formData.get('stadium_select');
     } else {
-      result.textContent = '티켓이 성공적으로 등록되었습니다!';
-      result.style.color = 'green';
-      form.reset();
-      stadiumSelect.style.display = 'none';
-      stadiumInput.style.display = 'none';
+      stadium = formData.get('stadium_input');
     }
-  });
+
+    const seat_info = formData.get('seat_info');
+    const section = formData.get('section');
+    const row = formData.get('row');
+    const extra_info = formData.get('extra_info');
+    const total_quantity = parseInt(formData.get('total_quantity'), 10);
+    const price_per_unit = parseInt(formData.get('price_per_unit'), 10);
+    const under_market_price = formData.get('under_market_price') === 'yes';
+    const contact_method = formData.get('contact_method');
+    const additional_info = formData.get('additional_info');
+
+    const { data, error } = await supabase.from('tickets').insert([
+      {
+        sport_type,
+        team,
+        match_date,
+        match_time,
+        stadium,
+        seat_info,
+        section,
+        row,
+        extra_info,
+        total_quantity,
+        price_per_unit,
+        under_market_price,
+        contact_method,
+        additional_info
+      }
+  ]);
+
+  if (error) {
+    console.error('등록 실패:', error.message);
+    result.textContent = '❌ 등록에 실패했습니다. 다시 시도해주세요.';
+  } else {
+    result.textContent = '✅ 티켓이 성공적으로 등록되었습니다!';
+    form.reset();
+    // 야구 선택 시 초기화된 경기장 드롭다운 유지
+    document.getElementById('stadium_select').style.display = 'none';
+    document.getElementById('stadium_input').style.display = 'none';
+    document.getElementById('team').innerHTML = '<option value="">-- 먼저 종목을 선택하세요 --</option>';
+  }
+});
 </script>
 </body>
 </html>
