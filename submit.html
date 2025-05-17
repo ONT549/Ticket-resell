@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <title>티켓 등록</title>
 </head>
@@ -41,27 +40,54 @@
         </li>
       </ul>
     </nav>
-  <h1>티켓 등록하기</h1>
   <form id="ticketForm">
-    <input type="text" name="team" placeholder="팀 이름" required><br>
-    <input type="date" name="date" required><br>
-    <input type="time" name="time" required><br>
-    <input type="text" name="location" placeholder="장소"><br>
-    <input type="number" name="price" placeholder="가격" required><br>
-    <input type="text" name="contact" placeholder="연락처" required><br>
-    <button type="submit">등록하기</button>
+    <label>종목:</label>
+    <select name="sport_type" required>
+      <option value="야구">야구</option>
+      <option value="축구">축구</option>
+    </select><br>
+
+    <label>팀 이름:</label>
+    <input type="text" name="team" required><br>
+
+    <label>경기 날짜:</label>
+    <input type="date" name="match_date" required><br>
+
+    <label>경기 시간:</label>
+    <input type="time" name="match_time" required><br>
+
+    <label>경기장:</label>
+    <input type="text" name="stadium" required><br>
+
+    <label>좌석 등급:</label>
+    <input type="text" name="seat_grade" required><br>
+
+    <label>좌석 번호:</label>
+    <input type="text" name="seat_number"><br>
+
+    <label>판매 가격 (원):</label>
+    <input type="number" name="price" required><br>
+
+    <label>연락처 (카톡ID 등):</label>
+    <input type="text" name="contact_method" required><br>
+
+    <label>판매 수량:</label>
+    <input type="number" name="ticket_count" required><br>
+
+    <label>추가 설명:</label><br>
+    <textarea name="additional_info" rows="4" cols="40"></textarea><br>
+
+    <button type="submit">티켓 등록</button>
   </form>
 
   <p id="result"></p>
 
-  <!-- 모듈 방식으로 Supabase import -->
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
     const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+    const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY'; // 👈 여기 본인의 키로 교체
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const form = document.getElementById('ticketForm');
     const result = document.getElementById('result');
@@ -70,23 +96,27 @@
       e.preventDefault();
       const formData = new FormData(form);
 
-      const { data, error } = await supabase.from('tickets').insert([{
-        team: formData.get('team'),
-        date: formData.get('date'),
-        time: formData.get('time'),
-        location: formData.get('location') || null,
-        price: parseInt(formData.get('price')),
-        contact: formData.get('contact'),
-        status: 'available'
-      }]);
+      const { data, error } = await supabase.from('tickets').insert([
+        {
+          sport_type: formData.get('sport_type'),
+          team: formData.get('team'),
+          match_date: formData.get('match_date'),
+          match_time: formData.get('match_time'),
+          stadium: formData.get('stadium'),
+          seat_grade: formData.get('seat_grade'),
+          seat_number: formData.get('seat_number') || null,
+          price: parseInt(formData.get('price')),
+          contact_method: formData.get('contact_method'),
+          ticket_count: parseInt(formData.get('ticket_count')),
+          additional_info: formData.get('additional_info') || null
+        }
+      ]);
 
       if (error) {
-        console.error('삽입 실패:', error);
-        result.textContent = '오류 발생: ' + error.message;
+        result.textContent = '오류: ' + error.message;
         result.style.color = 'red';
       } else {
-        console.log("성공적으로 등록된 티켓:", data);
-        result.textContent = '티켓이 성공적으로 등록되었습니다!';
+        result.textContent = '티켓 등록 완료!';
         result.style.color = 'green';
         form.reset();
       }
