@@ -56,31 +56,32 @@
   <div id="ticketList">불러오는 중...</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+  <script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-    const { createClient } = supabase;
-    const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const ticketList = document.getElementById('ticketList');
+  const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-      const { data: tickets, error } = await client
-        .from('tickets')
-        .select('*')
-        .eq('status', 'available');
+  document.addEventListener('DOMContentLoaded', async () => {
+    const ticketList = document.getElementById('ticketList');
 
-      if (error) {
-        console.error('티켓 불러오기 오류:', error.message);
-        ticketList.innerHTML = `<p>데이터를 불러오는 데 실패했습니다.</p>`;
-        return;
-      }
+    const { data: tickets, error } = await client
+      .from('tickets')
+      .select('*')
+      .eq('status', 'available');
 
-      if (!tickets || tickets.length === 0) {
-        ticketList.innerHTML = `<p>등록된 티켓이 없습니다.</p>`;
-        return;
-      }
+    if (error) {
+      console.error('티켓 불러오기 오류:', error.message);
+      ticketList.innerHTML = `<p>데이터를 불러오는 데 실패했습니다.</p>`;
+      return;
+    }
+
+    if (!tickets || tickets.length === 0) {
+      ticketList.innerHTML = `<p>등록된 티켓이 없습니다.</p>`;
+      return;
+    }
 
 ticketList.innerHTML = ''; // 초기화
 
