@@ -41,76 +41,71 @@
         </li>
       </ul>
     </nav>
-  <form id="ticketForm">
-    <label>종목:</label>
-    <select name="sport_type" id="sport_type" required>
-      <option value="">-- 종목을 선택하세요 --</option>
-      <option value="야구">야구</option>
-      <option value="축구">축구</option>
-    </select><br>
+<form id="ticketForm">
+  <label for="sport_type">종목:</label>
+  <select id="sport_type" name="sport_type">
+    <option value="야구">야구</option>
+    <option value="축구">축구</option>
+  </select>
+  <br>
 
-    <label>팀 이름:</label>
-    <select name="team" id="team" required>
-      <option value="">-- 먼저 종목을 선택하세요 --</option>
-    </select><br>
+  <label for="team">팀:</label>
+  <select id="team" name="team">
+    <!-- 야구/축구 팀 리스트가 동적으로 삽입됩니다. -->
+  </select>
+  <br>
 
-    <label>경기 날짜:</label>
-    <input type="date" name="match_date" required><br>
-
-    <label>경기 시간:</label>
-    <input type="time" name="match_time" required><br>
-
-    <label>경기장:</label>
-    <select id="stadium_select" name="stadium_select" style="display:none;">
+  <label>경기장:</label>
+  <select id="stadium_select" name="stadium_select" style="display:none;">
     <option value="">-- 경기장을 선택하세요 --</option>
-    </select>
+  </select>
 
-    <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;" required>
-    <br>
+  <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;" required>
+  <br>
 
-    <label>상대팀/좌석 정보:</label><br>
-    <input type="text" name="seat_info" required placeholder="상대팀/좌석 정보 입력"><br>
+  <label for="match_date">경기 날짜:</label>
+  <input type="date" id="match_date" name="match_date">
+  <br>
 
-    <label>구역(존/블럭) 입력:</label><br>
-    <input type="text" name="section" required placeholder="구역(존/블럭) 입력"><br>
+  <label for="match_time">경기 시간:</label>
+  <input type="time" id="match_time" name="match_time">
+  <br>
 
-    <label>열 입력:</label><br>
-    <input type="text" name="row" required placeholder="열 입력"><br>
+  <label for="seat_grade">좌석 등급:</label>
+  <input type="text" id="seat_grade" name="seat_grade" required>
+  <br>
 
-    <label>선택사항 입력 (최대 10자):</label><br>
-    <input type="text" name="extra_info" maxlength="10" placeholder="선택사항 입력 (최대 10자)"><br>
+  <label for="seat_number">좌석 번호:</label>
+  <input type="text" id="seat_number" name="seat_number">
+  <br>
 
-    <label>전체 수량:</label><br>
-    <input type="number" name="total_quantity" required placeholder="전체 수량"><br>
+  <label for="price">가격:</label>
+  <input type="number" id="price" name="price" required>
+  <br>
 
-    <label>매수 당 가격:</label><br>
-    <input type="number" name="price_per_unit" required placeholder="매수 당 가격"><br>
+  <label for="contact_method">연락 방법:</label>
+  <input type="text" id="contact_method" name="contact_method" required>
+  <br>
 
-    <label>정가 이하 판매 (수수료 무료):</label><br>
-    <input type="checkbox" name="under_market_price" value="yes"> 상품은 일괄 판매되며, 개별 판매는 불가합니다.<br>
+  <label for="ticket_count">티켓 개수:</label>
+  <input type="number" id="ticket_count" name="ticket_count" required>
+  <br>
 
-    <label>등록 상품 기준:</label><br>
-    <label>최저가: 9,000원</label><br>
-    <label>평균가: 40,609원</label><br>
-    <label>매수 당 정가: -</label><br>
+  <label for="additional_info">추가 정보:</label>
+  <textarea id="additional_info" name="additional_info"></textarea>
+  <br>
 
-    <label>연락처 (카톡ID 등):</label>
-    <input type="text" name="contact_method" required><br>
+  <button type="submit">등록</button>
+</form>
 
-    <label>추가 설명:</label><br>
-    <textarea name="additional_info" rows="4" cols="40"></textarea><br>
-
-    <button type="submit">티켓 등록</button>
-  </form>
-
-  <p id="result"></p>
+<div id="result"></div>
 
   <!-- Supabase JS SDK를 ES 모듈로 불러오기 -->
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
   const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_KEY_HERE';
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   const form = document.getElementById('ticketForm');
@@ -185,61 +180,41 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const formData = new FormData(form);
-    const sport_type = formData.get('sport_type');
-    const team = formData.get('team');
-    const match_date = formData.get('match_date');
-    const match_time = formData.get('match_time');
 
-    let stadium = '';
-    if (sport_type === '야구') {
-      stadium = formData.get('stadium_select');
+    const selectedSport = formData.get('sport_type');
+    const stadium = selectedSport === '야구'
+      ? formData.get('stadium_select')
+      : formData.get('stadium_input');
+
+    const { data, error } = await supabase.from('tickets').insert([{
+      sport_type: selectedSport,
+      team: formData.get('team'),
+      match_date: formData.get('match_date'),
+      match_time: formData.get('match_time'),
+      stadium: stadium,
+      seat_grade: formData.get('seat_grade'),
+      seat_number: formData.get('seat_number') || null,
+      price: parseInt(formData.get('price')),
+      contact_method: formData.get('contact_method'),
+      ticket_count: parseInt(formData.get('ticket_count')),
+      additional_info: formData.get('additional_info') || null
+    }]);
+
+    if (error) {
+      result.textContent = '오류: ' + error.message;
+      result.style.color = 'red';
     } else {
-      stadium = formData.get('stadium_input');
+      result.textContent = '티켓 등록 완료!';
+      result.style.color = 'green';
+      form.reset();
+      stadiumSelect.style.display = 'none';
+      stadiumInput.style.display = 'inline';
     }
+  });
 
-    const seat_info = formData.get('seat_info');
-    const section = formData.get('section');
-    const row = formData.get('row');
-    const extra_info = formData.get('extra_info');
-    const total_quantity = parseInt(formData.get('total_quantity'), 10);
-    const price_per_unit = parseInt(formData.get('price_per_unit'), 10);
-    const under_market_price = formData.get('under_market_price') === 'yes';
-    const contact_method = formData.get('contact_method');
-    const additional_info = formData.get('additional_info');
-
-    const { data, error } = await supabase.from('tickets').insert([
-      {
-        sport_type,
-        team,
-        match_date,
-        match_time,
-        stadium,
-        seat_info,
-        section,
-        row,
-        extra_info,
-        total_quantity,
-        price_per_unit,
-        under_market_price,
-        contact_method,
-        additional_info
-      }
-  ]);
-
-  if (error) {
-    console.error('등록 실패:', error.message);
-    result.textContent = '❌ 등록에 실패했습니다. 다시 시도해주세요.';
-  } else {
-    result.textContent = '✅ 티켓이 성공적으로 등록되었습니다!';
-    form.reset();
-    // 야구 선택 시 초기화된 경기장 드롭다운 유지
-    document.getElementById('stadium_select').style.display = 'none';
-    document.getElementById('stadium_input').style.display = 'none';
-    document.getElementById('team').innerHTML = '<option value="">-- 먼저 종목을 선택하세요 --</option>';
-  }
-});
+  // 페이지 로드시 종목에 따라 초기화
+  sportSelect.dispatchEvent(new Event('change'));
 </script>
 </body>
 </html>
