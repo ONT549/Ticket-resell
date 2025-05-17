@@ -76,7 +76,7 @@
     <input type="number" name="ticket_count" required><br>
 
     <label>추가 설명:</label><br>
-    <textarea name="memo" rows="4" cols="40"></textarea><br>
+    <textarea name="additional_info" rows="4" cols="40"></textarea><br>
 
     <button type="submit">티켓 등록</button>
   </form>
@@ -110,7 +110,7 @@
         price: parseInt(formData.get('price')),
         contact_method: formData.get('contact_method'),
         ticket_count: parseInt(formData.get('ticket_count')),
-        memo: formData.get('memo') || null
+        additional_info: formData.get('additional_info') || null
       }]);
 
       if (error) {
