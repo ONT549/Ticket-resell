@@ -110,7 +110,7 @@
         price: parseInt(formData.get('price')),
         contact_method: formData.get('contact_method'),
         ticket_count: parseInt(formData.get('ticket_count')),
-        additional_info: formData.get('memo') || null
+        memo: formData.get('memo') || null
       }]);
 
       if (error) {
