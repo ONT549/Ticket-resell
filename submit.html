@@ -61,98 +61,7 @@
     <input type="time" name="match_time" required><br>
 
     <label>경기장:</label>
-    <select name="stadium" id="stadiumSelect" required style="display: none;"></select>
-    <input type="text" name="stadium" id="stadiumInput" required style="display: none;"><br>
-
-    <label>좌석 등급:</label>
-    <input type="text" name="seat_grade" required><br>
-
-    <label>좌석 번호:</label>
-    <input type="text" name="seat_number"><br>
-
-    <label>판매 가격 (원):</label>
-    <input type="number" name="price" required><br>
-
-    <label>연락처 (카톡ID 등):</label>
-    <input type="text" name="contact_method" required><br>
-
-    <label>판매 수량:</label>
-    <input type="number" name="ticket_count" required><br>
-
-    <label>추가 설명:</label><br>
-    <textarea name="additional_info" rows="4" cols="40"></textarea><br>
-
-    <button type="submit">티켓 등록</button>
-  </form>
-
-  <p id="result"></p>
-
-  <!-- Supabase JS SDK를 ES 모듈로 불러오기 -->
-  <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>티켓 등록</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1><a href="index.html" style="text-decoration: none; color: inherit;">🎟️ Our Ticket</a></h1>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="submit.html">티켓 등록</a></li>
-        <li><a href="tickets.html">등록된 티켓</a></li>
-        <li><a href="about.html">소개</a></li>
-        <li class="dropdown">
-          <span class="dropdown-toggle">스포츠</span>
-          <ul class="dropdown-menu">
-            <li><strong>⚾ 야구</strong></li>
-            <li><a href="baseball/doosan.html">두산 베어스</a></li>
-            <li><a href="baseball/lg.html">LG 트윈스</a></li>
-            <li><a href="baseball/ktwiz.html">KT wiz</a></li>
-            <li><a href="baseball/samsung.html">삼성 라이온즈</a></li>
-            <li><a href="baseball/ssg.html">SSG 랜더스</a></li>
-            <li><a href="baseball/hanwha.html">한화 이글스</a></li>
-            <li><a href="baseball/nc.html">NC 다이노스</a></li>
-            <li><a href="baseball/lotte.html">롯데 자이언츠</a></li>
-            <li><a href="baseball/kiwoom.html">키움 히어로즈</a></li>
-            <li><a href="baseball/kia.html">KIA 타이거즈</a></li>
-            <li><strong>⚽ 축구</strong></li>
-            <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
-            <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
-            <li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
-            <li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
-            <li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
-            <li><a href="Soccer/daegu.html">대구 FC</a></li>
-            <li><a href="Soccer/gwangju.html">광주 FC</a></li>
-            <li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
-            <li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
-            <li><a href="Soccer/gangwon.html">강원 FC</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  <form id="ticketForm">
-    <label>종목:</label>
-    <select name="sport_type" id="sport_type" required>
-      <option value="">-- 종목을 선택하세요 --</option>
-      <option value="야구">야구</option>
-      <option value="축구">축구</option>
-    </select><br>
-
-    <label>팀 이름:</label>
-    <select name="team" id="team" required>
-      <option value="">-- 먼저 종목을 선택하세요 --</option>
-    </select><br>
-
-    <label>경기 날짜:</label>
-    <input type="date" name="match_date" required><br>
-
-    <label>경기 시간:</label>
-    <input type="time" name="match_time" required><br>
-
-    <label>경기장:</label>
-    <select name="stadium" id="stadiumSelect" required style="display: none;"></select>
-    <input type="text" name="stadium" id="stadiumInput" required style="display: none;"><br>
+    <input type="text" name="stadium" required><br>
 
     <label>좌석 등급:</label>
     <input type="text" name="seat_grade" required><br>
@@ -193,9 +102,6 @@
     const teamSelect = document.getElementById('team');
     const sportSelect = document.getElementById('sport_type');
 
-    const stadiumSelect = document.getElementById('stadiumSelect');
-    const stadiumInput = document.getElementById('stadiumInput');
-
     const teams = {
       '야구': [
         '두산 베어스', 'LG 트윈스', 'KT wiz', '삼성 라이온즈', 'SSG 랜더스',
@@ -207,25 +113,10 @@
       ]
     };
 
-    const stadiums = {
-      '두산 베어스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
-      'LG 트윈스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
-      'KT wiz': ['수원 위즈 파크 (주중)', '수원 위즈 파크 (금토일/공휴일)'],
-      '삼성 라이온즈': ['대구 라이온즈 파크(주중)', '대구 라이온즈 파크(금토일/공휴일)', '포항 야구장'],
-      'SSG 랜더스': ['인천 SSG 랜더스필드(주중)', '인천 SSG 랜더스필드(금토일/공휴일)'],
-      '한화 이글스': ['대전 한화생명 볼파크(주중)', '대전 한화생명 볼파크(금토일/공휴일)', '청주 야구장'],
-      'KIA 타이거즈': ['광주 챔피언스 필드(주중)', '광주 챔피언스 필드(금토일/공휴일)'],
-      '롯데 자이언츠': ['부산 사직 야구장 (주중)', '부산 사직 야구장 (금토일/공휴일)', '울산 문수 야구장'],
-      'NC 다이노스': ['울산 문수 야구장(주중)', '울산 문수 야구장(금토일/공휴일)', '창원 NC 파크'],
-      '키움 히어로즈': ['고척 돔 야구장(주중)', '고척 돔 야구장(금토일/공휴일)']
-    };
-
     sportSelect.addEventListener('change', () => {
       const selectedSport = sportSelect.value;
       teamSelect.innerHTML = ''; // 기존 옵션 제거
-      stadiumSelect.style.display = 'none';
-      stadiumInput.style.display = 'none';
-      
+
       if (teams[selectedSport]) {
         teams[selectedSport].forEach(team => {
           const option = document.createElement('option');
@@ -240,34 +131,6 @@
         teamSelect.appendChild(defaultOption);
       }
     });
-    teamSelect.addEventListener('change', () => {
-      const sport = sportSelect.value;
-      const team = teamSelect.value;
-
-      if (sport === '야구' && stadiums[team]) {
-        stadiumSelect.innerHTML = '';
-        stadiums[team].forEach(option => {
-          stadiumSelect.appendChild(new Option(option, option));
-        });
-        stadiumSelect.style.display = 'inline';
-        stadiumInput.style.display = 'none';
-      } else if (sport === '축구') {
-        stadiumInput.style.display = 'inline';
-        stadiumSelect.style.display = 'none';
-      } else {
-        stadiumSelect.style.display = 'none';
-        stadiumInput.style.display = 'inline';
-      }
-    });
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const sport = formData.get('sport_type');
-
-    const stadium = sport === '야구'
-      ? formData.get('stadium') // select
-      : document.getElementById('stadiumInput').value; // input
     
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
