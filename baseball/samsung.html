@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
-    <header>
-      <h1>삼성 티켓</h1>
-      <nav><a href="../index.html">홈으로</a></nav>
-    </header>
+    <div id="header-placeholder"></div>
     <main>
       <h2>삼성 티켓 목록</h2>
       <!-- 티켓 카드 반복 -->
@@ -26,7 +23,11 @@
       <p>&copy; 2025 Our Ticket</p>
     </footer>
   </body>
+  <script>
+    fetch("../baseball-header.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("header-placeholder").innerHTML = data;
+      });
+  </script>
   </html>
-  -->
-</body>
-</html>
