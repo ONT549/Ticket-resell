@@ -61,7 +61,11 @@
     <input type="time" name="match_time" required><br>
 
     <label>경기장:</label>
-    <input type="text" name="stadium" required><br>
+    <select id="stadium_select" name="stadium_select" style="display:none;">
+    <option value="">-- 경기장을 선택하세요 --</option>
+    </select>
+
+    <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" required><br>
 
     <label>좌석 등급:</label>
     <input type="text" name="seat_grade" required><br>
@@ -88,77 +92,144 @@
 
   <!-- Supabase JS SDK를 ES 모듈로 불러오기 -->
   <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+  const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_KEY_HERE';
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const form = document.getElementById('ticketForm');
+  const result = document.getElementById('result');
 
-    const form = document.getElementById('ticketForm');
-    const result = document.getElementById('result');
+  const teamSelect = document.getElementById('team');
+  const sportSelect = document.getElementById('sport_type');
+  const stadiumSelect = document.getElementById('stadium_select');
+  const stadiumInput = document.getElementById('stadium_input');
+  const matchDateInput = document.querySelector('input[name="match_date"]');
 
-    // ✅ 팀 목록 관리    
-    const teamSelect = document.getElementById('team');
-    const sportSelect = document.getElementById('sport_type');
+  const teams = {
+    '야구': [
+      '두산 베어스', 'LG 트윈스', 'KT wiz', '삼성 라이온즈', 'SSG 랜더스',
+      '한화 이글스', 'NC 다이노스', '롯데 자이언츠', '키움 히어로즈', 'KIA 타이거즈'
+    ],
+    '축구': [
+      'FC 서울', '수원 삼성', '울산 현대', '전북 현대', '포항 스틸러스',
+      '대구 FC', '광주 FC', '제주 유나이티드', '인천 유나이티드', '강원 FC'
+    ]
+  };
 
-    const teams = {
-      '야구': [
-        '두산 베어스', 'LG 트윈스', 'KT wiz', '삼성 라이온즈', 'SSG 랜더스',
-        '한화 이글스', 'NC 다이노스', '롯데 자이언츠', '키움 히어로즈', 'KIA 타이거즈'
-      ],
-      '축구': [
-        'FC 서울', '수원 삼성', '울산 현대', '전북 현대', '포항 스틸러스',
-        '대구 FC', '광주 FC', '제주 유나이티드', '인천 유나이티드', '강원 FC'
-      ]
-    };
+  const stadiums = {
+    '두산 베어스': { weekday: '잠실야구장', weekend: '잠실야구장' },
+    'LG 트윈스': { weekday: '잠실야구장', weekend: '잠실야구장' },
+    'KT wiz': { weekday: '수원 위즈 파크', weekend: '수원 위즈 파크' },
+    '삼성 라이온즈': { weekday: '대구 라이온즈 파크', weekend: '대구 라이온즈 파크', extra: ['포항 야구장'] },
+    'SSG 랜더스': { weekday: '인천 SSG 랜더스필드', weekend: '인천 SSG 랜더스필드' },
+    '한화 이글스': { weekday: '대전 한화생명 볼파크', weekend: '대전 한화생명 볼파크', extra: ['청주 야구장'] },
+    'NC 다이노스': { weekday: '울산 문수 야구장', weekend: '울산 문수 야구장', extra: ['창원 NC 파크'] },
+    '롯데 자이언츠': { weekday: '부산 사직 야구장', weekend: '부산 사직 야구장', extra: ['울산 문수 야구장'] },
+    '키움 히어로즈': { weekday: '고척 돔 야구장', weekend: '고척 돔 야구장' },
+    'KIA 타이거즈': { weekday: '광주 챔피언스 필드', weekend: '광주 챔피언스 필드' },
+  };
 
-    sportSelect.addEventListener('change', () => {
-      const selectedSport = sportSelect.value;
-      teamSelect.innerHTML = ''; // 기존 옵션 제거
+  function isWeekendOrHoliday(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDay();
+    return day === 0 || day === 6; // 0: 일요일, 6: 토요일
+  }
 
-      if (teams[selectedSport]) {
-        teams[selectedSport].forEach(team => {
-          const option = document.createElement('option');
-          option.value = team;
-          option.textContent = team;
-          teamSelect.appendChild(option);
-        });
-      } else {
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = '-- 먼저 종목을 선택하세요 --';
-        teamSelect.appendChild(defaultOption);
+  sportSelect.addEventListener('change', () => {
+    const selectedSport = sportSelect.value;
+    teamSelect.innerHTML = '';
+
+    if (teams[selectedSport]) {
+      teams[selectedSport].forEach(team => {
+        const option = document.createElement('option');
+        option.value = team;
+        option.textContent = team;
+        teamSelect.appendChild(option);
+      });
+    }
+
+    if (selectedSport === '야구') {
+      stadiumSelect.style.display = 'inline';
+      stadiumInput.style.display = 'none';
+    } else {
+      stadiumSelect.style.display = 'none';
+      stadiumInput.style.display = 'inline';
+    }
+
+    stadiumSelect.innerHTML = '<option value="">-- 경기장을 선택하세요 --</option>';
+  });
+
+  // 경기 날짜나 팀이 바뀌면 야구 경기장 자동 설정
+  [teamSelect, matchDateInput].forEach(el =>
+    el.addEventListener('change', () => {
+      const sport = sportSelect.value;
+      const team = teamSelect.value;
+      const date = matchDateInput.value;
+
+      if (sport === '야구' && team && date) {
+        const isWeekend = isWeekendOrHoliday(date);
+        const info = stadiums[team];
+        stadiumSelect.innerHTML = '';
+
+        if (info) {
+          const mainStadium = isWeekend ? info.weekend : info.weekday;
+          const option1 = document.createElement('option');
+          option1.value = mainStadium;
+          option1.textContent = mainStadium;
+          stadiumSelect.appendChild(option1);
+
+          if (info.extra) {
+            info.extra.forEach(extraStadium => {
+              const option = document.createElement('option');
+              option.value = extraStadium;
+              option.textContent = extraStadium;
+              stadiumSelect.appendChild(option);
+            });
+          }
+        }
       }
-    });
-    
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
+    })
+  );
 
-      const { data, error } = await supabase.from('tickets').insert([{
-        sport_type: formData.get('sport_type'),
-        team: formData.get('team'),
-        match_date: formData.get('match_date'),
-        match_time: formData.get('match_time'),
-        stadium: formData.get('stadium'),
-        seat_grade: formData.get('seat_grade'),
-        seat_number: formData.get('seat_number') || null,
-        price: parseInt(formData.get('price')),
-        contact_method: formData.get('contact_method'),
-        ticket_count: parseInt(formData.get('ticket_count')),
-        additional_info: formData.get('additional_info') || null
-      }]);
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
 
-      if (error) {
-        result.textContent = '오류: ' + error.message;
-        result.style.color = 'red';
-      } else {
-        result.textContent = '티켓 등록 완료!';
-        result.style.color = 'green';
-        form.reset();
-      }
-    });
-  </script>
+    const selectedSport = formData.get('sport_type');
+    const stadium = selectedSport === '야구'
+      ? formData.get('stadium_select')
+      : formData.get('stadium_input');
+
+    const { data, error } = await supabase.from('tickets').insert([{
+      sport_type: selectedSport,
+      team: formData.get('team'),
+      match_date: formData.get('match_date'),
+      match_time: formData.get('match_time'),
+      stadium: stadium,
+      seat_grade: formData.get('seat_grade'),
+      seat_number: formData.get('seat_number') || null,
+      price: parseInt(formData.get('price')),
+      contact_method: formData.get('contact_method'),
+      ticket_count: parseInt(formData.get('ticket_count')),
+      additional_info: formData.get('additional_info') || null
+    }]);
+
+    if (error) {
+      result.textContent = '오류: ' + error.message;
+      result.style.color = 'red';
+    } else {
+      result.textContent = '티켓 등록 완료!';
+      result.style.color = 'green';
+      form.reset();
+      stadiumSelect.style.display = 'none';
+      stadiumInput.style.display = 'inline';
+    }
+  });
+
+  // 페이지 로드시 종목에 따라 초기화
+  sportSelect.dispatchEvent(new Event('change'));
+</script>
 </body>
 </html>
