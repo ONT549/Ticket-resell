@@ -65,6 +65,9 @@
     <option value="">-- 경기장을 선택하세요 --</option>
     </select>
 
+    <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;" required>
+    <br>
+
     <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" required><br>
 
     <label>좌석 등급:</label>
@@ -91,7 +94,7 @@
   <p id="result"></p>
 
   <!-- Supabase JS SDK를 ES 모듈로 불러오기 -->
-  <script type="module">
+<script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
   const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
@@ -105,7 +108,6 @@
   const sportSelect = document.getElementById('sport_type');
   const stadiumSelect = document.getElementById('stadium_select');
   const stadiumInput = document.getElementById('stadium_input');
-  const matchDateInput = document.querySelector('input[name="match_date"]');
 
   const teams = {
     '야구': [
@@ -119,28 +121,21 @@
   };
 
   const stadiums = {
-    '두산 베어스': { weekday: '잠실야구장', weekend: '잠실야구장' },
-    'LG 트윈스': { weekday: '잠실야구장', weekend: '잠실야구장' },
-    'KT wiz': { weekday: '수원 위즈 파크', weekend: '수원 위즈 파크' },
-    '삼성 라이온즈': { weekday: '대구 라이온즈 파크', weekend: '대구 라이온즈 파크', extra: ['포항 야구장'] },
-    'SSG 랜더스': { weekday: '인천 SSG 랜더스필드', weekend: '인천 SSG 랜더스필드' },
-    '한화 이글스': { weekday: '대전 한화생명 볼파크', weekend: '대전 한화생명 볼파크', extra: ['청주 야구장'] },
-    'NC 다이노스': { weekday: '울산 문수 야구장', weekend: '울산 문수 야구장', extra: ['창원 NC 파크'] },
-    '롯데 자이언츠': { weekday: '부산 사직 야구장', weekend: '부산 사직 야구장', extra: ['울산 문수 야구장'] },
-    '키움 히어로즈': { weekday: '고척 돔 야구장', weekend: '고척 돔 야구장' },
-    'KIA 타이거즈': { weekday: '광주 챔피언스 필드', weekend: '광주 챔피언스 필드' },
+    '두산 베어스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
+    'LG 트윈스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
+    'KT wiz': ['수원 위즈 파크(주중)', '수원 위즈 파크(금토일/공휴일)'],
+    '삼성 라이온즈': ['대구 라이온즈 파크(주중)', '대구 라이온즈 파크(금토일/공휴일)', '포항 야구장'],
+    'SSG 랜더스': ['인천 SSG 랜더스필드(주중)', '인천 SSG 랜더스필드(금토일/공휴일)'],
+    '한화 이글스': ['대전 한화생명 볼파크(주중)', '대전 한화생명 볼파크(금토일/공휴일)', '청주 야구장'],
+    'NC 다이노스': ['울산 문수 야구장(주중)', '울산 문수 야구장(금토일/공휴일)', '창원 NC 파크'],
+    '롯데 자이언츠': ['부산 사직 야구장(주중)', '부산 사직 야구장(금토일/공휴일)', '울산 문수 야구장'],
+    '키움 히어로즈': ['고척 돔 야구장(주중)', '고척 돔 야구장(금토일/공휴일)'],
+    'KIA 타이거즈': ['광주 챔피언스 필드(주중)', '광주 챔피언스 필드(금토일/공휴일)']
   };
 
-  function isWeekendOrHoliday(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDay();
-    return day === 0 || day === 6; // 0: 일요일, 6: 토요일
-  }
-
-  sportSelect.addEventListener('change', () => {
+  function resetTeamOptions() {
     const selectedSport = sportSelect.value;
     teamSelect.innerHTML = '';
-
     if (teams[selectedSport]) {
       teams[selectedSport].forEach(team => {
         const option = document.createElement('option');
@@ -149,7 +144,11 @@
         teamSelect.appendChild(option);
       });
     }
+  }
 
+  sportSelect.addEventListener('change', () => {
+    resetTeamOptions();
+    const selectedSport = sportSelect.value;
     if (selectedSport === '야구') {
       stadiumSelect.style.display = 'inline';
       stadiumInput.style.display = 'none';
@@ -157,41 +156,20 @@
       stadiumSelect.style.display = 'none';
       stadiumInput.style.display = 'inline';
     }
-
-    stadiumSelect.innerHTML = '<option value="">-- 경기장을 선택하세요 --</option>';
   });
 
-  // 경기 날짜나 팀이 바뀌면 야구 경기장 자동 설정
-  [teamSelect, matchDateInput].forEach(el =>
-    el.addEventListener('change', () => {
-      const sport = sportSelect.value;
-      const team = teamSelect.value;
-      const date = matchDateInput.value;
-
-      if (sport === '야구' && team && date) {
-        const isWeekend = isWeekendOrHoliday(date);
-        const info = stadiums[team];
-        stadiumSelect.innerHTML = '';
-
-        if (info) {
-          const mainStadium = isWeekend ? info.weekend : info.weekday;
-          const option1 = document.createElement('option');
-          option1.value = mainStadium;
-          option1.textContent = mainStadium;
-          stadiumSelect.appendChild(option1);
-
-          if (info.extra) {
-            info.extra.forEach(extraStadium => {
-              const option = document.createElement('option');
-              option.value = extraStadium;
-              option.textContent = extraStadium;
-              stadiumSelect.appendChild(option);
-            });
-          }
-        }
-      }
-    })
-  );
+  teamSelect.addEventListener('change', () => {
+    const selectedTeam = teamSelect.value;
+    if (stadiums[selectedTeam]) {
+      stadiumSelect.innerHTML = '';
+      stadiums[selectedTeam].forEach(stadium => {
+        const option = document.createElement('option');
+        option.value = stadium;
+        option.textContent = stadium;
+        stadiumSelect.appendChild(option);
+      });
+    }
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
