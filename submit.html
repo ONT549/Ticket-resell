@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>티켓 등록</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1><a href="index.html" style="text-decoration: none; color: inherit;">🎟️ Our Ticket</a></h1>
@@ -85,8 +86,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
     const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-    const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY'; // 👈 여기 본인의 키로 교체
-
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
     const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const form = document.getElementById('ticketForm');
