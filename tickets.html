@@ -93,9 +93,10 @@
           <strong>경기 날짜:</strong> ${ticket.match_date}<br>
           <strong>경기 시간:</strong> ${ticket.match_time}<br>
           <strong>경기장:</strong> ${ticket.stadium}<br>
-          <strong>좌석 등급:</strong> ${ticket.seat_grade}<br>
-          <strong>좌석 번호:</strong> ${ticket.seat_number || '정보 없음'}<br>
-          <strong>가격:</strong> ${ticket.price.toLocaleString()}원<br>
+          <strong>상대팀/좌석 정보:</strong> ${ticket.seat_info}<br>
+          <strong>구역(존/블럭):</strong> ${ticket.section}<br>
+          <strong>열:</strong> ${ticket.row}<br>
+          <strong>판매 가격:</strong> ${ticket.price_per_unit}<br>
           <strong>연락처:</strong> ${ticket.contact_method}<br>
           <strong>판매 수량:</strong> ${ticket.ticket_count}장<br>
           <strong>추가 설명:</strong> ${ticket.additional_info || '없음'}
