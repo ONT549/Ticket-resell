@@ -61,7 +61,8 @@
     <input type="time" name="match_time" required><br>
 
     <label>경기장:</label>
-    <input type="text" name="stadium" required><br>
+    <select name="stadium" id="stadiumSelect" required style="display: none;"></select>
+    <input type="text" name="stadium" id="stadiumInput" required style="display: none;"><br>
 
     <label>좌석 등급:</label>
     <input type="text" name="seat_grade" required><br>
@@ -102,6 +103,9 @@
     const teamSelect = document.getElementById('team');
     const sportSelect = document.getElementById('sport_type');
 
+    const stadiumSelect = document.getElementById('stadiumSelect');
+    const stadiumInput = document.getElementById('stadiumInput');
+
     const teams = {
       '야구': [
         '두산 베어스', 'LG 트윈스', 'KT wiz', '삼성 라이온즈', 'SSG 랜더스',
@@ -113,10 +117,25 @@
       ]
     };
 
+    const stadiums = {
+      '두산 베어스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
+      'LG 트윈스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
+      'KT wiz': ['수원 위즈 파크 (주중)', '수원 위즈 파크 (금토일/공휴일)'],
+      '삼성 라이온즈': ['대구 라이온즈 파크(주중)', '대구 라이온즈 파크(금토일/공휴일)', '포항 야구장'],
+      'SSG 랜더스': ['인천 SSG 랜더스필드(주중)', '인천 SSG 랜더스필드(금토일/공휴일)'],
+      '한화 이글스': ['대전 한화생명 볼파크(주중)', '대전 한화생명 볼파크(금토일/공휴일)', '청주 야구장'],
+      'KIA 타이거즈': ['광주 챔피언스 필드(주중)', '광주 챔피언스 필드(금토일/공휴일)'],
+      '롯데 자이언츠': ['부산 사직 야구장 (주중)', '부산 사직 야구장 (금토일/공휴일)', '울산 문수 야구장'],
+      'NC 다이노스': ['울산 문수 야구장(주중)', '울산 문수 야구장(금토일/공휴일)', '창원 NC 파크'],
+      '키움 히어로즈': ['고척 돔 야구장(주중)', '고척 돔 야구장(금토일/공휴일)']
+    };
+
     sportSelect.addEventListener('change', () => {
       const selectedSport = sportSelect.value;
       teamSelect.innerHTML = ''; // 기존 옵션 제거
-
+      stadiumSelect.style.display = 'none';
+      stadiumInput.style.display = 'none';
+      
       if (teams[selectedSport]) {
         teams[selectedSport].forEach(team => {
           const option = document.createElement('option');
@@ -131,6 +150,34 @@
         teamSelect.appendChild(defaultOption);
       }
     });
+    teamSelect.addEventListener('change', () => {
+      const sport = sportSelect.value;
+      const team = teamSelect.value;
+
+      if (sport === '야구' && stadiums[team]) {
+        stadiumSelect.innerHTML = '';
+        stadiums[team].forEach(option => {
+          stadiumSelect.appendChild(new Option(option, option));
+        });
+        stadiumSelect.style.display = 'inline';
+        stadiumInput.style.display = 'none';
+      } else if (sport === '축구') {
+        stadiumInput.style.display = 'inline';
+        stadiumSelect.style.display = 'none';
+      } else {
+        stadiumSelect.style.display = 'none';
+        stadiumInput.style.display = 'inline';
+      }
+    });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const sport = formData.get('sport_type');
+
+    const stadium = sport === '야구'
+      ? formData.get('stadium') // select
+      : document.getElementById('stadiumInput').value; // input
     
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
