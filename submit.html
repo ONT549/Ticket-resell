@@ -98,6 +98,40 @@
     const form = document.getElementById('ticketForm');
     const result = document.getElementById('result');
 
+    // ✅ 팀 목록 관리    
+    const teamSelect = document.getElementById('team');
+    const sportSelect = document.getElementById('sport_type');
+
+    const teams = {
+      '야구': [
+        '두산 베어스', 'LG 트윈스', 'KT wiz', '삼성 라이온즈', 'SSG 랜더스',
+        '한화 이글스', 'NC 다이노스', '롯데 자이언츠', '키움 히어로즈', 'KIA 타이거즈'
+      ],
+      '축구': [
+        'FC 서울', '수원 삼성', '울산 현대', '전북 현대', '포항 스틸러스',
+        '대구 FC', '광주 FC', '제주 유나이티드', '인천 유나이티드', '강원 FC'
+      ]
+    };
+
+    sportSelect.addEventListener('change', () => {
+      const selectedSport = sportSelect.value;
+      teamSelect.innerHTML = ''; // 기존 옵션 제거
+
+      if (teams[selectedSport]) {
+        teams[selectedSport].forEach(team => {
+          const option = document.createElement('option');
+          option.value = team;
+          option.textContent = team;
+          teamSelect.appendChild(option);
+        });
+      } else {
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = '-- 먼저 종목을 선택하세요 --';
+        teamSelect.appendChild(defaultOption);
+      }
+    });
+    
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(form);
