@@ -1,32 +1,33 @@
-<!-- jeju.html -->
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>제주 유나이티드 - 티켓 리스트</title>
-  <link rel="stylesheet" href="../style.css" />
-</head>
-<body>
-  <header>
-    <h1>제주 유나이티드 티켓</h1>
-    <nav><a href="../index.html">홈으로</a></nav>
-  </header>
-  <main>
-    <h2>제주 유나이티드 티켓 목록</h2>
-    <!-- 티켓 카드 반복 -->
-    <div class="ticket-card">
-      <h3>경기명</h3>
-      <p>📅 날짜</p>
-      <p>🪑 좌석정보</p>
-      <p>💰 가격</p>
-      <p>📱 <a href="#">연락처 링크</a></p>
-    </div>
-  </main>
-  <footer>
-    <p>&copy; 2025 Our Ticket</p>
-  </footer>
-</body>
-</html>
-
-
+  <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제주 - 티켓 리스트</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+    <main>
+      <h2>제주 티켓 목록</h2>
+      <!-- 티켓 카드 반복 -->
+      <div class="ticket-card">
+        <h3>경기명</h3>
+        <p>📅 날짜</p>
+        <p>🪑 좌석정보</p>
+        <p>💰 가격</p>
+        <p>📱 <a href="#">연락처 링크</a></p>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2025 Our Ticket</p>
+    </footer>
+  </body>
+  <script>
+    fetch("../baseball-header.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("header-placeholder").innerHTML = data;
+      });
+  </script>
+  </html>
