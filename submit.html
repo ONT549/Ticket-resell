@@ -168,7 +168,7 @@
 
   teamSelect.addEventListener('change', () => {
     const selectedTeam = teamSelect.value;
-    if (stadiums[selectedTeam]) {
+    if (sportSelect.value === '야구' && stadiums[selectedTeam]) {
       stadiumSelect.innerHTML = '';
       stadiums[selectedTeam].forEach(stadium => {
         const option = document.createElement('option');
@@ -176,46 +176,41 @@
         option.textContent = stadium;
         stadiumSelect.appendChild(option);
       });
+      stadiumSelect.style.display = 'inline';
+      stadiumInput.style.display = 'none';
     }
   });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const formData = new FormData(form);
 
-    const selectedSport = formData.get('sport_type');
-    const stadium = selectedSport === '야구'
-      ? formData.get('stadium_select')
-      : formData.get('stadium_input');
+    const stadium = (sportSelect.value === '야구') ? stadiumSelect.value : stadiumInput.value;
 
     const { data, error } = await supabase.from('tickets').insert([{
-      sport_type: selectedSport,
-      team: formData.get('team'),
-      match_date: formData.get('match_date'),
-      match_time: formData.get('match_time'),
-      stadium: stadium,
-      seat_grade: formData.get('seat_grade'),
-      seat_number: formData.get('seat_number') || null,
-      price: parseInt(formData.get('price')),
-      contact_method: formData.get('contact_method'),
-      ticket_count: parseInt(formData.get('ticket_count')),
-      additional_info: formData.get('additional_info') || null
+      sport_type: sportSelect.value,
+      team: teamSelect.value,
+      stadium,
+      match_date: document.getElementById('match_date').value,
+      match_time: document.getElementById('match_time').value,
+      seat_grade: document.getElementById('seat_grade').value,
+      seat_number: document.getElementById('seat_number').value,
+      price: parseInt(document.getElementById('price').value),
+      contact_method: document.getElementById('contact_method').value,
+      ticket_count: parseInt(document.getElementById('ticket_count').value),
+      additional_info: document.getElementById('additional_info').value
     }]);
 
     if (error) {
-      result.textContent = '오류: ' + error.message;
+      result.textContent = `❌ 등록 실패: ${error.message}`;
       result.style.color = 'red';
     } else {
-      result.textContent = '티켓 등록 완료!';
+      result.textContent = '✅ 티켓이 성공적으로 등록되었습니다!';
       result.style.color = 'green';
       form.reset();
       stadiumSelect.style.display = 'none';
-      stadiumInput.style.display = 'inline';
+      stadiumInput.style.display = 'none';
     }
   });
-
-  // 페이지 로드시 종목에 따라 초기화
-  sportSelect.dispatchEvent(new Event('change'));
 </script>
 </body>
 </html>
