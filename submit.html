@@ -7,210 +7,188 @@
 </head>
 <body>
   <h1><a href="index.html" style="text-decoration: none; color: inherit;">🎟️ Our Ticket</a></h1>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="submit.html">티켓 등록</a></li>
-        <li><a href="tickets.html">등록된 티켓</a></li>
-        <li><a href="about.html">소개</a></li>
-        <li class="dropdown">
-          <span class="dropdown-toggle">스포츠</span>
-          <ul class="dropdown-menu">
-            <li><strong>⚾ 야구</strong></li>
-            <li><a href="baseball/doosan.html">두산 베어스</a></li>
-            <li><a href="baseball/lg.html">LG 트윈스</a></li>
-            <li><a href="baseball/ktwiz.html">KT wiz</a></li>
-            <li><a href="baseball/samsung.html">삼성 라이온즈</a></li>
-            <li><a href="baseball/ssg.html">SSG 랜더스</a></li>
-            <li><a href="baseball/hanwha.html">한화 이글스</a></li>
-            <li><a href="baseball/nc.html">NC 다이노스</a></li>
-            <li><a href="baseball/lotte.html">롯데 자이언츠</a></li>
-            <li><a href="baseball/kiwoom.html">키움 히어로즈</a></li>
-            <li><a href="baseball/kia.html">KIA 타이거즈</a></li>
-            <li><strong>⚽ 축구</strong></li>
-            <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
-            <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
-            <li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
-            <li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
-            <li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
-            <li><a href="Soccer/daegu.html">대구 FC</a></li>
-            <li><a href="Soccer/gwangju.html">광주 FC</a></li>
-            <li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
-            <li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
-            <li><a href="Soccer/gangwon.html">강원 FC</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-<form id="ticketForm">
-  <label for="sport_type">종목:</label>
-  <select id="sport_type" name="sport_type">
-    <option value="-- 종목을 선택하세요 --">-- 종목을 선택하세요 --</option>
-    <option value="야구">야구</option>
-    <option value="축구">축구</option>
-  </select>
-  <br>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="submit.html">티켓 등록</a></li>
+      <li><a href="tickets.html">등록된 티켓</a></li>
+      <li><a href="about.html">소개</a></li>
+      <li class="dropdown">
+        <span class="dropdown-toggle">스포츠</span>
+        <ul class="dropdown-menu">
+          <li><strong>⚾ 야구</strong></li>
+          <li><a href="baseball/doosan.html">두산 베어스</a></li>
+          <li><a href="baseball/lg.html">LG 트윈스</a></li>
+          <li><a href="baseball/ktwiz.html">KT wiz</a></li>
+          <li><a href="baseball/samsung.html">삼성 라이온즈</a></li>
+          <li><a href="baseball/ssg.html">SSG 랜더스</a></li>
+          <li><a href="baseball/hanwha.html">한화 이글스</a></li>
+          <li><a href="baseball/nc.html">NC 다이노스</a></li>
+          <li><a href="baseball/lotte.html">롯데 자이언츠</a></li>
+          <li><a href="baseball/kiwoom.html">키움 히어로즈</a></li>
+          <li><a href="baseball/kia.html">KIA 타이거즈</a></li>
+          <li><strong>⚽ 축구</strong></li>
+          <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
+          <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
+          <li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
+          <li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
+          <li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
+          <li><a href="Soccer/daegu.html">대구 FC</a></li>
+          <li><a href="Soccer/gwangju.html">광주 FC</a></li>
+          <li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
+          <li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
+          <li><a href="Soccer/gangwon.html">강원 FC</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
-  <label for="team">팀:</label>
-  <select id="team" name="team">
-    <!-- 야구/축구 팀 리스트가 동적으로 삽입됩니다. -->
-  </select>
-  <br>
+  <form id="ticketForm">
+    <label for="sport_type">종목:</label>
+    <select id="sport_type" name="sport_type">
+      <option value="">-- 종목을 선택하세요 --</option>
+      <option value="야구">야구</option>
+      <option value="축구">축구</option>
+    </select><br>
 
-  <label>경기장:</label>
-  <select id="stadium_select" name="stadium_select" style="display:none;">
-    <option value="">-- 팀을 먼저 선택하세요 --</option>
-  </select>
+    <label for="team">팀:</label>
+    <select id="team" name="team"></select><br>
 
-  <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;" required>
-  <br>
+    <label>경기장:</label>
+    <select id="stadium_select" name="stadium_select" style="display:none;"></select>
+    <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;"><br>
 
-  <label for="match_date">경기 날짜:</label>
-  <input type="date" id="match_date" name="match_date">
-  <br>
+    <label for="match_date">경기 날짜:</label>
+    <input type="date" id="match_date" name="match_date"><br>
 
-  <label for="match_time">경기 시간:</label>
-  <input type="time" id="match_time" name="match_time">
-  <br>
+    <label for="match_time">경기 시간:</label>
+    <input type="time" id="match_time" name="match_time"><br>
 
-  <label for="seat_grade">좌석 등급:</label>
-  <input type="text" id="seat_grade" name="seat_grade" required>
-  <br>
+    <label for="seat_grade">좌석 등급:</label>
+    <input type="text" id="seat_grade" name="seat_grade" required><br>
 
-  <label for="seat_number">좌석 번호:</label>
-  <input type="text" id="seat_number" name="seat_number">
-  <br>
+    <label for="seat_number">좌석 번호:</label>
+    <input type="text" id="seat_number" name="seat_number"><br>
 
-  <label for="price">티켓 당 가격:</label>
-  <input type="number" id="price" name="price" required>
-  <br>
+    <label for="price">티켓 당 가격:</label>
+    <input type="number" id="price" name="price" required><br>
 
-  <label for="contact_method">연락 방법:</label>
-  <input type="text" id="contact_method" name="contact_method" required>
-  <br>
+    <label for="contact_method">연락 방법:</label>
+    <input type="text" id="contact_method" name="contact_method" required><br>
 
-  <label for="ticket_count">티켓 개수:</label>
-  <input type="number" id="ticket_count" name="ticket_count" required>
-  <br>
+    <label for="ticket_count">티켓 개수:</label>
+    <input type="number" id="ticket_count" name="ticket_count" required><br>
 
-  <label for="additional_info">추가 정보:</label>
-  <textarea id="additional_info" name="additional_info"></textarea>
-  <br>
+    <label for="additional_info">추가 정보:</label>
+    <textarea id="additional_info" name="additional_info"></textarea><br>
 
-  <button type="submit">등록</button>
-</form>
+    <button type="submit">등록</button>
+  </form>
 
-<div id="result"></div>
+  <div id="result"></div>
 
-  <!-- Supabase JS SDK를 ES 모듈로 불러오기 -->
-<script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-  const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  const form = document.getElementById('ticketForm');
-  const result = document.getElementById('result');
+    const form = document.getElementById('ticketForm');
+    const result = document.getElementById('result');
 
-  const teamSelect = document.getElementById('team');
-  const sportSelect = document.getElementById('sport_type');
-  const stadiumSelect = document.getElementById('stadium_select');
-  const stadiumInput = document.getElementById('stadium_input');
+    const sportSelect = document.getElementById('sport_type');
+    const teamSelect = document.getElementById('team');
+    const stadiumSelect = document.getElementById('stadium_select');
+    const stadiumInput = document.getElementById('stadium_input');
 
-  const teams = {
-    '야구': [
-      '-- 팀을 선택하세요 --', '두산 베어스', 'LG 트윈스', 'KT wiz', '삼성 라이온즈', 'SSG 랜더스',
-      '한화 이글스', 'NC 다이노스', '롯데 자이언츠', '키움 히어로즈', 'KIA 타이거즈'
-    ],
-    '축구': [
-      '-- 팀을 선택하세요 --', 'FC 서울', '수원 삼성', '울산 현대', '전북 현대', '포항 스틸러스',
-      '대구 FC', '광주 FC', '제주 유나이티드', '인천 유나이티드', '강원 FC'
-    ]
-  };
+    const teams = {
+      '야구': ['-- 팀을 선택하세요 --', '두산 베어스', 'LG 트윈스', 'KT wiz', '삼성 라이온즈', 'SSG 랜더스', '한화 이글스', 'NC 다이노스', '롯데 자이언츠', '키움 히어로즈', 'KIA 타이거즈'],
+      '축구': ['-- 팀을 선택하세요 --', 'FC 서울', '수원 삼성', '울산 현대', '전북 현대', '포항 스틸러스', '대구 FC', '광주 FC', '제주 유나이티드', '인천 유나이티드', '강원 FC']
+    };
 
-  const stadiums = {
-    '두산 베어스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
-    'LG 트윈스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
-    'KT wiz': ['수원 위즈 파크(주중)', '수원 위즈 파크(금토일/공휴일)'],
-    '삼성 라이온즈': ['대구 라이온즈 파크(주중)', '대구 라이온즈 파크(금토일/공휴일)', '포항 야구장'],
-    'SSG 랜더스': ['인천 SSG 랜더스필드(주중)', '인천 SSG 랜더스필드(금토일/공휴일)'],
-    '한화 이글스': ['대전 한화생명 볼파크(주중)', '대전 한화생명 볼파크(금토일/공휴일)', '청주 야구장'],
-    'NC 다이노스': ['울산 문수 야구장(주중)', '울산 문수 야구장(금토일/공휴일)', '창원 NC 파크'],
-    '롯데 자이언츠': ['부산 사직 야구장(주중)', '부산 사직 야구장(금토일/공휴일)', '울산 문수 야구장'],
-    '키움 히어로즈': ['고척 돔 야구장(주중)', '고척 돔 야구장(금토일/공휴일)'],
-    'KIA 타이거즈': ['광주 챔피언스 필드(주중)', '광주 챔피언스 필드(금토일/공휴일)']
-  };
+    const stadiums = {
+      '두산 베어스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
+      'LG 트윈스': ['잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
+      'KT wiz': ['수원 위즈 파크(주중)', '수원 위즈 파크(금토일/공휴일)'],
+      '삼성 라이온즈': ['대구 라이온즈 파크(주중)', '대구 라이온즈 파크(금토일/공휴일)', '포항 야구장'],
+      'SSG 랜더스': ['인천 SSG 랜더스필드(주중)', '인천 SSG 랜더스필드(금토일/공휴일)'],
+      '한화 이글스': ['대전 한화생명 볼파크(주중)', '대전 한화생명 볼파크(금토일/공휴일)', '청주 야구장'],
+      'NC 다이노스': ['울산 문수 야구장(주중)', '울산 문수 야구장(금토일/공휴일)', '창원 NC 파크'],
+      '롯데 자이언츠': ['부산 사직 야구장(주중)', '부산 사직 야구장(금토일/공휴일)', '울산 문수 야구장'],
+      '키움 히어로즈': ['고척 돔 야구장(주중)', '고척 돔 야구장(금토일/공휴일)'],
+      'KIA 타이거즈': ['광주 챔피언스 필드(주중)', '광주 챔피언스 필드(금토일/공휴일)']
+    };
 
-  function resetTeamOptions() {
-    const selectedSport = sportSelect.value;
-    teamSelect.innerHTML = '';
-    if (teams[selectedSport]) {
-      teams[selectedSport].forEach(team => {
-        const option = document.createElement('option');
-        option.value = team;
-        option.textContent = team;
-        teamSelect.appendChild(option);
-      });
-    }
-  }
+    sportSelect.addEventListener('change', () => {
+      teamSelect.innerHTML = '';
+      const sport = sportSelect.value;
+      if (teams[sport]) {
+        teams[sport].forEach(team => {
+          const opt = document.createElement('option');
+          opt.value = team;
+          opt.textContent = team;
+          teamSelect.appendChild(opt);
+        });
+      }
 
-  sportSelect.addEventListener('change', () => {
-    resetTeamOptions();
-    const selectedSport = sportSelect.value;
-    if (selectedSport === '야구') {
-      stadiumSelect.style.display = 'inline';
-      stadiumInput.style.display = 'none';
-    } else {
-      stadiumSelect.style.display = 'none';
-      stadiumInput.style.display = 'inline';
-    }
-  });
+      if (sport === '야구') {
+        stadiumSelect.style.display = 'inline';
+        stadiumInput.style.display = 'none';
+      } else {
+        stadiumSelect.style.display = 'none';
+        stadiumInput.style.display = 'inline';
+      }
+    });
 
-  teamSelect.addEventListener('change', () => {
-    const selectedTeam = teamSelect.value;
-    if (sportSelect.value === '야구' && stadiums[selectedTeam]) {
-      stadiumSelect.innerHTML = '';
-      stadiums[selectedTeam].forEach(stadium => {
-        const option = document.createElement('option');
-        option.value = stadium;
-        option.textContent = stadium;
-        stadiumSelect.appendChild(option);
-      });
-      stadiumSelect.style.display = 'inline';
-      stadiumInput.style.display = 'none';
-    }
-  });
+    teamSelect.addEventListener('change', () => {
+      const team = teamSelect.value;
+      if (stadiums[team]) {
+        stadiumSelect.innerHTML = '';
+        stadiums[team].forEach(stadium => {
+          const opt = document.createElement('option');
+          opt.value = stadium;
+          opt.textContent = stadium;
+          stadiumSelect.appendChild(opt);
+        });
+        stadiumSelect.style.display = 'inline';
+      }
+    });
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    const stadium = (sportSelect.value === '야구') ? stadiumSelect.value : stadiumInput.value;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
 
-    const { data, error } = await supabase.from('tickets').insert([{
-      sport_type: sportSelect.value,
-      team: teamSelect.value,
-      stadium,
-      match_date: document.getElementById('match_date').value,
-      match_time: document.getElementById('match_time').value,
-      seat_grade: document.getElementById('seat_grade').value,
-      seat_number: document.getElementById('seat_number').value,
-      price: parseInt(document.getElementById('price').value),
-      contact_method: document.getElementById('contact_method').value,
-      ticket_count: parseInt(document.getElementById('ticket_count').value),
-      additional_info: document.getElementById('additional_info').value
-    }]);
+      if (data.sport_type === '야구') {
+        data.stadium = data.stadium_select;
+      } else {
+        data.stadium = data.stadium_input;
+      }
 
-    if (error) {
-      result.textContent = `❌ 등록 실패: ${error.message}`;
-      result.style.color = 'red';
-    } else {
-      result.textContent = '✅ 티켓이 성공적으로 등록되었습니다!';
-      result.style.color = 'green';
-      form.reset();
-      stadiumSelect.style.display = 'none';
-      stadiumInput.style.display = 'none';
-    }
-  });
-</script>
+      const { error } = await supabase.from('tickets').insert([{
+        sport_type: data.sport_type,
+        team: data.team,
+        stadium: data.stadium,
+        match_date: data.match_date,
+        match_time: data.match_time,
+        seat_grade: data.seat_grade,
+        seat_number: data.seat_number,
+        price: Number(data.price),
+        contact_method: data.contact_method,
+        ticket_count: Number(data.ticket_count),
+        additional_info: data.additional_info
+      }]);
+
+      if (error) {
+        result.textContent = '등록 중 오류가 발생했습니다.';
+        console.error(error);
+      } else {
+        result.textContent = '티켓이 성공적으로 등록되었습니다!';
+        form.reset();
+        stadiumSelect.innerHTML = '';
+      }
+    });
+  </script>
 </body>
 </html>
