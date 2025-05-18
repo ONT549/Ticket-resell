@@ -181,10 +181,11 @@
       }]);
 
       if (error) {
-        result.textContent = '등록 중 오류가 발생했습니다.';
-        console.error(error);
+        result.textContent = `❌ 등록 실패: ${error.message}`;
+        result.style.color = 'red';
       } else {
-        result.textContent = '티켓이 성공적으로 등록되었습니다!';
+        result.textContent = '✅ 티켓이 성공적으로 등록되었습니다!';
+        result.style.color = 'green';
         form.reset();
         stadiumSelect.innerHTML = '';
       }
