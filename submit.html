@@ -151,44 +151,38 @@
           opt.textContent = stadium;
           stadiumSelect.appendChild(opt);
         });
-        stadiumSelect.style.display = 'inline';
       }
     });
 
-    form.addEventListener('submit', async (e) => {
+      form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
+      const data = {
+        sport_type: formData.get('sport_type'),
+        team: formData.get('team'),
+        stadium: formData.get('sport_type') === '야구' ? formData.get('stadium_select') : formData.get('stadium_input'),
+        match_date: formData.get('match_date'),
+        match_time: formData.get('match_time'),
+        seat_grade: formData.get('seat_grade'),
+        seat_number: formData.get('seat_number'),
+        price: Number(formData.get('price')),
+        contact_method: formData.get('contact_method'),
+        ticket_count: Number(formData.get('ticket_count')),
+        additional_info: formData.get('additional_info')
+      };
 
-      if (data.sport_type === '야구') {
-        data.stadium = data.stadium_select;
-      } else {
-        data.stadium = data.stadium_input;
-      }
-
-      const { error } = await supabase.from('tickets').insert([{
-        sport_type: data.sport_type,
-        team: data.team,
-        stadium: data.stadium,
-        match_date: data.match_date,
-        match_time: data.match_time,
-        seat_grade: data.seat_grade,
-        seat_number: data.seat_number,
-        price: Number(data.price),
-        contact_method: data.contact_method,
-        ticket_count: Number(data.ticket_count),
-        additional_info: data.additional_info
-      }]);
+      const { error } = await supabase.from('tickets').insert([data]);
 
       if (error) {
-        result.textContent = `❌ 등록 실패: ${error.message}`;
+        result.textContent = '등록 실패: ' + error.message;
         result.style.color = 'red';
       } else {
-        result.textContent = '✅ 티켓이 성공적으로 등록되었습니다!';
+        result.textContent = '티켓이 성공적으로 등록되었습니다!';
         result.style.color = 'green';
         form.reset();
-        stadiumSelect.innerHTML = '';
+        stadiumSelect.style.display = 'none';
+        stadiumInput.style.display = 'none';
       }
     });
   </script>
