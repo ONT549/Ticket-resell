@@ -24,7 +24,7 @@
       const { data, error } = await supabase
         .from('tickets')
         .select('*')
-        .eq('team', TEAM_NAME);
+        .eq('team', '두산 베어스');
 
       const list = document.getElementById('ticket-list');
       list.innerHTML = '';
