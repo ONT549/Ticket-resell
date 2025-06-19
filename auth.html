@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>로그인 / 회원가입</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f0f0f0;
+      border-radius: 12px;
+    }
+    h1 {
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>로그인 / 회원가입</h1>
+
+  <input type="email" id="email" placeholder="이메일을 입력하세요" />
+  <input type="password" id="password" placeholder="비밀번호를 입력하세요" />
+
+  <button onclick="signUp()">회원가입</button>
+  <button onclick="signIn()">로그인</button>
+
+  <div id="result"></div>
+
+  <script>
+    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAU';
+
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function signUp() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const { error } = await supabase.auth.signUp({ email, password });
+      document.getElementById("result").textContent = error ? error.message : "가입 이메일을 확인하세요!";
+    }
+
+    async function signIn() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        document.getElementById("result").textContent = error.message;
+      } else {
+        document.getElementById("result").textContent = "로그인 성공!";
+        setTimeout(() => {
+          window.location.href = "index.html"; // 로그인 후 이동할 페이지
+        }, 1500);
+      }
+    }
+  </script>
+</body>
+</html>
