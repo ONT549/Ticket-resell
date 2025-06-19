@@ -47,8 +47,7 @@
   <div id="result"></div>
 
   <script type="module">
-  import { supabase } from './supabaseClient.js';
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    import { supabase } from './supabaseClient.js';
 
     document.getElementById("signup-btn").addEventListener("click", async () => {
       const email = document.getElementById("email").value;
@@ -65,9 +64,10 @@
         document.getElementById("result").textContent = error.message;
       } else {
         document.getElementById("result").textContent = "로그인 성공!";
+        // 세션이 확실히 저장되도록 약간 대기 후 이동
         setTimeout(() => {
           window.location.href = "index.html";
-        }, 1500);
+        }, 700);
       }
     });
   </script>
