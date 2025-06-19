@@ -1,5 +1,5 @@
 
-import { supabase } from '../supabaseClient.js';
+import { supabase } from './supabaseClient.js';
 
 window.addEventListener('DOMContentLoaded', async () => {
   const loginBtn = document.getElementById("login-button");
