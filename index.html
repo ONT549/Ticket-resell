@@ -163,8 +163,12 @@
 
 <script type="module">
   const hash = window.location.hash;
-  if (hash.includes("access_token") && hash.includes("type=signup")) {
-    window.location.href = "verified.html";
+
+  if (hash && hash.includes("access_token") && hash.includes("type=signup")) {
+    console.log("✅ Supabase 인증 완료 해시 감지됨. verified.html로 이동합니다.");
+    window.location.replace("verified.html");
+  } else {
+    console.log("🔍 인증 해시 없음 또는 조건 불충족:", hash);
   }
 </script>
 
