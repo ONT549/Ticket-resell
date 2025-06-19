@@ -52,6 +52,14 @@
     document.getElementById("signup-btn").addEventListener("click", async () => {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
+
+      const { data: existingUser, error: userError } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (existingUser.session) {
+        document.getElementById("result").textContent = "이미 가입 완료된 계정입니다!";
+        return;
+      }
+
       const { error } = await supabase.auth.signUp({ email, password });
       document.getElementById("result").textContent = error ? error.message : "가입 이메일을 확인하세요!";
     });
@@ -64,7 +72,6 @@
         document.getElementById("result").textContent = error.message;
       } else {
         document.getElementById("result").textContent = "로그인 성공!";
-        // 세션이 확실히 저장되도록 약간 대기 후 이동
         setTimeout(() => {
           window.location.href = "index.html";
         }, 700);
