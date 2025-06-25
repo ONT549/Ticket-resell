@@ -245,7 +245,7 @@ export const stadiumSeats = {
     "카운터석",
     "가족석"
   ],
-  "인천 SSG랜더스필드": [
+  "인천 SSG 랜더스필드": [
     "SKY탁자석",
     "중앙 4층 SKY뷰석",
     "3루 4층 SKY뷰석",
