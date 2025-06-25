@@ -373,16 +373,13 @@ const stadiumSeatMap = {
 
 stadiumSelect.addEventListener("change", () => {
   const stadiumName = stadiumSelect.value.replace(/\(.*?\)/g, "").trim(); // 주중/주말 제거
-  seatGradeSelect.innerHTML = "";
   if (stadiumSeatMap[stadiumName]) {
     stadiumSeatMap[stadiumName].forEach(seat => {
       const opt = document.createElement("option");
       opt.value = seat;
       opt.textContent = seat;
-      seatGradeSelect.appendChild(opt);
     });
   } else {
-    seatGradeSelect.innerHTML = '<option value="">선택 가능한 좌석 없음</option>';
   }
 });</script>
 </body>
