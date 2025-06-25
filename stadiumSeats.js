@@ -190,21 +190,7 @@ export const stadiumSeats = {
     "3루 외야자유석",
     "1루 외야자유석"
   ],
-  "울산 문수 야구장(롯데 자이언츠)": [
-    "1루 프리미엄",
-    "3루 프리미엄",
-    "1루 중앙탁자석",
-    "3루 중앙탁자석",
-    "바베큐석",
-    "1루 커플석",
-    "3루 커플석",
-    "1루 내야지정석",
-    "3루 내야지정석",
-    "1루 스탠딩석",
-    "3루 스탠딩석",
-    "외야자유석"
-  ],
-  "울산 문수 야구장(NC 다이노스)": [
+  "울산 문수 야구장": [
     "프리미엄석",
     "중앙테이블석",
     "1루 미니테이블석",
@@ -277,8 +263,7 @@ export const stadiumSeats = {
   ]
 };
 
-
-export function updateSeatOptions(stadiumSelectId, seatSelectId) {
+ updateSeatOptions(stadiumSelectId, seatSelectId) {
   const stadiumSelect = document.getElementById(stadiumSelectId);
   const seatSelect = document.getElementById(seatSelectId);
 
