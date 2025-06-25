@@ -154,6 +154,13 @@
 
         form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData.user) {
+        result.textContent = '❌ 로그인 후 이용해주세요.';
+        return;
+      }
+      const user_id = userData.user.id;
+
 
       const sport_type = sportSelect.value;
       const team = teamSelect.value;
@@ -180,7 +187,8 @@
           price,
           contact_method,
           ticket_count,
-          additional_info
+          additional_info,
+          user_id
         }]);
 
       if (error) {
