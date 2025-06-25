@@ -81,6 +81,31 @@
     <label for="additional_info">추가 정보:</label>
     <textarea id="additional_info" name="additional_info"></textarea><br>
 
+    
+    <label for="trade_method">거래 방식:</label>
+    <select id="trade_method" name="trade_method" required>
+      <option value="">-- 거래 방식을 선택하세요 --</option>
+      <option value="배송">배송</option>
+      <option value="현장">현장</option>
+      <option value="PIN(E-ticket)">PIN(E-ticket)</option>
+      <option value="기타">기타</option>
+    </select><br>
+
+    <label for="trade_description">거래 설명:</label>
+    <textarea id="trade_description" name="trade_description" placeholder="상품 및 거래 방법에 대한 설명 입력 (최대 2000자)"></textarea><br>
+
+    <label><input type="checkbox" id="is_adjacent" name="is_adjacent"> 연석</label><br>
+    <label><input type="checkbox" id="is_under_price" name="under_price"> 정가 이하 판매 (수수료 무료)</label><br>
+
+    <label for="section">구역(존/블럭):</label>
+    <input type="text" id="section" name="section"><br>
+
+    <label for="row">열:</label>
+    <input type="text" id="row" name="row"><br>
+
+    <label for="note">선택사항 (최대 10자):</label>
+    <input type="text" id="note" name="note" maxlength="10"><br>
+
     <button type="submit">등록</button>
   </form>
 
@@ -174,6 +199,15 @@
       const ticket_count = parseInt(document.getElementById('ticket_count').value);
       const additional_info = document.getElementById('additional_info').value;
 
+      const trade_method = document.getElementById('trade_method').value;
+      const trade_description = document.getElementById('trade_description').value;
+      const is_adjacent = document.getElementById('is_adjacent').checked;
+      const is_under_price = document.getElementById('under_price').checked;
+      const section = document.getElementById('section').value;
+      const row = document.getElementById('row').value;
+      const note = document.getElementById('note').value;
+
+
       const { data, error } = await supabase
         .from('tickets')
         .insert([{
@@ -188,7 +222,14 @@
           contact_method,
           ticket_count,
           additional_info,
-          user_id
+          user_id,
+          trade_method,
+          trade_description,
+          is_adjacent,
+          is_under_price,
+          section,
+          row,
+          note
         }]);
 
       if (error) {
