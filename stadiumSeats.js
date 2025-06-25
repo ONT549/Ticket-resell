@@ -260,7 +260,8 @@ const stadiumSeats = {
     "미니 스카이박스",
     "1루 덕아웃 상단석",
     "3루 덕아웃 상단석"
-  ];
+  ]
+};
 
 function updateSeatOptions(stadiumSelectId, seatSelectId) {
   const stadiumSelect = document.getElementById(stadiumSelectId);
