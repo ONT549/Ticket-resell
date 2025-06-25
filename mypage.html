@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8" />
   <title>마이페이지</title>
   <style>
@@ -35,17 +36,15 @@
       cursor: pointer;
     }
   </style>
-  <div id="ticket-list" class="info">내가 등록한 티켓 목록을 불러오는 중...</div>
-
 </head>
 <body>
 
-  <header style="text-align:center; margin-bottom: 20px;">
-    <a href="index.html" style="text-decoration: none; font-size: 24px;">🏠 홈으로</a>
-    <nav style="margin-top: 10px;">
-      <a href="submit.html" style="margin: 0 10px;">티켓 등록</a>
-      <a href="tickets.html" style="margin: 0 10px;">등록된 티켓</a>
-      <a href="about.html" style="margin: 0 10px;">소개</a>
+  <header>
+    <h1><a href="index.html" style="text-decoration: none; color: inherit;">🎟️ Our Ticket</a></h1>
+    <nav class="nav-links">
+      <a href="submit.html">티켓 등록</a>
+      <a href="tickets.html">등록된 티켓</a>
+      <a href="about.html">소개</a>
     </nav>
   </header>
 
@@ -66,7 +65,6 @@
         logoutBtn.style.display = "none";
       } else {
         userInfo.textContent = `로그인한 사용자: ${user.email}`;
-        loadTickets(user.id);
       }
     }
 
@@ -75,35 +73,6 @@
       alert("로그아웃 되었습니다.");
       window.location.href = "index.html";
     });
-
-    
-    const ticketList = document.getElementById("ticket-list");
-
-    async function loadTickets(user_id) {
-      const { data, error } = await supabase
-        .from('tickets')
-        .select('*')
-        .eq('user_id', user_id);
-
-      if (error) {
-        ticketList.textContent = "티켓을 불러오는데 실패했습니다.";
-        console.error(error);
-        return;
-      }
-
-      if (data.length === 0) {
-        ticketList.textContent = "등록한 티켓이 없습니다.";
-        return;
-      }
-
-      ticketList.innerHTML = "<h2>내 티켓 목록</h2>" + data.map(ticket => `
-        <div style="border: 1px solid #ccc; margin: 10px 0; padding: 10px; border-radius: 8px;">
-          <strong>${ticket.team}</strong> - ${ticket.match_date} ${ticket.match_time}<br/>
-          좌석: ${ticket.seat_grade} ${ticket.seat_number}<br/>
-          가격: ₩${ticket.price} / 수량: ${ticket.ticket_count}
-        </div>
-      `).join("");
-    }
 
     loadUser();
   </script>
