@@ -147,7 +147,6 @@
 <div class="form-group"><label for="trade_description">거래 설명(현장, 기타 선택 시에만):</label></div><div class="form-group"><textarea id="trade_description" name="trade_description" placeholder="상품 및 거래 방법에 대한 설명 입력 (최대 2000자)"></textarea></div><button type="submit">등록</button></form>
 <div id="result"></div>
 <script type="module">import { updateSeatOptions } from './stadiumSeats.js';
-updateSeatOptions('stadium_select', 'seat_grade');
 
 import { supabase } from './supabaseClient.js';
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
@@ -263,7 +262,6 @@ teamSelect.addEventListener('change', () => {
       const stadium = sport_type === '야구' ? stadiumSelect.value : stadiumInput.value;
       const match_date = document.getElementById('match_date').value;
       const match_time = document.getElementById('match_time').value;
-      const seat_grade = document.getElementById('seat_grade').value;
       const price = parseInt(document.getElementById('price').value);
       const ticket_count = parseInt(document.getElementById('ticket_count').value);
       
@@ -283,7 +281,6 @@ teamSelect.addEventListener('change', () => {
           stadium,
           match_date,
           match_time,
-          seat_grade,
           price,
           ticket_count,
           user_id,
@@ -308,7 +305,6 @@ teamSelect.addEventListener('change', () => {
     });
 
 
-const seatGradeSelect = document.getElementById("seat_grade");
 const stadiumSeatMap = {
   "잠실야구장": [
     "중앙석(프리미엄/VIP)",
