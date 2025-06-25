@@ -263,7 +263,7 @@ export const stadiumSeats = {
   ]
 };
 
- updateSeatOptions(stadiumSelectId, seatSelectId) {
+export function updateSeatOptions(stadiumSelectId, seatSelectId) {
   const stadiumSelect = document.getElementById(stadiumSelectId);
   const seatSelect = document.getElementById(seatSelectId);
 
