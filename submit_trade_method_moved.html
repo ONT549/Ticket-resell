@@ -123,7 +123,7 @@
 <input id="row" name="row" type="text"/>
 </div>
 </div>
-<div class="form-group"><label for="contact_method">연락 방법:</label></div><div class="form-group"><input id="contact_method" name="contact_method" required="" type="text"/></div><div class="form-group"><label for="trade_method">거래 방식:</label></div><div class="form-group"><select id="trade_method" name="trade_method" required="">
+<div class="form-group"><label for="trade_method">거래 방식:</label></div><div class="form-group"><select id="trade_method" name="trade_method" required="">
 <option value="">-- 거래 방식을 선택하세요 --</option>
 <option value="배송">배송</option>
 <option value="현장">현장</option>
@@ -144,7 +144,7 @@
 <label><input id="is_adjacent" name="is_adjacent" type="checkbox"/> 연석</label>
 <label><input id="is_under_price" name="is_under_price" type="checkbox"/> 정가 이하 판매 (수수료 무료)</label>
 </div>
-<div class="form-group"><label for="trade_description">거래 설명:</label></div><div class="form-group"><textarea id="trade_description" name="trade_description" placeholder="상품 및 거래 방법에 대한 설명 입력 (최대 2000자)"></textarea></div><button type="submit">등록</button></form>
+<div class="form-group"><label for="trade_description">거래 설명(현장, 기타 선택 시에만):</label></div><div class="form-group"><textarea id="trade_description" name="trade_description" placeholder="상품 및 거래 방법에 대한 설명 입력 (최대 2000자)"></textarea></div><button type="submit">등록</button></form>
 <div id="result"></div>
 <script type="module">
   import { supabase } from './supabaseClient.js';
