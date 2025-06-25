@@ -263,6 +263,8 @@ const stadiumSeats = {
   ]
 };
 
+
+
 function updateSeatOptions(stadiumSelectId, seatSelectId) {
   const stadiumSelect = document.getElementById(stadiumSelectId);
   const seatSelect = document.getElementById(seatSelectId);
