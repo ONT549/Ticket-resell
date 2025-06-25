@@ -103,8 +103,9 @@
 
       ticketList.innerHTML = "<h2>내 티켓 목록</h2>" + data.map(ticket => `
         <div style="border: 1px solid #ccc; margin: 10px 0; padding: 10px; border-radius: 8px;">
-          <strong>${ticket.team}</strong> - ${ticket.match_date} ${ticket.match_time}<br/>
-          좌석: ${ticket.seat_grade} ${ticket.seat_number}<br/>
+          <strong>${ticket.team}</strong> vs ${ticket.opponent_team}<br/>
+          날짜: ${ticket.match_date} ${ticket.match_time}<br/>
+          좌석: ${ticket.seat_grade} / ${ticket.section} / ${ticket.row}<br/>
           가격: ₩${ticket.price} / 수량: ${ticket.ticket_count}
         </div>
       `).join("");
