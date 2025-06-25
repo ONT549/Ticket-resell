@@ -1,117 +1,115 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>티켓 등록</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<meta charset="utf-8"/>
+<title>티켓 등록</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 800px;
+    margin: auto;
+  }
+  form label, form input, form select, form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  form button {
+    grid-column: span 2;
+    padding: 10px;
+    font-size: 1.1rem;
+  }
+</style></head>
 <body>
-  <h1><a href="index.html" style="text-decoration: none; color: inherit;">🎟️ Our Ticket</a></h1>
-  <nav>
-    <ul class="nav-links">
-      <li><a href="submit.html">티켓 등록</a></li>
-      <li><a href="tickets.html">등록된 티켓</a></li>
-      <li><a href="about.html">소개</a></li>
-      <li class="dropdown">
-        <span class="dropdown-toggle">스포츠</span>
-        <ul class="dropdown-menu">
-          <li><strong>⚾ 야구</strong></li>
-          <li><a href="baseball/doosan.html">두산 베어스</a></li>
-          <li><a href="baseball/lg.html">LG 트윈스</a></li>
-          <li><a href="baseball/ktwiz.html">KT wiz</a></li>
-          <li><a href="baseball/samsung.html">삼성 라이온즈</a></li>
-          <li><a href="baseball/ssg.html">SSG 랜더스</a></li>
-          <li><a href="baseball/hanwha.html">한화 이글스</a></li>
-          <li><a href="baseball/nc.html">NC 다이노스</a></li>
-          <li><a href="baseball/lotte.html">롯데 자이언츠</a></li>
-          <li><a href="baseball/kiwoom.html">키움 히어로즈</a></li>
-          <li><a href="baseball/kia.html">KIA 타이거즈</a></li>
-          <li><strong>⚽ 축구</strong></li>
-          <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
-          <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
-          <li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
-          <li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
-          <li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
-          <li><a href="Soccer/daegu.html">대구 FC</a></li>
-          <li><a href="Soccer/gwangju.html">광주 FC</a></li>
-          <li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
-          <li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
-          <li><a href="Soccer/gangwon.html">강원 FC</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-
-  <form id="ticketForm">
-    <label for="sport_type">종목:</label>
-    <select id="sport_type" name="sport_type">
-      <option value="">-- 종목을 선택하세요 --</option>
-      <option value="야구">야구</option>
-      <option value="축구">축구</option>
-    </select><br>
-
-    <label for="team">팀:</label>
-    <select id="team" name="team"></select><br>
-
-    <label>경기장:</label>
-    <select id="stadium_select" name="stadium_select" style="display:none;"></select>
-    <input type="text" id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;"><br>
-
-    <label for="match_date">경기 날짜:</label>
-    <input type="date" id="match_date" name="match_date"><br>
-
-    <label for="match_time">경기 시간:</label>
-    <input type="time" id="match_time" name="match_time"><br>
-
-    <label for="seat_grade">좌석 등급:</label>
-    <input type="text" id="seat_grade" name="seat_grade" required><br>
-
-    <label for="seat_number">좌석 번호:</label>
-    <input type="text" id="seat_number" name="seat_number"><br>
-
-    <label for="price">티켓 당 가격:</label>
-    <input type="number" id="price" name="price" step="100" required><br>
-
-    <label for="contact_method">연락 방법:</label>
-    <input type="text" id="contact_method" name="contact_method" required><br>
-
-    <label for="ticket_count">티켓 개수:</label>
-    <input type="number" id="ticket_count" name="ticket_count" required><br>
-
-    <label for="additional_info">추가 정보:</label>
-    <textarea id="additional_info" name="additional_info"></textarea><br>
-
-    
-    <label for="trade_method">거래 방식:</label>
-    <select id="trade_method" name="trade_method" required>
-      <option value="">-- 거래 방식을 선택하세요 --</option>
-      <option value="배송">배송</option>
-      <option value="현장">현장</option>
-      <option value="PIN(E-ticket)">PIN(E-ticket)</option>
-      <option value="기타">기타</option>
-    </select><br>
-
-    <label for="trade_description">거래 설명:</label>
-    <textarea id="trade_description" name="trade_description" placeholder="상품 및 거래 방법에 대한 설명 입력 (최대 2000자)"></textarea><br>
-
-    <label><input type="checkbox" id="is_adjacent" name="is_adjacent"> 연석</label><br>
-    <label><input type="checkbox" id="is_under_price" name="under_price"> 정가 이하 판매 (수수료 무료)</label><br>
-
-    <label for="section">구역(존/블럭):</label>
-    <input type="text" id="section" name="section"><br>
-
-    <label for="row">열:</label>
-    <input type="text" id="row" name="row"><br>
-
-    <label for="note">선택사항 (최대 10자):</label>
-    <input type="text" id="note" name="note" maxlength="10"><br>
-
-    <button type="submit">등록</button>
-  </form>
-
-  <div id="result"></div>
-
-  <script type="module">
+<h1><a href="index.html" style="text-decoration: none; color: inherit;">🎟️ Our Ticket</a></h1>
+<nav>
+<ul class="nav-links">
+<li><a href="submit.html">티켓 등록</a></li>
+<li><a href="tickets.html">등록된 티켓</a></li>
+<li><a href="about.html">소개</a></li>
+<li class="dropdown">
+<span class="dropdown-toggle">스포츠</span>
+<ul class="dropdown-menu">
+<li><strong>⚾ 야구</strong></li>
+<li><a href="baseball/doosan.html">두산 베어스</a></li>
+<li><a href="baseball/lg.html">LG 트윈스</a></li>
+<li><a href="baseball/ktwiz.html">KT wiz</a></li>
+<li><a href="baseball/samsung.html">삼성 라이온즈</a></li>
+<li><a href="baseball/ssg.html">SSG 랜더스</a></li>
+<li><a href="baseball/hanwha.html">한화 이글스</a></li>
+<li><a href="baseball/nc.html">NC 다이노스</a></li>
+<li><a href="baseball/lotte.html">롯데 자이언츠</a></li>
+<li><a href="baseball/kiwoom.html">키움 히어로즈</a></li>
+<li><a href="baseball/kia.html">KIA 타이거즈</a></li>
+<li><strong>⚽ 축구</strong></li>
+<li><a href="Soccer/fcseoul.html">FC 서울</a></li>
+<li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
+<li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
+<li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
+<li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
+<li><a href="Soccer/daegu.html">대구 FC</a></li>
+<li><a href="Soccer/gwangju.html">광주 FC</a></li>
+<li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
+<li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
+<li><a href="Soccer/gangwon.html">강원 FC</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<form id="ticketForm">
+<label for="sport_type">종목:</label>
+<select id="sport_type" name="sport_type">
+<option value="">-- 종목을 선택하세요 --</option>
+<option value="야구">야구</option>
+<option value="축구">축구</option>
+</select><br/>
+<label for="team">팀:</label>
+<select id="team" name="team"></select><br/>
+<label>경기장:</label>
+<select id="stadium_select" name="stadium_select" style="display:none;"></select>
+<input id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;" type="text"/><br/>
+<label for="match_date">경기 날짜:</label>
+<input id="match_date" name="match_date" type="date"/><br/>
+<label for="match_time">경기 시간:</label>
+<input id="match_time" name="match_time" type="time"/><br/>
+<label for="seat_grade">좌석 등급:</label>
+<input id="seat_grade" name="seat_grade" required="" type="text"/><br/>
+<label for="seat_number">좌석 번호:</label>
+<input id="seat_number" name="seat_number" type="text"/><br/>
+<label for="price">티켓 당 가격:</label>
+<input id="price" name="price" required="" step="100" type="number"/><br/>
+<label for="contact_method">연락 방법:</label>
+<input id="contact_method" name="contact_method" required="" type="text"/><br/>
+<label for="ticket_count">티켓 개수:</label>
+<input id="ticket_count" name="ticket_count" required="" type="number"/><br/>
+<label for="additional_info">추가 정보:</label>
+<br/>
+<label for="trade_method">거래 방식:</label>
+<select id="trade_method" name="trade_method" required="">
+<option value="">-- 거래 방식을 선택하세요 --</option>
+<option value="배송">배송</option>
+<option value="현장">현장</option>
+<option value="PIN(E-ticket)">PIN(E-ticket)</option>
+<option value="기타">기타</option>
+</select><br/>
+<label for="trade_description">거래 설명:</label>
+<textarea id="trade_description" name="trade_description" placeholder="상품 및 거래 방법에 대한 설명 입력 (최대 2000자)"></textarea><br/>
+<label><input id="is_adjacent" name="is_adjacent" type="checkbox"/> 연석</label><br/>
+<label><input id="is_under_price" name="under_price" type="checkbox"/> 정가 이하 판매 (수수료 무료)</label><br/>
+<label for="section">구역(존/블럭):</label>
+<input id="section" name="section" type="text"/><br/>
+<label for="row">열:</label>
+<input id="row" name="row" type="text"/><br/>
+<label for="note">선택사항 (최대 10자):</label>
+<br/>
+<button type="submit">등록</button>
+</form>
+<div id="result"></div>
+<script type="module">
   import { supabase } from './supabaseClient.js';
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
