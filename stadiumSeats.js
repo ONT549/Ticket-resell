@@ -1,4 +1,4 @@
-export const stadiumSeats = {
+const stadiumSeats = {
   "잠실야구장": [
     "중앙석(프리미엄/VIP)",
     "1루 테이블석",
@@ -263,7 +263,7 @@ export const stadiumSeats = {
   ]
 };
 
-export function updateSeatOptions(stadiumSelectId, seatSelectId) {
+function updateSeatOptions(stadiumSelectId, seatSelectId) {
   const stadiumSelect = document.getElementById(stadiumSelectId);
   const seatSelect = document.getElementById(seatSelectId);
 
