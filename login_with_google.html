@@ -1,48 +1,18 @@
 
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
   <meta charset="UTF-8" />
-  <title>로그인 / 회원가입</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 20px;
-      background: #f0f0f0;
-      border-radius: 12px;
-    }
-    h1 {
-      text-align: center;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background-color: #007BFF;
-      color: white;
-      cursor: pointer;
-    }
-    #result {
-      margin-top: 20px;
-      text-align: center;
-      font-weight: bold;
-    }
-  </style>
+  <title>Our Ticket 로그인</title>
 </head>
 <body>
-
   <h1>로그인</h1>
 
   <input type="email" id="email" placeholder="이메일을 입력하세요" />
   <input type="password" id="password" placeholder="비밀번호를 입력하세요" />
 
   <button id="login-btn">로그인</button>
+
   <hr/>
   <button id="google-login" style="background-color: #4285F4; color: white; margin-top: 10px;">
     Google 계정으로 로그인
@@ -69,19 +39,19 @@
       } else {
         result.textContent = "✅ 로그인 성공!";
         window.location.href = "index.html";
-
-  document.getElementById("google-login").addEventListener("click", async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google'
+      }
     });
-    if (error) {
-      console.error("Google 로그인 실패:", error.message);
-    }
-  });
 
+    document.getElementById("google-login").addEventListener("click", async () => {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google'
+      });
+      if (error) {
+        console.error("Google 로그인 실패:", error.message);
+      } else {
+        console.log("✅ Google 로그인 시도 중...");
       }
     });
   </script>
-
 </body>
 </html>
