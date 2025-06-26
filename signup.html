@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>로그인 / 회원가입</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f0f0f0;
+      border-radius: 12px;
+    }
+    h1 {
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>회원가입</h1>
+
+  <input type="email" id="email" placeholder="이메일을 입력하세요" />
+  <input type="password" id="password" placeholder="비밀번호를 입력하세요" />
+
+  <div style="margin-top: 10px;">
+    <input type="checkbox" id="terms" />
+    <label for="terms">
+      <a href="terms.html" target="_blank">이용약관</a>에 동의합니다. (필수)
+    </label>
+  </div>
+  <div style="margin-top: 10px;">
+    <input type="checkbox" id="privacy" />
+    <label for="privacy">
+      <a href="privacy.html" target="_blank">개인정보 수집 및 이용</a>에 동의합니다. (필수)
+    </label>
+  </div>
+
+  <button id="signup-btn">회원가입</button>
+  <div style="margin-top: 10px; text-align: center;">
+    <a href="login.html">이미 계정이 있으신가요? 로그인</a>
+  </div>
+
+  <div id="result"></div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    document.getElementById("signup-btn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const terms = document.getElementById("terms");
+      const privacy = document.getElementById("privacy");
+      const result = document.getElementById("result");
+
+      if (!terms.checked || !privacy.checked) {
+        result.textContent = "❌ 약관 및 개인정보 수집에 동의해야 합니다.";
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({ email, password });
+
+      if (error) {
+        result.textContent = "❌ 회원가입 실패: " + error.message;
+      } else {
+        result.textContent = "✅ 회원가입 성공! 이메일을 확인해주세요.";
+      }
+    });
+  </script>
+
+</body>
+</html>
