@@ -183,7 +183,7 @@
       });
 
       if (error) {
-        if (error.message.includes("User already registered")) {
+        if (error.message.includes("User already registered"))) {
           result.textContent = "❌ 이미 가입된 이메일입니다.";
         } else {
           result.textContent = "❌ 회원가입 실패: " + error.message;
