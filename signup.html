@@ -6,6 +6,25 @@
   <title>회원가입</title>
   <style>
     body {
+      background-color: #f7f9fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .signup-wrapper {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 480px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    body {
       font-family: sans-serif;
       max-width: 480px;
       margin: 50px auto;
@@ -48,6 +67,12 @@
   </style>
 </head>
 <body>
+  <div class="signup-wrapper">
+    <header style="margin-bottom: 20px;">
+      <a href="index.html" style="text-decoration: none; color: #007BFF; font-weight: bold;">
+        ← 홈으로 돌아가기
+      </a>
+    </header>
 
   <h1>회원가입</h1>
 
@@ -55,7 +80,8 @@
   <input type="password" id="password" placeholder="비밀번호를 입력하세요" />
   <input type="password" id="password-confirm" placeholder="비밀번호를 다시 입력하세요" />
   <input type="text" id="name" placeholder="이름을 입력하세요" />
-  <input type="date" id="birth" placeholder="생년월일" />
+  <label for="birth">생년월일을 입력하세요</label>
+  <input type="date" id="birth" placeholder="생년월일을 입력하세요" />
 
   <div class="checkbox-group">
     <input type="checkbox" id="agree-all" />
@@ -120,7 +146,7 @@
         .single();
 
       if (existingUser) {
-        result.textContent = "❌ 이미 가입된 이메일입니다.";
+        result.textContent = "❌ 이미 가입 완료된 이메일입니다.";
         return;
       }
 
@@ -140,5 +166,6 @@
     });
   </script>
 
+  </div>
 </body>
 </html>
