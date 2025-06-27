@@ -159,8 +159,13 @@
       });
 
       if (error) {
+      if (error.message && error.message.includes("already registered")) {
+        result.textContent = "❌ 이미 가입 완료된 이메일입니다.";
+      }
+    } else {
         result.textContent = "❌ 회원가입 실패: " + error.message;
-      } else {
+      }
+    } else {
         result.textContent = "✅ 회원가입 성공! 이메일 인증을 완료해주세요.";
       }
     });
