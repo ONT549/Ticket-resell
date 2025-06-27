@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>PASS 인증</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #e60023;
+    }
+
+    .options {
+      margin-top: 30px;
+    }
+
+    .options button {
+      display: block;
+      width: 90%;
+      margin: 10px auto;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: #f8f8f8;
+      cursor: pointer;
+    }
+
+    .options button:hover {
+      background-color: #e9e9e9;
+    }
+
+    #certify {
+      margin-top: 40px;
+      background-color: #e60023;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>PASS 인증</h2>
+  <p>인증 방법을 선택해주세요.</p>
+
+  <div class="options">
+    <button>PASS 인증 (앱 실행)</button>
+    <button>QR코드 인증</button>
+    <button>문자(SMS) 인증</button>
+    <button id="certify">인증 완료</button>
+  </div>
+
+  <script>
+    document.getElementById("certify").addEventListener("click", () => {
+      // 부모 창에 인증 완료 메시지 전송
+      window.opener.postMessage({
+        status: "success",
+        name: "홍길동",
+        phone: "01012345678"
+      }, "*");
+
+      // 현재 창 닫기
+      window.close();
+    });
+  </script>
+
+</body>
+</html>
