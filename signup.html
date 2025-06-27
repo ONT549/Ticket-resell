@@ -177,6 +177,27 @@
   <script type="module">
     import { supabase } from './supabaseClient.js';
 
+    
+    // 전체 동의 체크하면 나머지도 체크
+    document.getElementById("agree-all").addEventListener("change", (e) => {
+      const checked = e.target.checked;
+      document.getElementById("terms").checked = checked;
+      document.getElementById("privacy").checked = checked;
+      document.getElementById("age-check").checked = checked;
+    });
+
+    // 개별 체크 시 전체 동의 여부 판단
+    ["terms", "privacy", "age-check"].forEach(id => {
+      document.getElementById(id).addEventListener("change", () => {
+        const allChecked =
+          document.getElementById("terms").checked &&
+          document.getElementById("privacy").checked &&
+          document.getElementById("age-check").checked;
+        document.getElementById("agree-all").checked = allChecked;
+      });
+    });
+
+
     document.getElementById("signup-btn").addEventListener("click", async () => {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
