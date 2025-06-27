@@ -61,6 +61,22 @@
     text-align: center;
     margin-top: 12px;
   }
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.checkbox-group input[type="checkbox"] {
+  margin: 0;
+}
+
 </style>
 
   <meta charset="UTF-8" />
@@ -149,19 +165,12 @@
   <script type="module">
     import { supabase } from './supabaseClient.js';
 
-    document.getElementById("agree-all").addEventListener("change", (e) => {
-      document.getElementById("terms").checked = e.target.checked;
-      document.getElementById("privacy").checked = e.target.checked;
-      document.getElementById("age-check").checked = e.target.checked;
-    });
-
     document.getElementById("signup-btn").addEventListener("click", async () => {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
       const passwordConfirm = document.getElementById("password-confirm").value;
-      const name = document.getElementById("name").value;
+      const name = document.getElementById("name").value.trim();
       const birth = document.getElementById("birth").value;
-
       const terms = document.getElementById("terms").checked;
       const privacy = document.getElementById("privacy").checked;
       const ageCheck = document.getElementById("age-check").checked;
@@ -169,6 +178,18 @@
 
       if (!terms || !privacy || !ageCheck) {
         result.textContent = "❌ 모든 필수 약관에 동의해야 합니다.";
+        return;
+      }
+
+      if (!name || !birth) {
+        result.textContent = "❌ 이름과 생년월일을 모두 입력해야 합니다.";
+        return;
+      }
+
+      const birthDate = new Date(birth);
+      const minDate = new Date("2011-06-28");
+      if (birthDate > minDate) {
+        result.textContent = "❌ 만 14세 이상만 가입 가능합니다.";
         return;
       }
 
@@ -185,36 +206,16 @@
         }
       });
 
-      if (error) {
-        if (error.message && error.message.includes("User already registered")) {
-          result.textContent = "❌ 이미 가입된 이메일입니다.";
-        } else {
-          result.textContent = "❌ 회원가입 실패: " + error.message;
-        }
+      if (error || (data.user && data.user.identities && data.user.identities.length === 0)) {
+        result.textContent = "❌ 회원가입 실패: " + (error?.message || "이미 가입된 이메일입니다.");
         return;
       }
 
-      if (data.user && data.user.identities && data.user.identities.length === 0) {
-        result.textContent = "❌ 이미 가입된 이메일입니다.";
-        return;
-      }
-
-      result.textContent = "✅ 회원가입 성공! 이메일 인증 메일이 발송되었습니다. 메일함을 확인해주세요.";
-
-      if (data.user && data.user.identities.length === 0) {
-        result.textContent = "❌ 이미 가입된 이메일입니다.";
-        return;
-      }
-
-      result.textContent = "✅ 회원가입 성공! 이메일 인증 메일이 발송되었습니다. 메일함을 확인해주세요.";
-
-      if (error) {
-        result.textContent = "❌ 회원가입 실패: " + error.message;
-      } else {
-        result.textContent = "✅ 회원가입 성공! 이메일 인증을 완료해주세요.";
-      }
+      // 성공 시 새 페이지로 이동
+      window.location.href = "signup_success.html";
     });
-  </script>
+
+</script>
 
 <a class="home-link" href="index.html">← 홈으로 돌아가기</a>
 </div>
