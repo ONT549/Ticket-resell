@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>회원가입</title>
+  <style>
+    body {
+      background-color: #f7f9fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .signup-wrapper {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 480px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    body {
+      font-family: sans-serif;
+      max-width: 480px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f0f0f0;
+      border-radius: 12px;
+    }
+    h1 {
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    .checkbox-group {
+      margin-top: 10px;
+    }
+    .checkbox-group input {
+      width: auto;
+    }
+    .info-note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-wrapper">
+    <header style="margin-bottom: 20px;">
+      <a href="index.html" style="text-decoration: none; color: #007BFF; font-weight: bold;">
+        ← 홈으로 돌아가기
+      </a>
+    </header>
+
+  <h1>회원가입</h1>
+
+  <input type="email" id="email" placeholder="이메일을 입력하세요" />
+  <input type="password" id="password" placeholder="비밀번호를 입력하세요" />
+  <input type="password" id="password-confirm" placeholder="비밀번호를 다시 입력하세요" />
+  <input type="text" id="name" placeholder="이름을 입력하세요" />
+  <label for="birth">생년월일을 입력하세요</label>
+  <input type="date" id="birth" placeholder="생년월일을 입력하세요" />
+
+  <div class="checkbox-group">
+    <input type="checkbox" id="agree-all" />
+    <label for="agree-all"><strong>전체 동의</strong></label>
+
+    <input type="checkbox" id="terms" />
+    <label for="terms"><a href="terms.html" target="_blank">이용약관</a>에 동의합니다. (필수)</label>
+
+    <input type="checkbox" id="privacy" />
+    <label for="privacy"><a href="privacy.html" target="_blank">개인정보 수집 및 이용</a>에 동의합니다. (필수)</label>
+
+    <input type="checkbox" id="age-check" />
+    <label for="age-check">만 14세 이상입니다. (필수)</label>
+  </div>
+
+  <button id="signup-btn">회원가입</button>
+
+  <div class="info-note">※ 가입 후 이메일 인증을 완료해야 로그인 가능합니다.</div>
+
+  <div style="margin-top: 10px; text-align: center;">
+    <a href="login.html">이미 계정이 있으신가요? 로그인</a>
+  </div>
+
+  <div id="result"></div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    document.getElementById("agree-all").addEventListener("change", (e) => {
+      document.getElementById("terms").checked = e.target.checked;
+      document.getElementById("privacy").checked = e.target.checked;
+      document.getElementById("age-check").checked = e.target.checked;
+    });
+
+    document.getElementById("signup-btn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const passwordConfirm = document.getElementById("password-confirm").value;
+      const name = document.getElementById("name").value;
+      const birth = document.getElementById("birth").value;
+
+      const terms = document.getElementById("terms").checked;
+      const privacy = document.getElementById("privacy").checked;
+      const ageCheck = document.getElementById("age-check").checked;
+      const result = document.getElementById("result");
+
+      if (!terms || !privacy || !ageCheck) {
+        result.textContent = "❌ 모든 필수 약관에 동의해야 합니다.";
+        return;
+      }
+
+      if (password !== passwordConfirm) {
+        result.textContent = "❌ 비밀번호가 일치하지 않습니다.";
+        return;
+      }
+
+      // 이미 가입된 이메일인지 확인
+      const { data: existingUser, error: fetchError } = await supabase
+        .from("users")
+        .select("email")
+        .eq("email", email)
+        .single();
+
+      if (existingUser) {
+        result.textContent = "❌ 이미 가입 완료된 이메일입니다.";
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { name, birth }
+        }
+      });
+
+      if (error) {
+      if (error.message && error.message.includes("already registered")) {
+        result.textContent = "❌ 이미 가입 완료된 이메일입니다.";
+      }
+    } else {
+        result.textContent = "❌ 회원가입 실패: " + error.message;
+      }
+    } else {
+        result.textContent = "✅ 회원가입 성공! 이메일 인증을 완료해주세요.";
+      }
+    });
+  </script>
+
+  </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const agreeAll = document.getElementById("agreeAll");
+    const subChecks = document.querySelectorAll(".sub-agree");
+
+    if (agreeAll) {
+      agreeAll.addEventListener("change", function () {
+        subChecks.forEach(chk => chk.checked = agreeAll.checked);
+      });
+    }
+
+    subChecks.forEach(chk => {
+      chk.addEventListener("change", function () {
+        const allChecked = Array.from(subChecks).every(chk => chk.checked);
+        agreeAll.checked = allChecked;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
