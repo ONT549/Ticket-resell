@@ -14,7 +14,26 @@
   <button id="login-btn">로그인</button>
 
   <hr/>
-  <button id="google-login" style="background-color: #4285F4; color: white; margin-top: 10px;">
+<style>
+  .google-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 12px 24px; background-color: #ffffff; color: #000000;
+    border: 1px solid #dadce0; border-radius: 8px; font-size: 16px;
+    font-weight: 500; font-family: "Segoe UI", sans-serif;
+    cursor: pointer; transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .google-btn:hover {
+    background-color: #f1f3f4; transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  .google-icon { width: 20px; height: 20px; }
+</style>
+
+<button id="google-login" class="google-btn">
+  <img class="google-icon" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+  Google 계정으로 로그인
+</button>
     Google 계정으로 로그인
   </button>
 
