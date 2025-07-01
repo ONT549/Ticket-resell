@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Our Ticket 로그인</title>
+</head>
+<body>
+  <div class="login-wrapper">
+
+  <header style="width: 100%; padding: 16px 0; border-bottom: 1px solid #eee; margin-bottom: 24px;">
+    <a href="index.html" style="text-decoration: none; color: #4a90e2; font-weight: bold; font-size: 18px;">
+      ← 홈으로 돌아가기
+    </a>
+  </header>
+
+  <h1>로그인</h1>
+
+  <input type="email" id="email" placeholder="이메일을 입력하세요" />
+  <input type="password" id="password" placeholder="비밀번호를 입력하세요" />
+
+  <button id="login-btn">로그인</button>
+
+  <hr/>
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f9fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .login-wrapper {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    color: #333;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  #login-btn {
+    background-color: #4a90e2;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  #login-btn:hover {
+    background-color: #357ab8;
+  }
+
+  .google-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Segoe UI', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .google-btn:hover {
+    background-color: #f1f3f4;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .google-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .signup-link {
+    margin-top: 16px;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  #result {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #d9534f;
+  }
+</style>
+
+<style>
+  .google-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 12px 24px; background-color: #ffffff; color: #000000;
+    border: 1px solid #dadce0; border-radius: 8px; font-size: 16px;
+    font-weight: 500; font-family: "Segoe UI", sans-serif;
+    cursor: pointer; transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .google-btn:hover {
+    background-color: #f1f3f4; transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  .google-icon { width: 20px; height: 20px; }
+</style>
+
+<button id="google-login" class="google-btn">
+  <img class="google-icon" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+  Google 계정으로 로그인
+</button>
+
+  <div style="margin-top: 10px; text-align: center;">
+    <a href="signup.html">아직 회원이 아니신가요? 회원가입</a>
+  </div>
+
+  <div id="result"></div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    document.getElementById("login-btn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+      const result = document.getElementById("result");
+      if (error) {
+        result.textContent = "❌ 로그인 실패: " + error.message;
+      } else {
+        result.textContent = "✅ 로그인 성공!";
+        window.location.href = "index.html";
+      }
+    });
+
+    document.getElementById("google-login").addEventListener("click", async () => {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google'
+      });
+      if (error) {
+        console.error("Google 로그인 실패:", error.message);
+      } else {
+        console.log("✅ Google 로그인 시도 중...");
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
