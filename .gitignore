@@ -1,0 +1,12 @@
+# 환경 설정 및 키
+.env
+.supabase
+*.key
+*.token
+
+# 일반 무시 대상
+node_modules/
+dist/
+.vscode/
+*.log
+.DS_Store

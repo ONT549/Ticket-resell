@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>티켓 등록</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 40px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  form {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-group.inline {
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+  label {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  input, select, textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+  }
+  input[type="checkbox"] {
+    width: auto;
+  }
+  .checkbox-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  button {
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+</style></head>
+<body>
+<div style="text-align: center; margin-top: 30px;">
+  <a href="index.html" style="text-decoration: none;">
+    <img src="cover.png" alt="TICKET ZONE" style="height: 150px; vertical-align: middle;">
+  </a>
+</div>
+<nav>
+<ul class="nav-links">
+<li><a href="submit.html">티켓 등록</a></li>
+<li><a href="tickets.html">등록된 티켓</a></li>
+<li><a href="about.html">소개</a></li>
+<li class="dropdown">
+<span class="dropdown-toggle">스포츠</span>
+<ul class="dropdown-menu">
+<li><strong>⚾ 야구</strong></li>
+<li><a href="baseball/doosan.html">두산 베어스</a></li>
+<li><a href="baseball/lg.html">LG 트윈스</a></li>
+<li><a href="baseball/ktwiz.html">KT wiz</a></li>
+<li><a href="baseball/samsung.html">삼성 라이온즈</a></li>
+<li><a href="baseball/ssg.html">SSG 랜더스</a></li>
+<li><a href="baseball/hanwha.html">한화 이글스</a></li>
+<li><a href="baseball/nc.html">NC 다이노스</a></li>
+<li><a href="baseball/lotte.html">롯데 자이언츠</a></li>
+<li><a href="baseball/kiwoom.html">키움 히어로즈</a></li>
+<li><a href="baseball/kia.html">KIA 타이거즈</a></li>
+<li><strong>⚽ 축구</strong></li>
+<li><a href="Soccer/fcseoul.html">FC 서울</a></li>
+<li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
+<li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
+<li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
+<li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
+<li><a href="Soccer/daegu.html">대구 FC</a></li>
+<li><a href="Soccer/gwangju.html">광주 FC</a></li>
+<li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
+<li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
+<li><a href="Soccer/gangwon.html">강원 FC</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<form id="ticketForm"><div class="form-group"><label for="sport_type">종목:</label></div><div class="form-group"><select id="sport_type" name="sport_type">
+<option value="">-- 종목을 선택하세요 --</option>
+<option value="야구">야구</option>
+<option value="축구">축구</option>
+</select></div><div class="form-group"><label for="team">팀:</label></div><div class="form-group"><select id="team" name="team"></select></div><div class="form-group"><label>경기장:</label></div><div class="form-group"><select id="stadium_select" name="stadium_select" style="display:none;"></select></div><div class="form-group"><input id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;" type="text"/></div><div class="form-group"><label for="match_date">경기 날짜:</label></div><div class="form-group"><input id="match_date" name="match_date" type="date"/></div><div class="form-group"><label for="match_time">경기 시간:</label></div><div class="form-group"><input id="match_time" name="match_time" type="time"/></div>
+<div class="form-row" id="seat-info-group" style="display: flex; gap: 20px;">
+<div class="form-group">
+<label for="opponent_team">상대팀 선택</label>
+<select id="opponent_team" name="opponent_team"></select>
+</div>
+<div class="form-group">
+<label for="seat_grade">좌석 선택</label>
+<select id="seat_grade" name="seat_grade"></select>
+</div>
+<div class="form-group">
+<label for="section">구역(존/블럭)</label>
+<input id="section" name="section" type="text"/>
+</div>
+<div class="form-group">
+<label for="row">열</label>
+<input id="row" name="row" type="text"/>
+</div>
+</div>
+<div class="form-group"><label for="trade_method">거래 방식:</label></div><div class="form-group"><select id="trade_method" name="trade_method" required="">
+<option value="">-- 거래 방식을 선택하세요 --</option>
+<option value="배송">배송</option>
+<option value="현장">현장</option>
+<option value="PIN(E-ticket)">PIN(E-ticket)</option>
+<option value="기타">기타</option>
+</select></div>
+<div class="form-row">
+<div class="form-group">
+<label for="ticket_count">전체 수량</label>
+<input id="ticket_count" name="ticket_count" required="" type="number"/>
+</div>
+<div class="form-group">
+<label for="price">1매당 가격 (원)</label>
+<input id="price" name="price" required="" step="100" type="number"/>
+</div>
+</div>
+<div class="form-row checkbox-group">
+<label><input id="is_adjacent" name="is_adjacent" type="checkbox"/> 연석</label>
+<label><input id="is_under_price" name="is_under_price" type="checkbox"/> 정가 이하 판매 (수수료 무료)</label>
+</div>
+<div class="form-group"><label for="trade_description">거래 설명(현장, 기타 선택 시에만):</label></div><div class="form-group"><textarea id="trade_description" name="trade_description" placeholder="상품 및 거래 방법에 대한 설명 입력 (최대 2000자)"></textarea></div><button type="submit">등록</button></form>
+<div id="result"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+  const supabase = window.supabase.createClient(
+    'https://dbdnvjbkotlyarsfmtjn.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0'
+  );
+</script>
+<script src="stadiumSeats.js"></script>
+<script>
+updateSeatOptions("stadium_select", "seat_grade");
+
+
+    const result = document.getElementById('result');
+
+    const sportSelect = document.getElementById('sport_type');
+    const teamSelect = document.getElementById('team');
+    const stadiumSelect = document.getElementById('stadium_select');
+    const stadiumInput = document.getElementById('stadium_input');
+
+    const teams = {
+      '야구': ['-- 팀을 선택하세요 --', '두산 베어스', 'LG 트윈스', 'KT wiz', '삼성 라이온즈', 'SSG 랜더스', '한화 이글스', 'NC 다이노스', '롯데 자이언츠', '키움 히어로즈', 'KIA 타이거즈'],
+      '축구': ['-- 팀을 선택하세요 --', 'FC 서울', '수원 삼성', '울산 현대', '전북 현대', '포항 스틸러스', '대구 FC', '광주 FC', '제주 유나이티드', '인천 유나이티드', '강원 FC']
+    };
+
+    const stadiums = {
+      '두산 베어스': ['-- 경기장을 선택하세요 --', '잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
+      'LG 트윈스': ['-- 경기장을 선택하세요 --', '잠실야구장(주중)', '잠실야구장(금토일/공휴일)'],
+      'KT wiz': ['-- 경기장을 선택하세요 --', '수원 위즈 파크(주중)', '수원 위즈 파크(금토일/공휴일)'],
+      '삼성 라이온즈': ['-- 경기장을 선택하세요 --', '대구 라이온즈 파크(주중)', '대구 라이온즈 파크(금토일/공휴일)', '포항 야구장'],
+      'SSG 랜더스': ['-- 경기장을 선택하세요 --', '인천 SSG 랜더스필드(주중)', '인천 SSG 랜더스필드(금토일/공휴일)'],
+      '한화 이글스': ['-- 경기장을 선택하세요 --', '대전 한화생명 볼파크(주중)', '대전 한화생명 볼파크(금토일/공휴일)', '청주 야구장'],
+      'NC 다이노스': ['-- 경기장을 선택하세요 --', '울산 문수 야구장(주중)', '울산 문수 야구장(금토일/공휴일)', '창원 NC 파크'],
+      '롯데 자이언츠': ['-- 경기장을 선택하세요 --', '부산 사직 야구장(주중)', '부산 사직 야구장(금토일/공휴일)', '울산 문수 야구장'],
+      '키움 히어로즈': ['-- 경기장을 선택하세요 --', '고척 돔 야구장(주중)', '고척 돔 야구장(금토일/공휴일)'],
+      'KIA 타이거즈': ['-- 경기장을 선택하세요 --', '광주 챔피언스 필드(주중)', '광주 챔피언스 필드(금토일/공휴일)']
+    };
+
+    sportSelect.addEventListener('change', () => {
+      teamSelect.innerHTML = '';
+      const sport = sportSelect.value;
+      if (teams[sport]) {
+        teams[sport].forEach(team => {
+          const opt = document.createElement('option');
+          opt.value = team;
+          opt.textContent = team;
+          teamSelect.appendChild(opt);
+        });
+      }
+
+      if (sport === '야구') {
+        stadiumSelect.style.display = 'inline';
+        stadiumInput.style.display = 'none';
+      } else {
+        stadiumSelect.style.display = 'none';
+        stadiumInput.style.display = 'inline';
+      }
+    });
+
+    
+const opponentSelect = document.getElementById("opponent_team");
+
+teamSelect.addEventListener('change', () => {
+  const team = teamSelect.value;
+
+  // 기존 stadium 처리 유지
+  if (stadiums[team]) {
+    stadiumSelect.innerHTML = '';
+    stadiums[team].forEach(stadium => {
+      const opt = document.createElement('option');
+      opt.value = stadium;
+      opt.textContent = stadium;
+      stadiumSelect.appendChild(opt);
+    });
+    stadiumSelect.style.display = 'inline';
+  }
+
+  // 상대팀 필터링
+  const sport = sportSelect.value;
+  if (teams[sport]) {
+    opponentSelect.innerHTML = '';
+    teams[sport].forEach(t => {
+      if (t !== team && t !== '-- 팀을 선택하세요 --') {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        opponentSelect.appendChild(opt);
+      }
+    });
+  }
+});
+
+
+teamSelect.addEventListener('change', () => {
+      const team = teamSelect.value;
+      if (stadiums[team]) {
+        stadiumSelect.innerHTML = '';
+        stadiums[team].forEach(stadium => {
+          const opt = document.createElement('option');
+          opt.value = stadium;
+          opt.textContent = stadium;
+          stadiumSelect.appendChild(opt);
+        });
+        stadiumSelect.style.display = 'inline';
+      }
+    });
+
+        const form = document.getElementById('ticketForm');
+form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData.user) {
+        result.textContent = '❌ 로그인 후 이용해주세요.';
+        return;
+      }
+      const user_id = userData.user.id;
+
+
+      const sport_type = sportSelect.value;
+      const team = teamSelect.value;
+      const stadium = sport_type === '야구' ? stadiumSelect.value : stadiumInput.value;
+      const match_date = document.getElementById('match_date').value;
+      const opponent_team = document.getElementById('opponent_team').value;
+const seat_grade = document.getElementById('seat_grade').value;
+console.log("seat_grade:", seat_grade);
+if (!seat_grade) {
+  result.textContent = '❌ 좌석을 선택해주세요.';
+  return;
+}
+const match_time = document.getElementById('match_time').value;
+      const price = parseInt(document.getElementById('price').value);
+      const ticket_count = parseInt(document.getElementById('ticket_count').value);
+      
+      const trade_method = document.getElementById('trade_method').value;
+      const trade_description = document.getElementById('trade_description').value;
+      const is_adjacent = document.getElementById('is_adjacent').checked;
+      const is_under_price = document.getElementById('is_under_price').checked;
+      const section = document.getElementById('section').value;
+      const row = document.getElementById('row').value;
+      
+
+      const { data, error } = await supabase
+        .from('tickets')
+        .insert([{
+          opponent_team,
+          seat_grade,
+          sport_type,
+          team,
+          stadium,
+          match_date,
+          match_time,
+          price,
+          ticket_count,
+          user_id,
+          trade_method,
+          trade_description,
+          is_adjacent,
+          is_under_price,
+          section,
+          row,
+                  }]);
+
+      if (error) {
+        console.error(error);
+        result.textContent = '❌ 티켓 등록 중 오류가 발생했습니다.';
+      } else {
+        result.textContent = '✅ 티켓이 성공적으로 등록되었습니다!';
+        form.reset();
+        stadiumSelect.style.display = 'none';
+        stadiumInput.style.display = 'none';
+        teamSelect.innerHTML = '';
+      }
+    });
+
+
+stadiumSelect.addEventListener("change", () => {
+  const seatSelect = document.getElementById("seat_grade");
+  const stadiumName = stadiumSelect.value.replace(/\(.*?\)/g, "").trim();
+  seatSelect.innerHTML = '';
+  if (stadiumSeats[stadiumName]) {
+    stadiumSeats[stadiumName].forEach(seat => {
+      const opt = document.createElement("option");
+      opt.value = seat;
+      opt.textContent = seat;
+      seatSelect.appendChild(opt);
+    });
+  } else {
+    const opt = document.createElement("option");
+    opt.textContent = "선택 가능한 좌석 없음";
+    seatSelect.appendChild(opt);
+  }
+});
+</script>
+</body>
+</html>

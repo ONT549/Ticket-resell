@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>마이페이지</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    .info {
+      margin-top: 30px;
+      font-size: 18px;
+      text-align: center;
+    }
+    .logout-btn {
+      margin-top: 30px;
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+    <div>
+      <a href="index.html" style="text-decoration: none; font-size: 24px;">🎟️</a>
+    </div>
+    <h1 style="margin: 0; text-align: center; flex-grow: 1;">마이페이지</h1>
+    <nav class="nav-links" style="display: flex; gap: 10px;">
+      <a href="submit.html">티켓 등록</a>
+      <a href="tickets.html">등록된 티켓</a>
+      <a href="about.html">소개</a>
+    </nav>
+  </header>
+
+
+  
+  
+  
+<div id="ticket-list" class="info">내가 등록한 티켓 목록을 불러오는 중...</div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    const userInfo = document.getElementById("user-info");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    async function loadUser() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (error || !user) {
+        userInfo.textContent = "로그인이 필요합니다.";
+        logoutBtn.style.display = "none";
+      } else {
+        userInfo.textContent = `로그인한 사용자: ${user.email}`;
+        loadTickets(user.id);
+      }
+    }
+
+    logoutBtn.addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      alert("로그아웃 되었습니다.");
+      window.location.href = "index.html";
+    });
+
+    
+    const ticketList = document.getElementById("ticket-list");
+
+    async function loadTickets(user_id) {
+      const { data, error } = await supabase
+        .from('tickets')
+        .select('*')
+        .eq('user_id', user_id);
+
+      if (error) {
+        ticketList.textContent = "티켓을 불러오는데 실패했습니다.";
+        console.error(error);
+        return;
+      }
+
+      if (data.length === 0) {
+        ticketList.textContent = "등록한 티켓이 없습니다.";
+        return;
+      }
+
+      ticketList.innerHTML = "<h2>내 티켓 목록</h2>" + data.map(ticket => `
+        <div style="border: 1px solid #ccc; margin: 10px 0; padding: 10px; border-radius: 8px;">
+          <strong>${ticket.team}</strong> vs ${ticket.opponent_team}<br/>
+          경기장: ${ticket.stadium}<br/>
+          날짜: ${ticket.match_date} ${ticket.match_time}<br/>
+          <strong>좌석</strong><br/>
+          구역(존/블럭): ${ticket.section} 열: ${ticket.row}<br/>
+          가격: ₩${ticket.price} / 수량: ${ticket.ticket_count}
+        </div>
+      `).join("");
+    }
+
+    loadUser();
+  </script>
+
+  <div class="info" id="user-info">불러오는 중...</div>
+  <button class="logout-btn" id="logout-btn">로그아웃</button>
+</body>
+
+</html>

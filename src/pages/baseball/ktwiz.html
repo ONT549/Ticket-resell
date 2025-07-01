@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>KT wiz 티켓 목록</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #222;
+    }
+    .ticket {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  
+  <div id="ticket-list">불러오는 중...</div>
+
+  <script>
+    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co'; // 🔁 실제 Supabase URL로 교체
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0'; // 🔁 실제 Supabase KEY로 교체
+    const TEAM_NAME = 'KT wiz';
+
+    const { createClient } = supabase;
+    const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function fetchTickets() {
+      const list = document.getElementById('ticket-list');
+      list.innerHTML = '불러오는 중...';
+
+      const { data, error } = await supabaseClient
+        .from('tickets')
+        .select('*')
+        .eq('team', TEAM_NAME);
+
+      if (error) {
+        console.error('에러:', error.message);
+        list.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        list.innerHTML = '등록된 티켓이 없습니다.';
+        return;
+      }
+
+      list.innerHTML = ''; // 기존 내용 초기화
+
+      data.forEach(ticket => {
+        const div = document.createElement('div');
+        div.className = 'ticket';
+        div.innerHTML = `
+          <strong>경기 날짜:</strong> ${ticket.match_date} <br>
+          <strong>경기 시간:</strong> ${ticket.match_time}<br>
+          <strong>경기장:</strong> ${ticket.stadium}<br>
+          <strong>좌석 등급:</strong> ${ticket.seat_grade}<br>
+          <strong>좌석 번호:</strong> ${ticket.seat_number}<br>
+          <strong>티켓 당 가격:</strong> ${ticket.price}원<br>
+          <strong>판매 수량:</strong> ${ticket.ticket_count}장<br>
+          <strong>연락처:</strong> ${ticket.contact_method}<br>
+          <strong>추가 설명:</strong> ${ticket.additional_info || '없음'}
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    fetchTickets();
+    
+       fetch("../baseball-header.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("header-placeholder").innerHTML = data;
+      });
+  </script>
+</body>
+</html>
