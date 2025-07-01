@@ -1,5 +1,3 @@
-
 import './style.css';
-import { supabase } from './supabaseClient';
 
-console.log("Vite 프로젝트 시작!");
+console.log('Main JS loaded');
