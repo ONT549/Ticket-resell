@@ -5,12 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ticket Zone - 티켓 중개 플랫폼</title>
   <meta name="description" content="Ticket Zone은 야구, 축구 등 스포츠 티켓을 쉽게 등록·검색하고 양도 정보를 중개하는 실시간 티켓 거래 플랫폼입니다.">
-  <link rel="stylesheet" href="./src/style.css" />
+  <link rel="stylesheet" href="/Ticket-resell/style.css" />
+  <style>
+    .search-container {
+      text-align: center;
+      margin: 40px auto;
+    }
+    #searchInput {
+      padding: 10px;
+      font-size: 16px;
+      width: 60%;
+      max-width: 400px;
+    }
+    .search-results {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .search-results ul {
+      list-style: none;
+      padding: 0;
+    }
+    .search-results li {
+      margin: 10px 0;
+    }
+    .search-results a {
+      text-decoration: none;
+      color: #0077cc;
+      font-weight: bold;
+    }
+    .search-results a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 <div style="text-align: center; margin-top: 30px;">
   <a href="index.html" style="text-decoration: none;">
-    <img src="./public/cover.png" alt="TICKET ZONE" style="height: 150px; vertical-align: middle;">
+    <img src="/Ticket-resell/cover.png" alt="TICKET ZONE" style="height: 150px; vertical-align: middle;">
   </a>
 </div>
 
@@ -39,6 +70,7 @@
           <li><a href="baseball/nc.html">NC 다이노스</a></li>
           <li><a href="baseball/lotte.html">롯데 자이언츠</a></li>
           <li><a href="baseball/kiwoom.html">키움 히어로즈</a></li>
+          <li><a href="baseball/kia.html">KIA 타이거즈</a></li>
           <li><strong>⚽ 축구</strong></li>
           <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
           <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
@@ -67,6 +99,7 @@
   <p>&copy; 2025 Ticket Zone</p>
 </footer>
 
-<script type="module" src="./src/main.js"></script>
+<!-- Vite 진입점 스크립트 -->
+<script type="module" src="/Ticket-resell/src/main.js"></script>
 </body>
 </html>
