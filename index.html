@@ -1,127 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Zone - 티켓 중개 플랫폼</title>
+  <meta name="description" content="Ticket Zone은 야구, 축구 등 스포츠 티켓을 쉽게 등록·검색하고 양도 정보를 중개하는 실시간 티켓 거래 플랫폼입니다.">
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="dropdown.js"></script>
+  <style>
+    .search-container {
+      text-align: center;
+      margin: 40px auto;
+    }
 
-<!-- 중간 생략: 기존 상단 head와 스타일, 로그인 버튼 등은 그대로 유지한다고 가정 -->
-<!-- 드롭다운 메뉴 교체 부분만 예시로 작성 -->
+    #searchInput {
+      padding: 10px;
+      font-size: 16px;
+      width: 60%;
+      max-width: 400px;
+    }
+
+    .search-results {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .search-results ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .search-results li {
+      margin: 10px 0;
+    }
+
+    .search-results a {
+      text-decoration: none;
+      color: #0077cc;
+      font-weight: bold;
+    }
+
+    .search-results a:hover {
+      text-decoration: underline;
+    }
+
+    .home-logo {
+      height: 150px;
+      margin: 20px auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<a id="login-button" href="login.html" style="position: absolute; top: 20px; right: 20px;
+  padding: 10px 16px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 6px;">
+  로그인 / 회원가입
+</a>
+
+<header>
+  <a href="index.html">
+    <img src="cover.png" alt="Ticket Zone Logo" class="home-logo" />
+  </a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="submit.html">티켓 등록</a></li>
+      <li><a href="tickets.html">등록된 티켓</a></li>
+      <li><a href="about.html">소개</a></li>
+      
+<li class="dropdown">
+  <span class="dropdown-toggle">스포츠</span>
+  <ul class="dropdown-menu">
+    <li class="dropdown">
+      <span>⚾ 야구</span>
+      <ul class="sub-dropdown-menu">
+        <li class="dropdown">
+          <span>두산 베어스</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">잠실야구장(주중)</a></li>
+            <li><a href="#">잠실야구장(금토일/공휴일)</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span>LG 트윈스</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">잠실야구장(주중)</a></li>
+            <li><a href="#">잠실야구장(금토일/공휴일)</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span>삼성 라이온즈</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">대구 라이온즈 파크(주중)</a></li>
+            <li><a href="#">대구 라이온즈 파크(금토일/공휴일)</a></li>
+            <li><a href="#">포항 야구장</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span>SSG 랜더스</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">인천 SSG 랜더스필드(주중)</a></li>
+            <li><a href="#">인천 SSG 랜더스필드(금토일/공휴일)</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span>한화 이글스</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">대전 한화생명 볼파크(주중)</a></li>
+            <li><a href="#">대전 한화생명 볼파크(금토일/공휴일)</a></li>
+            <li><a href="#">청주 야구장</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span>NC 다이노스</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">울산 문수 야구장(주중)</a></li>
+            <li><a href="#">울산 문수 야구장(금토일/공휴일)</a></li>
+            <li><a href="#">창원 NC 파크</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span>롯데 자이언츠</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">부산 사직 야구장(주중)</a></li>
+            <li><a href="#">부산 사직 야구장(금토일/공휴일)</a></li>
+            <li><a href="#">울산 문수 야구장</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span>키움 히어로즈</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">고척 돔 야구장(주중)</a></li>
+            <li><a href="#">고척 돔 야구장(금토일/공휴일)</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span>KIA 타이거즈</span>
+          <ul class="sub-dropdown-menu">
+            <li><a href="#">광주 챔피언스 필드(주중)</a></li>
+            <li><a href="#">광주 챔피언스 필드(금토일/공휴일)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>⚽ 축구</strong></li>
+    <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
+    <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
+    <li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
+    <li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
+    <li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
+    <li><a href="Soccer/daegu.html">대구 FC</a></li>
+    <li><a href="Soccer/gwangju.html">광주 FC</a></li>
+    <li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
+    <li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
+    <li><a href="Soccer/gangwon.html">강원 FC</a></li>
+  </ul>
+</li>
 
 <style>
-  .nav-links li {
-    position: relative;
-  }
-
-  .dropdown-menu,
-  .sub-dropdown-menu {
+  .nav-links li { position: relative; }
+  .dropdown-menu, .sub-dropdown-menu {
     display: none;
     position: absolute;
     left: 100%;
     top: 0;
-    white-space: nowrap;
     background: white;
     border: 1px solid #ccc;
     z-index: 1000;
+    white-space: nowrap;
   }
-
-  .nav-links li:hover > .dropdown-menu {
+  .dropdown:hover > .dropdown-menu {
     display: block;
+    left: 0;
+    top: 100%;
   }
-
   .dropdown-menu li:hover > .sub-dropdown-menu {
     display: block;
+    left: 100%;
+    top: 0;
   }
-
-  .dropdown-menu li {
-    position: relative;
-  }
+  .dropdown-menu li { position: relative; }
 </style>
-
-<ul class="nav-links">
-  <li><a href="submit.html">티켓 등록</a></li>
-  <li><a href="tickets.html">등록된 티켓</a></li>
-  <li><a href="about.html">소개</a></li>
-  <li class="dropdown">
-    <span class="dropdown-toggle">스포츠</span>
-    <ul class="dropdown-menu">
-      <li class="dropdown">
-        <span>⚾ 야구</span>
-        <ul class="sub-dropdown-menu">
-          <li class="dropdown">
-            <span>두산 베어스</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">잠실야구장(주중)</a></li>
-              <li><a href="#">잠실야구장(금토일/공휴일)</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <span>LG 트윈스</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">잠실야구장(주중)</a></li>
-              <li><a href="#">잠실야구장(금토일/공휴일)</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <span>삼성 라이온즈</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">대구 라이온즈 파크(주중)</a></li>
-              <li><a href="#">대구 라이온즈 파크(금토일/공휴일)</a></li>
-              <li><a href="#">포항 야구장</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <span>한화 이글스</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">대전 한화생명 볼파크(주중)</a></li>
-              <li><a href="#">대전 한화생명 볼파크(금토일/공휴일)</a></li>
-              <li><a href="#">청주 야구장</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <span>NC 다이노스</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">울산 문수 야구장(주중)</a></li>
-              <li><a href="#">울산 문수 야구장(금토일/공휴일)</a></li>
-              <li><a href="#">창원 NC 파크</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <span>롯데 자이언츠</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">부산 사직 야구장(주중)</a></li>
-              <li><a href="#">부산 사직 야구장(금토일/공휴일)</a></li>
-              <li><a href="#">울산 문수 야구장</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <span>키움 히어로즈</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">고척 돔 야구장(주중)</a></li>
-              <li><a href="#">고척 돔 야구장(금토일/공휴일)</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <span>KIA 타이거즈</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">광주 챔피언스 필드(주중)</a></li>
-              <li><a href="#">광주 챔피언스 필드(금토일/공휴일)</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <span>SSG 랜더스</span>
-            <ul class="sub-dropdown-menu">
-              <li><a href="#">인천 SSG 랜더스필드(주중)</a></li>
-              <li><a href="#">인천 SSG 랜더스필드(금토일/공휴일)</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><strong>⚽ 축구</strong></li>
-      <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
-      <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
-      <li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
-      <li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
-      <li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
-      <li><a href="Soccer/daegu.html">대구 FC</a></li>
-      <li><a href="Soccer/gwangju.html">광주 FC</a></li>
-      <li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
-      <li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
-      <li><a href="Soccer/gangwon.html">강원 FC</a></li>
-    </ul>
-  </li>
 </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="찾고 싶은 팀이나 경기명을 입력하세요..." />
+    <div class="search-results" id="results"></div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Ticket Zone</p>
+</footer>
+
+<script>
+  const data = [
+    { name: "두산 베어스", link: "baseball/doosan.html" },
+    { name: "LG 트윈스", link: "baseball/lg.html" },
+    { name: "KT wiz", link: "baseball/ktwiz.html" },
+    { name: "삼성 라이온즈", link: "baseball/samsung.html" },
+    { name: "SSG 랜더스", link: "baseball/ssg.html" },
+    { name: "한화 이글스", link: "baseball/hanwha.html" },
+    { name: "NC 다이노스", link: "baseball/nc.html" },
+    { name: "롯데 자이언츠", link: "baseball/lotte.html" },
+    { name: "키움 히어로즈", link: "baseball/kiwoom.html" },
+    { name: "KIA 타이거즈", link: "baseball/kia.html" },
+    { name: "FC 서울", link: "Soccer/fcseoul.html" },
+    { name: "수원 삼성", link: "Soccer/suwonsamsung.html" },
+    { name: "울산 현대", link: "Soccer/ulsanhyundai.html" },
+    { name: "전북 현대", link: "Soccer/jeonbuk.html" },
+    { name: "포항 스틸러스", link: "Soccer/pohang.html" },
+    { name: "대구 FC", link: "Soccer/daegu.html" },
+    { name: "광주 FC", link: "Soccer/gwangju.html" },
+    { name: "제주 유나이티드", link: "Soccer/jeju.html" },
+    { name: "인천 유나이티드", link: "Soccer/incheon.html" },
+    { name: "강원 FC", link: "Soccer/gangwon.html" }
+  ];
+
+  document.getElementById("searchInput").addEventListener("input", function () {
+    const keyword = this.value.trim().toLowerCase();
+    const results = data.filter(item => item.name.toLowerCase().includes(keyword));
+    const resultDiv = document.getElementById("results");
+
+    if (keyword === "") {
+      resultDiv.innerHTML = "";
+      return;
+    }
+
+    if (results.length === 0) {
+      resultDiv.innerHTML = "<p>검색 결과가 없습니다.</p>";
+      return;
+    }
+
+    const ul = document.createElement("ul");
+    results.forEach(item => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = item.link;
+      a.textContent = item.name;
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    resultDiv.innerHTML = "";
+    resultDiv.appendChild(ul);
+  });
+</script>
+
+<script type="module">
+  import { supabase } from './supabaseClient.js';
+</script>
+
+<script type="module" src="sessionCheck.js"></script>
+
+<script type="module">
+  const hash = window.location.hash;
+  if (hash && hash.includes("access_token") && hash.includes("type=signup")) {
+    console.log("✅ Supabase 인증 완료 해시 감지됨. verified.html로 이동합니다.");
+    window.location.replace("verified.html");
+  } else {
+    console.log("🔍 인증 해시 없음 또는 조건 불충족:", hash);
+  }
+</script>
+
+</body>
+</html>
