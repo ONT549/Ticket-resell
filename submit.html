@@ -269,6 +269,7 @@ form.addEventListener('submit', async (e) => {
         return;
       }
       const user_id = userData.user.id;
+      const user_email = userData.user.email;
 
 
       const sport_type = sportSelect.value;
@@ -307,6 +308,7 @@ const match_time = document.getElementById('match_time').value;
           price,
           ticket_count,
           user_id,
+          user_email,
           trade_method,
           trade_description,
           is_adjacent,
