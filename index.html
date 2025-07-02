@@ -177,5 +177,27 @@
   }
 </script>
 
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+  const supabase = createClient(
+    "https://dbdnvjbkotlyarsfmtjn.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0"
+  );
+
+  document.querySelectorAll('a[href="submit.html"]').forEach(link => {
+    link.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        alert("로그인 후 이용해 주세요.");
+        window.location.href = "login.html";
+      } else {
+        window.location.href = "submit.html";
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
