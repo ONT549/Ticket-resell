@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,11 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>두산 베어스 - 잠실야구장(주중) 티켓 목록</title>
   <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <a href="../../index.html">← 홈으로</a>
+  <h1>두산 베어스 - 잠실야구장(주중) 티켓 목록</h1>
+  <div id="ticket-results">불러오는 중...</div>
+
   <script type="module">
     import { supabase } from '../../supabaseClient.js';
 
-    
     document.addEventListener("DOMContentLoaded", async () => {
+      // ✅ 헤더 로드
+      fetch("../../baseball-header.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+
+      // ✅ Supabase 데이터 불러오기
       const resultContainer = document.getElementById("ticket-results");
 
       const { data, error } = await supabase
@@ -18,15 +33,15 @@
         .eq("team", "두산 베어스")
         .eq("stadium", "잠실야구장(주중)")
         .order("match_date", { ascending: true });
-      
+
       if (error) {
         console.error('에러:', error.message);
-        list.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
+        resultContainer.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
         return;
       }
 
       if (!data || data.length === 0) {
-        list.innerHTML = '등록된 티켓이 없습니다.';
+        resultContainer.innerHTML = '등록된 티켓이 없습니다.';
         return;
       }
 
@@ -43,21 +58,6 @@
       });
       resultContainer.appendChild(list);
     });
-    
-  async function fetchTickets(){
-    fetchTickets();
-    
-       fetch("../../baseball-header.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("header-placeholder").innerHTML = data;
-      });
-  }
   </script>
-</head>
-<body>
-  <a href="../../index.html">← 홈으로</a>
-  <h1>두산 베어스 - 잠실야구장(주중) 티켓 목록</h1>
-  <div id="ticket-results">불러오는 중...</div>
 </body>
 </html>
