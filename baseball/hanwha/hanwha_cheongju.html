@@ -199,8 +199,8 @@
       const { data, error } = await supabase
         .from("tickets")
         .select("*")
-        .eq("team", "두산 베어스")
-        .eq("stadium", "잠실야구장(주중)")
+        .eq("team", "한화 이글스")
+        .eq("stadium", "청주 야구장")
         .order("match_date", { ascending: true });
 
       if (error) {
