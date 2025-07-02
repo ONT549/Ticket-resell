@@ -260,6 +260,10 @@
   } else {
     console.log("🔍 인증 해시 없음 또는 조건 불충족:", hash);
   }
+</script>
+  
+<script type="module">
+  import { supabase } from './supabaseClient.js';
   
   document.querySelectorAll('a[href="submit.html"]').forEach(link => {
     link.addEventListener("click", async (e) => {
