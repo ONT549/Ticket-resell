@@ -57,7 +57,7 @@
   </a>
   <nav>
     <ul class="nav-links">
-      <li><a href="submit.html">티켓 등록</a></li>
+      <li><a href="submit.html" id="ticket-submit-link">티켓 등록</a></li>
       <li><a href="tickets.html">등록된 티켓</a></li>
       <li><a href="about.html">소개</a></li>
       <li class="dropdown">
@@ -158,8 +158,9 @@
 <script type="module">
   import { supabase } from './supabaseClient.js';
 
-  document.querySelectorAll('a[href="submit.html"]').forEach(link => {
-    link.addEventListener("click", async (e) => {
+  const ticketLink = document.querySelector('#ticket-submit-link');
+  if (ticketLink) {
+    ticketLink.addEventListener("click", async (e) => {
       e.preventDefault();
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
@@ -169,7 +170,7 @@
         window.location.href = "submit.html";
       }
     });
-  });
+  }
 </script>
 
 </body>
