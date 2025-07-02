@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>두산 베어스 - 잠실야구장(주중) 티켓 목록</title>
+  <title>삼성 라이온즈 - 대구 라이온즈 파크(주중) 티켓 목록</title>
   <link rel="stylesheet" href="../../style.css" />
   <style>
     body {
@@ -185,7 +185,7 @@
       </nav>
     </header>
   <div id="header-placeholder"></div>
-  <h1>두산 베어스 - 잠실야구장(주중) 티켓 목록</h1>
+  <h1>삼성 라이온즈 - 대구 라이온즈 파크(주중) 티켓 목록</h1>
   <div id="ticket-results">불러오는 중...</div>
 
   <script type="module">
@@ -199,8 +199,8 @@
       const { data, error } = await supabase
         .from("tickets")
         .select("*")
-        .eq("team", "두산 베어스")
-        .eq("stadium", "잠실야구장(주중)")
+        .eq("team", "삼성 라이온즈")
+        .eq("stadium", "대구 라이온즈 파크(주중)")
         .order("match_date", { ascending: true });
 
       if (error) {
