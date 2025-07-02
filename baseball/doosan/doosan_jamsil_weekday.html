@@ -42,6 +42,14 @@
       });
       resultContainer.appendChild(list);
     });
+    
+    fetchTickets();
+    
+       fetch("../../baseball-header.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("header-placeholder").innerHTML = data;
+      });
   </script>
 </head>
 <body>
