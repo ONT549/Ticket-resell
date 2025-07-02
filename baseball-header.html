@@ -91,6 +91,33 @@
           <li><a href="Soccer/gangwon.html">강원 FC</a></li>
         </ul>
       </li>
-    </ul>
-  </nav>
-</header>
+      
+      <style>
+        .nav-links li { position: relative; }
+        .dropdown-menu, .sub-dropdown-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: white;
+          border: 1px solid #ccc;
+          z-index: 1000;
+          white-space: nowrap;
+        }
+        .dropdown:hover > .dropdown-menu {
+          display: block;
+        }
+        .dropdown-menu li:hover > .sub-dropdown-menu {
+          display: block;
+          top: 0;
+          left: 100%;
+        }
+        .dropdown-menu li {
+          position: relative;
+        }
+      </style>
+      </ul>
+            </li>
+          </ul>
+      </nav>
+    </header>
