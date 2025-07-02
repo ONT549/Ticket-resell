@@ -8,6 +8,7 @@
   <script type="module">
     import { supabase } from '../../supabaseClient.js';
 
+    
     document.addEventListener("DOMContentLoaded", async () => {
       const resultContainer = document.getElementById("ticket-results");
 
@@ -17,15 +18,15 @@
         .eq("team", "두산 베어스")
         .eq("stadium", "잠실야구장(주중)")
         .order("match_date", { ascending: true });
-
+      
       if (error) {
-        resultContainer.innerHTML = "<p>❌ 데이터를 불러오는 중 오류가 발생했습니다.</p>";
-        console.error(error);
+        console.error('에러:', error.message);
+        list.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
         return;
       }
 
-      if (data.length === 0) {
-        resultContainer.innerHTML = "<p>등록된 티켓이 없습니다.</p>";
+      if (!data || data.length === 0) {
+        list.innerHTML = '등록된 티켓이 없습니다.';
         return;
       }
 
@@ -43,6 +44,7 @@
       resultContainer.appendChild(list);
     });
     
+  async function fetchTickets(){
     fetchTickets();
     
        fetch("../../baseball-header.html")
@@ -50,6 +52,7 @@
       .then(data => {
         document.getElementById("header-placeholder").innerHTML = data;
       });
+  }
   </script>
 </head>
 <body>
