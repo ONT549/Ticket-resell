@@ -17,7 +17,8 @@
 <body>
   <div id="header-placeholder"></div>
   <h1>두산 베어스 - 잠실야구장(주중) 티켓 목록</h1>
-
+  <div id="ticket-results">불러오는 중...</div>
+  
   <script type="module">
     import { supabase } from '../../supabaseClient.js';
 
@@ -31,7 +32,9 @@
 
       // ✅ Supabase 데이터 불러오기
       const resultContainer = document.getElementById("ticket-results");
-
+      
+    list.innerHTML = '';
+      
       const { data, error } = await supabase
         .from("tickets")
         .select("*")
