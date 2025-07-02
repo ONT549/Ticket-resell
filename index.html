@@ -155,14 +155,18 @@
   });
 </script>
 
-<!-- supabaseClient가 정의된 모듈 반드시 먼저 로드 -->
-<script type="module" src="supabaseClient.js"></script>
-
-<!-- submit.html 접근 제어 스크립트 -->
+<!-- 실제 작동 확인용 모듈 -->
 <script type="module">
   import { supabase } from './supabaseClient.js';
 
   const ticketLink = document.querySelector('#ticket-submit-link');
+
+  // 콘솔 로그로 로그인 상태 확인
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    console.log(session ? "✅ 로그인된 상태입니다." : "🔒 로그인되지 않은 상태입니다.");
+  });
+
+  // 티켓 등록 버튼 제어
   if (ticketLink) {
     ticketLink.addEventListener("click", async (e) => {
       e.preventDefault();
