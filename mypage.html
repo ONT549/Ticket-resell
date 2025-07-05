@@ -72,6 +72,22 @@
       } else {
         userInfo.textContent = `로그인한 사용자: ${user.email}`;
         loadTickets(user.id);
+      // ✅ 계좌 등록 상태 확인
+      const { data: account } = await supabase
+        .from("accounts")
+        .select("*")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      const section = document.getElementById("account-section");
+      if (section) {
+        if (account) {
+          section.innerHTML = `<p>계좌: ${account.bank_name} ${account.account_number} (${account.account_holder})</p>`;
+        } else {
+          section.innerHTML = `<p>계좌 미등록 상태입니다. <a href="account.html">등록하기</a></p>`;
+        }
+      }
+
       }
     }
 
@@ -118,6 +134,7 @@
 
   <div class="info" id="user-info">불러오는 중...</div>
   <button class="logout-btn" id="logout-btn">로그아웃</button>
+  <div class="info" id="account-section">계좌 정보를 불러오는 중...</div>
 </body>
 
 </html>
