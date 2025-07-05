@@ -109,7 +109,7 @@
         <div class="ticket-price">${ticket.price.toLocaleString()}원</div>
       `;
       card.addEventListener('click', () => {
-        window.location.href = \`/payment.html?ticket_id=\${ticket.id}\`;
+        window.location.href = `/payment.html?ticket_id=\${ticket.id}\`;
       });
       resultContainer.appendChild(card);
     });
