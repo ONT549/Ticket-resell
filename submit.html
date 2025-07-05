@@ -358,6 +358,18 @@ form.addEventListener('submit', async (e) => {
       }
       const user_id = userData.user.id;
       const user_email = userData.user.email;
+      // ✅ 계좌 등록 여부 확인
+      const { data: account, error: accountError } = await supabase
+        .from("accounts")
+        .select("*")
+        .eq("user_id", user_id)
+        .maybeSingle();
+
+      if (!account || accountError) {
+        result.textContent = '❌ 티켓 등록을 위해 계좌 등록이 필요합니다. 마이페이지에서 등록해주세요.';
+        return;
+      }
+
 
 
       const sport_type = sportSelect.value;
