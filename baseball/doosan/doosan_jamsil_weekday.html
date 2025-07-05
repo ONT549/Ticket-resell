@@ -29,7 +29,7 @@
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       padding: 20px;
-      width: 300px;
+      width: 500px;
       cursor: pointer;
       transition: transform 0.2s ease-in-out;
     }
@@ -102,7 +102,7 @@
       const card = document.createElement("div");
       card.className = "ticket-card";
       card.innerHTML = `
-        <div class="ticket-opponent">vs ${ticket.opponent}</div>
+        <div class="ticket-opponent_team">vs ${ticket.opponent_team}</div>
         <div class="ticket-location">${ticket.section} | ${ticket.row}열</div>
         <div class="ticket-subinfo">${ticket.match_date} ${ticket.match_time}</div>
         <div class="ticket-subinfo">${ticket.seat_grade} / ${ticket.ticket_count}매 / ${ticket.trade_method}</div>
