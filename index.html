@@ -54,6 +54,8 @@
 <style>
 .dropdown-wrapper {
   margin-top: 2rem;
+  display: inline-block;
+  position: relative;
 }
 .dropdown-toggle {
   background-color: white;
@@ -66,22 +68,41 @@
 }
 .dropdown-menu {
   display: none;
-  margin-top: 1rem;
-  padding: 1rem;
+  position: absolute;
+  top: 110%;
+  left: 0;
   background-color: white;
   border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  list-style: none;
-  max-height: 300px;
-  overflow-y: auto;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  min-width: 280px;
+  display: none;
+  white-space: nowrap;
 }
-.dropdown-menu li {
+.dropdown-category {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 2rem;
+}
+.dropdown-category ul {
+  list-style: none;
+  padding-left: 0;
+}
+.dropdown-category li {
   margin: 0.4rem 0;
 }
-.dropdown-menu a {
+.dropdown-category a {
   text-decoration: none;
   color: #333;
-  font-weight: 500;
+}
+.sub-dropdown {
+  display: none;
+  padding-left: 1rem;
+  margin-top: 0.3rem;
+}
+.sub-dropdown li {
+  margin: 0.3rem 0;
 }
 </style></head>
 <body>
@@ -121,30 +142,37 @@
 </nav>
 </header>
 <main><section class="hero-banner"><h2>실시간 티켓 거래, 믿을 수 있는 Ticket Zone</h2><p>야구/축구 티켓을 쉽고 빠르게 등록하고 양도해보세요.</p><a class="cta-button" href="submit.html">티켓 등록하러 가기</a><a class="cta-button" href="tickets.html">등록된 티켓</a><a class="cta-button" href="about.html">소개</a><ul class="nav-links"></ul>
-<div class="dropdown-wrapper">
+<div class="dropdown-wrapper" style="position: relative;">
 <button class="dropdown-toggle" onclick="toggleDropdown()">스포츠</button>
-<ul class="dropdown-menu" id="dropdownMenu">
-<li><a href="baseball/doosan/doosan_jamsil_weekday.html">두산 베어스</a></li>
-<li><a href="baseball/lg/lg_jamsil_weekday.html">LG 트윈스</a></li>
-<li><a href="baseball/ktwiz/ktwiz_suwon_weekday.html">KT wiz</a></li>
-<li><a href="baseball/samsung/samsung_daegu_weekday.html">삼성 라이온즈</a></li>
-<li><a href="baseball/ssg/ssg_incheon_weekday.html">SSG 랜더스</a></li>
-<li><a href="baseball/hanwha/hanwha_daejeon_weekday.html">한화 이글스</a></li>
-<li><a href="baseball/nc/nc_ulsan_weekday.html">NC 다이노스</a></li>
-<li><a href="baseball/lotte/lotte_busan_weekday.html">롯데 자이언츠</a></li>
-<li><a href="baseball/kiwoom/kiwoom_gocheok_weekday.html">키움 히어로즈</a></li>
-<li><a href="baseball/kia/kia_gwangju_weekday.html">KIA 타이거즈</a></li>
+<div class="dropdown-menu" id="dropdownMenu">
+<div class="dropdown-category">
+<strong>⚾ 야구</strong>
+<ul>
+<li class="team">
+<span onclick="toggleSub(this)">두산 베어스 ▾</span>
+<ul class="sub-dropdown">
+<li><a href="baseball/doosan/doosan_jamsil_weekday.html">잠실야구장(주중)</a></li>
+<li><a href="baseball/doosan/doosan_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
+</ul>
+</li>
+<li class="team">
+<span onclick="toggleSub(this)">KT wiz ▾</span>
+<ul class="sub-dropdown">
+<li><a href="baseball/ktwiz/ktwiz_suwon_weekday.html">수원 위즈 파크(주중)</a></li>
+<li><a href="baseball/ktwiz/ktwiz_suwon_weekend.html">수원 위즈 파크(금토일/공휴일)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="dropdown-category">
+<strong>⚽ 축구</strong>
+<ul>
 <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
 <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
 <li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
-<li><a href="Soccer/jeonbuk.html">전북 현대</a></li>
-<li><a href="Soccer/pohang.html">포항 스틸러스</a></li>
-<li><a href="Soccer/daegu.html">대구 FC</a></li>
-<li><a href="Soccer/gwangju.html">광주 FC</a></li>
-<li><a href="Soccer/jeju.html">제주 유나이티드</a></li>
-<li><a href="Soccer/incheon.html">인천 유나이티드</a></li>
-<li><a href="Soccer/gangwon.html">강원 FC</a></li>
 </ul>
+</div>
+</div>
 </div>
 </section>
 <div class="search-container">
@@ -240,6 +268,11 @@
 function toggleDropdown() {
   const menu = document.getElementById("dropdownMenu");
   menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+function toggleSub(el) {
+  const next = el.nextElementSibling;
+  next.style.display = (next.style.display === "block") ? "none" : "block";
 }
 </script></body>
 </html>
