@@ -117,6 +117,38 @@ main h2 {
   margin-bottom: 2rem;
 }
 
+/* 히어로 배너 */
+.hero-banner {
+  margin: 3rem auto;
+  background: linear-gradient(to right, #007BFF, #5596ff);
+  color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.hero-banner h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.hero-banner p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.cta-button {
+  display: inline-block;
+  background-color: white;
+  color: #007BFF;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.cta-button:hover {
+  background-color: #f0f0f0;
+}
+
 /* 티켓 카드 */
 .ticket-card {
   background-color: #ffffff;
