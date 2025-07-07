@@ -135,43 +135,77 @@
 <ul>
 <li class="team">
 <span onclick="toggleSub(this)">두산 베어스 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/doosan/doosan_jamsil_weekday.html">잠실야구장(주중)</a></li>
+<li><a href="baseball/doosan/doosan_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">LG 트윈스 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/lg/lg_jamsil_weekday.html">잠실야구장(주중)</a></li>
+<li><a href="baseball/lg/lg_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">KT wiz ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/ktwiz/ktwiz_suwon_weekday.html">수원 위즈 파크(주중)</a></li>
+<li><a href="baseball/ktwiz/ktwiz_suwon_weekend.html">수원 위즈 파크(금토일/공휴일)</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">삼성 라이온즈 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/samsung/samsung_daegu_weekday.html">대구 라이온즈 파크(주중)</a></li>
+<li><a href="baseball/samsung/samsung_daegu_weekend.html">대구 라이온즈 파크(금토일/공휴일)</a></li>
+<li><a href="baseball/samsung/samsung_pohang.html">포항 야구장</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">SSG 랜더스 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/ssg/ssg_incheon_weekday.html">인천 SSG 랜더스필드(주중)</a></li>
+<li><a href="baseball/ssg/ssg_incheon_weekend.html">인천 SSG 랜더스필드(금토일/공휴일)</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">한화 이글스 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/hanwha/hanwha_daejeon_weekday.html">대전 한화생명 볼파크(주중)</a></li>
+<li><a href="baseball/hanwha/hanwha_daejeon_weekend.html">대전 한화생명 볼파크(금토일/공휴일)</a></li>
+<li><a href="baseball/hanwha/hanwha_cheongju.html">청주 야구장</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">NC 다이노스 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/nc/nc_ulsan_weekday.html">울산 문수 야구장(주중)</a></li>
+<li><a href="baseball/nc/nc_ulsan_weekend.html">울산 문수 야구장(금토일/공휴일)</a></li>
+<li><a href="baseball/nc/nc_changwon.html">창원 NC 파크</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">롯데 자이언츠 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/lotte/lotte_busan_weekday.html">부산 사직 야구장(주중)</a></li>
+<li><a href="baseball/lotte/lotte_busan_weekend.html">부산 사직 야구장(금토일/공휴일)</a></li>
+<li><a href="baseball/lotte/lotte_ulsan.html">울산 문수 야구장</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">키움 히어로즈 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/kiwoom/kiwoom_gocheok_weekday.html">고척 돔 야구장(주중)</a></li>
+<li><a href="baseball/kiwoom/kiwoom_gocheok_weekend.html">고척 돔 야구장(금토일/공휴일)</a></li>
+</ul>
 </li>
 <li class="team">
 <span onclick="toggleSub(this)">KIA 타이거즈 ▾</span>
-
+<ul class="sub-dropdown">
+<li><a href="baseball/kia/kia_gwangju_weekday.html">광주 챔피언스 필드(주중)</a></li>
+<li><a href="baseball/kia/kia_gwangju_weekend.html">광주 챔피언스 필드(금토일/공휴일)</a></li>
+</ul>
 </li>
 </ul>
 </div>
@@ -190,7 +224,7 @@
 <li><a href="Soccer/gangwon.html">강원 FC</a></li>
 </ul>
 </div>
-</div><div id="teamSubMenu" style="display:none; margin-top: 1rem; background:white; padding:1rem; border-radius:1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"></div>
+</div>
 </div>
 </section>
 <div class="search-container">
@@ -289,24 +323,10 @@ function toggleDropdown() {
 }
 
 function toggleSub(el) {
-  const submenuBox = document.getElementById("teamSubMenu");
-  const teamName = el.textContent.trim().split('▾')[0].trim();
-  const teamLinks = {'두산 베어스': [('잠실야구장(주중)', 'baseball/doosan/doosan_jamsil_weekday.html'), ('잠실야구장(금토일/공휴일)', 'baseball/doosan/doosan_jamsil_weekend.html')], 'LG 트윈스': [('잠실야구장(주중)', 'baseball/lg/lg_jamsil_weekday.html'), ('잠실야구장(금토일/공휴일)', 'baseball/lg/lg_jamsil_weekend.html')], 'KT wiz': [('수원 위즈 파크(주중)', 'baseball/ktwiz/ktwiz_suwon_weekday.html'), ('수원 위즈 파크(금토일/공휴일)', 'baseball/ktwiz/ktwiz_suwon_weekend.html')], '삼성 라이온즈': [('대구 라이온즈 파크(주중)', 'baseball/samsung/samsung_daegu_weekday.html'), ('대구 라이온즈 파크(금토일/공휴일)', 'baseball/samsung/samsung_daegu_weekend.html'), ('포항 야구장', 'baseball/samsung/samsung_pohang.html')], 'SSG 랜더스': [('인천 SSG 랜더스필드(주중)', 'baseball/ssg/ssg_incheon_weekday.html'), ('인천 SSG 랜더스필드(금토일/공휴일)', 'baseball/ssg/ssg_incheon_weekend.html')], '한화 이글스': [('대전 한화생명 볼파크(주중)', 'baseball/hanwha/hanwha_daejeon_weekday.html'), ('대전 한화생명 볼파크(금토일/공휴일)', 'baseball/hanwha/hanwha_daejeon_weekend.html'), ('청주 야구장', 'baseball/hanwha/hanwha_cheongju.html')], 'NC 다이노스': [('울산 문수 야구장(주중)', 'baseball/nc/nc_ulsan_weekday.html'), ('울산 문수 야구장(금토일/공휴일)', 'baseball/nc/nc_ulsan_weekend.html'), ('창원 NC 파크', 'baseball/nc/nc_changwon.html')], '롯데 자이언츠': [('부산 사직 야구장(주중)', 'baseball/lotte/lotte_busan_weekday.html'), ('부산 사직 야구장(금토일/공휴일)', 'baseball/lotte/lotte_busan_weekend.html'), ('울산 문수 야구장', 'baseball/lotte/lotte_ulsan.html')], '키움 히어로즈': [('고척 돔 야구장(주중)', 'baseball/kiwoom/kiwoom_gocheok_weekday.html'), ('고척 돔 야구장(금토일/공휴일)', 'baseball/kiwoom/kiwoom_gocheok_weekend.html')], 'KIA 타이거즈': [('광주 챔피언스 필드(주중)', 'baseball/kia/kia_gwangju_weekday.html'), ('광주 챔피언스 필드(금토일/공휴일)', 'baseball/kia/kia_gwangju_weekend.html')]};
-
-  submenuBox.innerHTML = "";
-  if (teamLinks[teamName]) {
-    submenuBox.style.display = "block";
-    teamLinks[teamName].forEach(link => {
-      const a = document.createElement("a");
-      a.href = link[1];
-      a.textContent = link[0];
-      a.style.display = "block";
-      a.style.margin = "0.5rem 0";
-      a.style.color = "#333";
-      submenuBox.appendChild(a);
-    });
-  } else {
-    submenuBox.style.display = "none";
+  const parent = el.closest(".team");
+  const submenu = parent.querySelector(".sub-dropdown");
+  if (submenu) {
+    submenu.style.display = submenu.style.display === "block" ? "none" : "block";
   }
 }
 </script></body>
