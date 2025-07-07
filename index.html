@@ -79,12 +79,12 @@
   min-width: 600px;
   max-width: 90vw;
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 3rem;
+  overflow-x: auto;
 }
 .dropdown-category {
-  flex: 1 1 250px;
+  flex: 1 1 200px;
 }
 .dropdown-category ul {
   list-style: none;
@@ -248,12 +248,10 @@ function toggleDropdown() {
 }
 
 function toggleSub(el) {
-  let next = el.nextSibling;
-  while (next && next.nodeType !== 1) {
-    next = next.nextSibling;
-  }
-  if (next && next.classList.contains("sub-dropdown")) {
-    next.style.display = (next.style.display === "block") ? "none" : "block";
+  const parent = el.closest(".team");
+  const submenu = parent.querySelector(".sub-dropdown");
+  if (submenu) {
+    submenu.style.display = submenu.style.display === "block" ? "none" : "block";
   }
 }
 </script></body>
