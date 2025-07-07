@@ -120,7 +120,9 @@
 </nav>
 </header>
 <main><section class="hero-banner"><h2>실시간 티켓 거래, 믿을 수 있는 Ticket Zone</h2><p>야구/축구 티켓을 쉽고 빠르게 등록하고 양도해보세요.</p><a class="cta-button" href="submit.html">티켓 등록하러 가기</a><a class="cta-button" href="tickets.html">등록된 티켓</a><a class="cta-button" href="about.html">소개</a><ul class="nav-links"></ul>
-<div class="dropdown-wrapper" style="position: relative;">
+
+
+<div class="dropdown-wrapper">
 <button class="dropdown-toggle" onclick="toggleDropdown()">스포츠</button>
 <div class="dropdown-menu" id="dropdownMenu">
 <div class="dropdown-category">
@@ -251,6 +253,18 @@ function toggleDropdown() {
 function toggleSub(el) {
   const next = el.nextElementSibling;
   next.style.display = (next.style.display === "block") ? "none" : "block";
+}
+</script><script>
+function toggleDropdown() {
+  const menu = document.getElementById("dropdownMenu");
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+function toggleSub(el) {
+  const next = el.nextElementSibling;
+  if (next && next.classList.contains("sub-dropdown")) {
+    next.style.display = (next.style.display === "block") ? "none" : "block";
+  }
 }
 </script></body>
 </html>
