@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
   color: #1e1e2f;
   line-height: 1.6;
   font-size: 16px;
@@ -57,7 +57,7 @@ nav {
 
 .nav-links a:hover,
 .dropdown-toggle:hover {
-  background-color: #f0f0f0;
+  background-color: #e6f0ff;
   border-radius: 0.5rem;
 }
 
@@ -71,9 +71,9 @@ nav {
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 0.75rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   z-index: 100;
-  width: 220px;
+  width: 240px;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -107,60 +107,113 @@ nav {
 main {
   max-width: 800px;
   margin: 0 auto;
-  padding-top: 2rem;
+  padding-top: 3rem;
   text-align: center;
 }
 
 main h2 {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 /* 티켓 카드 */
 .ticket-card {
-  background-color: #f9f9f9;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   text-align: left;
+  transition: transform 0.2s ease-in-out;
+}
+
+.ticket-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .ticket-card h3 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
+  color: #222;
 }
 
 .ticket-card p {
   margin: 0.3rem 0;
   font-size: 0.95rem;
+  color: #444;
+}
+
+/* 검색창 */
+.search-container {
+  margin: 3rem auto;
+  text-align: center;
+}
+
+#searchInput {
+  padding: 12px;
+  font-size: 1rem;
+  width: 90%;
+  max-width: 480px;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: border 0.2s ease;
+}
+
+#searchInput:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+.search-results {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.search-results li {
+  margin: 10px 0;
+}
+
+.search-results a {
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.search-results a:hover {
+  text-decoration: underline;
 }
 
 /* 푸터 */
 footer {
   text-align: center;
-  margin-top: 3rem;
+  margin-top: 4rem;
   font-size: 0.9rem;
   color: #888;
 }
 
 /* 버튼 */
 button {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1.2rem;
   font-size: 1rem;
-  background-color: #111;
+  background-color: #007BFF;
   color: #fff;
   border: none;
   border-radius: 0.75rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 button:hover {
-  background-color: #fff;
-  color: #111;
-  border: 1px solid #111;
+  background-color: #0056b3;
 }
 
 /* 입력 폼 공통 */
@@ -189,14 +242,4 @@ textarea {
   margin-bottom: 1.5rem;
   margin-top: 1rem;
   text-align: center;
-}
-
-.ticket-form-page input,
-.ticket-form-page select,
-.ticket-form-page textarea {
-  /* 이미 공통 스타일로 정의되었으므로 중복 정의 제거 가능하지만, 명시적 재정의해도 무방 */
-}
-
-.ticket-form-page button {
-  /* 공통 버튼 스타일로 커버되므로 생략 가능 */
 }
