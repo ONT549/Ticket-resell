@@ -2,35 +2,82 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>등록된 티켓 보기</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>티켓 목록</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    h1 { color: #333; }
+    body {
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    #ticket-results {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      align-items: center;
+    }
     .ticket-card {
-      border: 1px solid #ccc;
+      background: white;
       border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
-      background: #f9f9f9;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 500px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+    .ticket-card:hover {
+      transform: translateY(-5px);
+    }
+    .ticket-opponent {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .ticket-location {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .ticket-price {
+      font-size: 22px;
+      color: crimson;
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: right;
+      width: 100%;              /* 전체 너비 사용 */
+      display: block;           /* 확실한 블록 요소화 */
+    }
+    .ticket-subinfo {
+      font-size: 13px;
+      color: #555;
     }
     .home-logo {
       height: 150px;
       margin: 20px auto;
       display: block;
-    }
+    }  
   </style>
 </head>
+
 <body>
+<header>
   <a href="index.html">
     <img src="cover.png" alt="Ticket Zone Logo" class="home-logo" />
   </a>
   <nav>
     <ul class="nav-links">
-      <li><a href="submit.html">티켓 등록</a></li>
-      <li><a href="tickets.html">등록된 티켓</a></li>
-      <li><a href="about.html">소개</a></li>
+      <li><a href="/submit.html">티켓 등록</a></li>
+      <li><a href="/tickets.html">등록된 티켓</a></li>
+      <li><a href="/about.html">소개</a></li>
       <li class="dropdown">
         <span class="dropdown-toggle">스포츠</span>
         <ul class="dropdown-menu">
@@ -38,75 +85,75 @@
           <li class="dropdown">
             <span>두산 베어스</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/doosan/doosan_jamsil_weekday.html">잠실야구장(주중)</a></li>
-              <li><a href="baseball/doosan/doosan_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
+              <li><a href="doosan/doosan_jamsil_weekday.html">잠실야구장(주중)</a></li>
+              <li><a href="doosan/doosan_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>LG 트윈스</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/lg/lg_jamsil_weekday.html">잠실야구장(주중)</a></li>
-              <li><a href="baseball/lg/lg_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
+              <li><a href="lg/lg_jamsil_weekday.html">잠실야구장(주중)</a></li>
+              <li><a href="lg/lg_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>KT wiz</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/ktwiz/ktwiz_suwon_weekday.html">수원 위즈 파크(주중)</a></li>
-              <li><a href="baseball/ktwiz/ktwiz_suwon_weekend.html">수원 위즈 파크(금토일/공휴일)</a></li>
+              <li><a href="ktwiz/ktwiz_suwon_weekday.html">수원 위즈 파크(주중)</a></li>
+              <li><a href="ktwiz/ktwiz_suwon_weekend.html">수원 위즈 파크(금토일/공휴일)</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>삼성 라이온즈</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/samsung/samsung_daegu_weekday.html">대구 라이온즈 파크(주중)</a></li>
-              <li><a href="baseball/samsung/samsung_daegu_weekend.html">대구 라이온즈 파크(금토일/공휴일)</a></li>
-              <li><a href="baseball/samsung/samsung_pohang.html">포항 야구장</a></li>
+              <li><a href="samsung/samsung_daegu_weekday.html">대구 라이온즈 파크(주중)</a></li>
+              <li><a href="samsung/samsung_daegu_weekend.html">대구 라이온즈 파크(금토일/공휴일)</a></li>
+              <li><a href="samsung/samsung_pohang.html">포항 야구장</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>SSG 랜더스</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/ssg/ssg_incheon_weekday.html">인천 SSG 랜더스필드(주중)</a></li>
-              <li><a href="baseball/ssg/ssg_incheon_weekend.html">인천 SSG 랜더스필드(금토일/공휴일)</a></li>
+              <li><a href="ssg/ssg_incheon_weekday.html">인천 SSG 랜더스필드(주중)</a></li>
+              <li><a href="ssg/ssg_incheon_weekend.html">인천 SSG 랜더스필드(금토일/공휴일)</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>한화 이글스</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/hanwha/hanwha_daejeon_weekday.html">대전 한화생명 볼파크(주중)</a></li>
-              <li><a href="baseball/hanwha/hanwha_daejeon_weekend.html">대전 한화생명 볼파크(금토일/공휴일)</a></li>
-              <li><a href="baseball/hanwha/hanwha_cheongju.html">청주 야구장</a></li>
+              <li><a href="hanwha/hanwha_daejeon_weekday.html">대전 한화생명 볼파크(주중)</a></li>
+              <li><a href="hanwha/hanwha_daejeon_weekend.html">대전 한화생명 볼파크(금토일/공휴일)</a></li>
+              <li><a href="hanwha/hanwha_cheongju.html">청주 야구장</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>NC 다이노스</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/nc/nc_ulsan_weekday.html">울산 문수 야구장(주중)</a></li>
-              <li><a href="baseball/nc/nc_ulsan_weekend.html">울산 문수 야구장(금토일/공휴일)</a></li>
-              <li><a href="baseball/nc/nc_changwon.html">창원 NC 파크</a></li>
+              <li><a href="nc/nc_ulsan_weekday.html">울산 문수 야구장(주중)</a></li>
+              <li><a href="nc/nc_ulsan_weekend.html">울산 문수 야구장(금토일/공휴일)</a></li>
+              <li><a href="nc/nc_changwon.html">창원 NC 파크</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>롯데 자이언츠</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/lotte/lotte_busan_weekday.html">부산 사직 야구장(주중)</a></li>
-              <li><a href="baseball/lotte/lotte_busan_weekend.html">부산 사직 야구장(금토일/공휴일)</a></li>
-              <li><a href="baseball/lotte/lotte_ulsan.html">울산 문수 야구장</a></li>
+              <li><a href="lotte/lotte_busan_weekday.html">부산 사직 야구장(주중)</a></li>
+              <li><a href="lotte/lotte_busan_weekend.html">부산 사직 야구장(금토일/공휴일)</a></li>
+              <li><a href="lotte/lotte_ulsan.html">울산 문수 야구장</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>키움 히어로즈</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/kiwoom/kiwoom_gocheok_weekday.html">고척 돔 야구장(주중)</a></li>
-              <li><a href="baseball/kiwoom/kiwoom_gocheok_weekend.html">고척 돔 야구장(금토일/공휴일)</a></li>
+              <li><a href="kiwoom/kiwoom_gocheok_weekday.html">고척 돔 야구장(주중)</a></li>
+              <li><a href="kiwoom/kiwoom_gocheok_weekend.html">고척 돔 야구장(금토일/공휴일)</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <span>KIA 타이거즈</span>
             <ul class="sub-dropdown-menu">
-              <li><a href="baseball/kia/kia_gwangju_weekday.html">광주 챔피언스 필드(주중)</a></li>
-              <li><a href="baseball/kia/kia_gwangju_weekend.html">광주 챔피언스 필드(금토일/공휴일)</a></li>
+              <li><a href="kia/kia_gwangju_weekday.html">광주 챔피언스 필드(주중)</a></li>
+              <li><a href="kia/kia_gwangju_weekend.html">광주 챔피언스 필드(금토일/공휴일)</a></li>
             </ul>
           </li>
           <li><strong>⚽ 축구</strong></li>
@@ -122,83 +169,78 @@
           <li><a href="Soccer/gangwon.html">강원 FC</a></li>
         </ul>
       </li>
+      
       <style>
-          .nav-links li { position: relative; }
-          .dropdown-menu, .sub-dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            border: 1px solid #ccc;
-            z-index: 1000;
-            white-space: nowrap;
-          }
-          .dropdown:hover > .dropdown-menu {
-            display: block;
-          }
-          .dropdown-menu li:hover > .sub-dropdown-menu {
-            display: block;
-            top: 0;
-            left: 100%;
-          }
-          .dropdown-menu li {
-            position: relative;
-          }
+        .nav-links li { position: relative; }
+        .dropdown-menu, .sub-dropdown-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: white;
+          border: 1px solid #ccc;
+          z-index: 1000;
+          white-space: nowrap;
+        }
+        .dropdown:hover > .dropdown-menu {
+          display: block;
+        }
+        .dropdown-menu li:hover > .sub-dropdown-menu {
+          display: block;
+          top: 0;
+          left: 100%;
+        }
+        .dropdown-menu li {
+          position: relative;
+        }
       </style>
-    </ul>
-  </nav>
-  <h1>등록된 티켓</h1>
-  <div id="ticketList">불러오는 중...</div>
+      </ul>
+            </li>
+          </ul>
+      </nav>
+</header>
+<h1>두산 베어스 티켓 목록</h1>
+<div id="ticket-results">불러오는 중...</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+<script type="module">
+  import { supabase } from '../supabaseClient.js';
 
-    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0';
+  document.addEventListener("DOMContentLoaded", async () => {
+    const resultContainer = document.getElementById("ticket-results");
 
-    const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { data, error } = await supabase
+      .from("tickets")
+      .select("*")
+      .order("match_date", { ascending: true });
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const ticketList = document.getElementById('ticketList');
+    if (error) {
+      console.error('에러:', error.message);
+      resultContainer.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
+      return;
+    }
 
-      const { data: tickets, error } = await client
-        .from('tickets')
-        .select('*')
+    if (!data || data.length === 0) {
+      resultContainer.innerHTML = '등록된 티켓이 없습니다.';
+      return;
+    }
 
-      if (error) {
-        console.error('티켓 불러오기 오류:', error.message);
-        ticketList.innerHTML = `<p>데이터를 불러오는 데 실패했습니다.</p>`;
-        return;
-      }
-
-      if (!tickets || tickets.length === 0) {
-        ticketList.innerHTML = `<p>등록된 티켓이 없습니다.</p>`;
-        return;
-      }
-
-      ticketList.innerHTML = ''; // 초기화
-
-      tickets.forEach(ticket => {
-        const card = document.createElement('div');
-        card.className = 'ticket-card';
-        card.innerHTML = `
-          <strong>종목:</strong> ${ticket.sport_type}<br>
-          <strong>팀:</strong> ${ticket.team}<br>
-          <strong>경기 날짜:</strong> ${ticket.match_date}<br>
-          <strong>경기 시간:</strong> ${ticket.match_time}<br>
-          <strong>경기장:</strong> ${ticket.stadium}<br>
-          <strong>좌석 등급:</strong> ${ticket.seat_grade}<br>
-          <strong>좌석 번호:</strong> ${ticket.seat_number}<br>
-          <strong>티켓 당 가격:</strong> ${ticket.price}원<br>
-          <strong>연락처:</strong> ${ticket.contact_method}<br>
-          <strong>판매 수량:</strong> ${ticket.ticket_count}장<br>
-          <strong>추가 설명:</strong> ${ticket.additional_info || '없음'}
-        `;
-        ticketList.appendChild(card);
+    resultContainer.innerHTML = '';
+    data.forEach(ticket => {
+      const card = document.createElement("div");
+      card.className = "ticket-card";
+      card.innerHTML = `
+        <div class="ticket-opponent_team">vs ${ticket.opponent_team}</div>
+        <div class="ticket-location">${ticket.section} | ${ticket.row}열</div>
+        <div class="ticket-subinfo">${ticket.match_date} ${ticket.match_time}</div>
+        <div class="ticket-subinfo">${ticket.seat_grade} / ${ticket.ticket_count}매 / ${ticket.trade_method}</div>
+        <div class="ticket-price">${ticket.price.toLocaleString()}원</div>
+      `;
+      card.addEventListener('click', () => {
+        window.location.href = `/payment.html?ticket_id=${ticket.id}`;
       });
+      resultContainer.appendChild(card);
     });
-  </script>
+  });
+</script>
 </body>
 </html>
