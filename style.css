@@ -275,3 +275,62 @@ textarea {
   margin-top: 1rem;
   text-align: center;
 }
+
+
+/* ===== Ticket Zone Design Patch 2025‑07‑18 ===== */
+:root{
+  --primary:#1E90FF;
+  --accent:#FFB400;
+  --surface:#f9fafb;
+}
+
+/* CTA primary highlight */
+.cta-button.primary{
+  background:var(--primary);
+  color:#fff;
+}
+
+/* Universal hover micro‑motion */
+.cta-button,
+.dropdown-toggle{
+  transition:background .15s ease,transform .15s ease;
+}
+.cta-button:hover,
+.dropdown-toggle:hover{
+  transform:translateY(-2px);
+}
+
+/* Dropdown depth */
+.dropdown-menu{
+  box-shadow:0 12px 32px rgba(0,0,0,.12);
+  border:1px solid #e5e7eb;
+}
+
+/* Search bar expansion + icon */
+#searchInput{
+  width:100%;
+  max-width:560px;
+  padding-left:44px;
+  background:url('search-icon.svg') no-repeat 14px center/18px;
+  border:2px solid #e5e7eb;
+  border-radius:999px;
+}
+
+#searchInput::placeholder{
+  color:#94a3b8;
+}
+
+/* Dropdown appear motion */
+.dropdown-menu{
+  transform-origin:top center;
+  transition:transform .15s ease,opacity .15s ease;
+}
+.dropdown-menu.dropdown-opening{
+  transform:scale(.95);
+  opacity:0;
+}
+.dropdown-menu.dropdown-open{
+  transform:scale(1);
+  opacity:1;
+}
+
