@@ -113,6 +113,29 @@
 .sub-dropdown a {
   color: #333 !important;
 }
+.cta-group{
+  display:flex;
+  flex-wrap:wrap;          /* 작은 화면 대응 */
+  gap:1rem;
+  justify-content:center;
+  margin-top:1.5rem;
+}
+.cta-button,
+.dropdown-toggle{
+  background:#fff;
+  color:#007BFF;
+  padding:0.6rem 1.2rem;
+  border:none;
+  border-radius:999px;
+  font-weight:bold;
+  cursor:pointer;
+  text-decoration:none;    /* a, button 통일 */
+}
+.cta-button:hover,
+.dropdown-toggle:hover{
+  background:#f0f4ff;
+}
+.dropdown-wrapper{margin-top:0!important;}
 </style></head>
 <body>
 <a href="login.html" id="login-button" style="position: absolute; top: 20px; right: 20px;
@@ -126,10 +149,16 @@
 <nav>
 </nav>
 </header>
-<main><section class="hero-banner"><h2>실시간 티켓 거래, 믿을 수 있는 Ticket Zone</h2><p>야구/축구 티켓을 쉽고 빠르게 등록하고 양도해보세요.</p><a class="cta-button" href="submit.html">티켓 등록하러 가기</a><a class="cta-button" href="tickets.html">등록된 티켓</a><a class="cta-button" href="about.html">소개</a><ul class="nav-links"></ul>
+<main><section class="hero-banner"><h2>실시간 티켓 거래, 믿을 수 있는 Ticket Zone</h2>
+    <p>야구/축구 티켓을 쉽고 빠르게 등록하고 양도해보세요.</p>
+<div class="cta-group">
+  <a class="cta-button" href="submit.html">티켓 등록하러 가기</a>
+  <a class="cta-button" href="tickets.html">등록된 티켓</a>
+  <a class="cta-button" href="about.html">소개</a>
+    <ul class="nav-links"></ul>
 <div class="dropdown-wrapper">
-<button class="dropdown-toggle" onclick="toggleDropdown()">스포츠</button>
-<div class="dropdown-menu" id="dropdownMenu">
+ <button class="dropdown-toggle" onclick="toggleDropdown()">스포츠</button>
+    <div class="dropdown-menu" id="dropdownMenu">
 <div class="dropdown-category">
 <strong>⚾ 야구</strong>
 <ul>
