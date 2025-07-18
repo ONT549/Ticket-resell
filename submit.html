@@ -5,300 +5,158 @@
 <meta charset="utf-8"/>
 <title>티켓 등록</title>
 <link href="style.css" rel="stylesheet"/>
-<script defer="" src="dropdown.js"></script>
 <style>
-    .search-container {
-      text-align: center;
-      margin: 40px auto;
-    }
-
-    #searchInput {
-      padding: 10px;
-      font-size: 16px;
-      width: 60%;
-      max-width: 400px;
-    }
-
-    .search-results {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    .search-results ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .search-results li {
-      margin: 10px 0;
-    }
-
-    .search-results a {
-      text-decoration: none;
-      color: #0077cc;
-      font-weight: bold;
-    }
-
-    .search-results a:hover {
-      text-decoration: underline;
-    }
-  
-    .button {
-      padding: 12px;
-      background-color: #007bff;
-      border: none;
-      color: white;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-  
-    .form {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-  
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .form-group.inline {
-      flex-direction: row;
-      gap: 10px;
-      align-items: center;
-    }
-  
-    .label {
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-  
-    .input, select, textarea {
-      padding: 10px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      width: 100%;
-    }
-  
-    .input[type="checkbox"] {
-      width: auto;
-    }
-  
-    .checkbox-group {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-  
-    .home-logo {
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 40px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  form {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-group.inline {
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+  label {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  input, select, textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+  }
+  input[type="checkbox"] {
+    width: auto;
+  }
+  .checkbox-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  button {
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .home-logo {
       height: 150px;
       margin: 20px auto;
       display: block;
     }
-  </style>
-<style>
-.dropdown-wrapper {
-  margin-top: 2rem;
-  position: relative;
-  width: fit-content;
-}
-.dropdown-toggle {
-  background-color: white;
-  color: #007BFF;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 999px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  background-color: white;
-  color: #333;
-  border-radius: 1rem;
-  padding: 1.5rem 2rem;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
-  z-index: 1000;
-  flex-wrap: nowrap;
-  gap: 2rem;
-  overflow-x: auto;
-  min-width: 700px;
-  max-width: 95vw;
-}
-.dropdown-category {
-  flex: 0 0 300px;
-  color: #333;
-}
-.dropdown-category ul {
-  list-style: none;
-  padding-left: 0;
-}
-.dropdown-category li {
-  margin: 0.4rem 0;
-}
-.dropdown-category a {
-  text-decoration: none;
-  color: #333 !important;
-}
-.dropdown-category strong {
-  color: #333;
-}
-.sub-dropdown {
-  display: none;
-  padding-left: 1rem;
-  margin-top: 0.3rem;
-}
-.sub-dropdown li {
-  margin: 0.3rem 0;
-}
-.sub-dropdown a {
-  color: #333 !important;
-}
-.cta-group{
-  display:flex;
-  flex-wrap:wrap;          /* 작은 화면 대응 */
-  gap:1rem;
-  justify-content:center;
-  margin-top:1.5rem;
-}
-.cta-button,
-.dropdown-toggle{
-  background:#fff;
-  color:#007BFF;
-  padding:0.6rem 1.2rem;
-  border:none;
-  border-radius:999px;
-  font-weight:bold;
-  cursor:pointer;
-  text-decoration:none;    /* a, button 통일 */
-}
-.cta-button:hover,
-.dropdown-toggle:hover{
-  background:#f0f4ff;
-}
-.dropdown-wrapper{margin-top:0!important;}
 </style></head>
 <body>
-<a href="login.html" id="login-button" style="position: absolute; top: 20px; right: 20px;
-  padding: 10px 16px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 6px;">
-  로그인 / 회원가입
-</a>
-<header>
 <a href="index.html">
-<img alt="Ticket Zone Logo" class="home-logo" src="cover.png"/>
-</a>
+    <img src="cover.png" alt="Ticket Zone Logo" class="home-logo" />
+  </a>
 <nav>
-</nav>
-</header>
-<main><section class="hero-banner"><h2>실시간 티켓 거래, 믿을 수 있는 Ticket Zone</h2>
-    <p>야구/축구 티켓을 쉽고 빠르게 등록하고 양도해보세요.</p>
-<div class="cta-group">
-  <a class="cta-button" href="submit.html">티켓 등록하러 가기</a>
-  <a class="cta-button" href="tickets.html">등록된 티켓</a>
-  <a class="cta-button" href="about.html">소개</a>
-    <ul class="nav-links"></ul>
-<div class="dropdown-wrapper">
- <button class="dropdown-toggle" onclick="toggleDropdown()">스포츠</button>
-    <div class="dropdown-menu" id="dropdownMenu">
-<div class="dropdown-category">
-<strong>⚾ 야구</strong>
-<ul>
-<li class="team">
-<span onclick="toggleSub(this)">두산 베어스 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/doosan/doosan_jamsil_weekday.html">잠실야구장(주중)</a></li>
-<li><a href="baseball/doosan/doosan_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">LG 트윈스 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/lg/lg_jamsil_weekday.html">잠실야구장(주중)</a></li>
-<li><a href="baseball/lg/lg_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">KT wiz ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/ktwiz/ktwiz_suwon_weekday.html">수원 위즈 파크(주중)</a></li>
-<li><a href="baseball/ktwiz/ktwiz_suwon_weekend.html">수원 위즈 파크(금토일/공휴일)</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">삼성 라이온즈 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/samsung/samsung_daegu_weekday.html">대구 라이온즈 파크(주중)</a></li>
-<li><a href="baseball/samsung/samsung_daegu_weekend.html">대구 라이온즈 파크(금토일/공휴일)</a></li>
-<li><a href="baseball/samsung/samsung_pohang.html">포항 야구장</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">SSG 랜더스 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/ssg/ssg_incheon_weekday.html">인천 SSG 랜더스필드(주중)</a></li>
-<li><a href="baseball/ssg/ssg_incheon_weekend.html">인천 SSG 랜더스필드(금토일/공휴일)</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">한화 이글스 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/hanwha/hanwha_daejeon_weekday.html">대전 한화생명 볼파크(주중)</a></li>
-<li><a href="baseball/hanwha/hanwha_daejeon_weekend.html">대전 한화생명 볼파크(금토일/공휴일)</a></li>
-<li><a href="baseball/hanwha/hanwha_cheongju.html">청주 야구장</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">NC 다이노스 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/nc/nc_ulsan_weekday.html">울산 문수 야구장(주중)</a></li>
-<li><a href="baseball/nc/nc_ulsan_weekend.html">울산 문수 야구장(금토일/공휴일)</a></li>
-<li><a href="baseball/nc/nc_changwon.html">창원 NC 파크</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">롯데 자이언츠 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/lotte/lotte_busan_weekday.html">부산 사직 야구장(주중)</a></li>
-<li><a href="baseball/lotte/lotte_busan_weekend.html">부산 사직 야구장(금토일/공휴일)</a></li>
-<li><a href="baseball/lotte/lotte_ulsan.html">울산 문수 야구장</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">키움 히어로즈 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/kiwoom/kiwoom_gocheok_weekday.html">고척 돔 야구장(주중)</a></li>
-<li><a href="baseball/kiwoom/kiwoom_gocheok_weekend.html">고척 돔 야구장(금토일/공휴일)</a></li>
-</ul>
-</li>
-<li class="team">
-<span onclick="toggleSub(this)">KIA 타이거즈 ▾</span>
-<ul class="sub-dropdown">
-<li><a href="baseball/kia/kia_gwangju_weekday.html">광주 챔피언스 필드(주중)</a></li>
-<li><a href="baseball/kia/kia_gwangju_weekend.html">광주 챔피언스 필드(금토일/공휴일)</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="dropdown-category">
-<strong>⚽ 축구</strong>
-<ul>
+<ul class="nav-links">
+<li><a href="submit.html">티켓 등록</a></li>
+<li><a href="tickets.html">등록된 티켓</a></li>
+<li><a href="about.html">소개</a></li>
+<li class="dropdown">
+<span class="dropdown-toggle">스포츠</span>
+<ul class="dropdown-menu">
+<li><strong>⚾ 야구</strong></li>
+<li class="dropdown">
+            <span>두산 베어스</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/doosan/doosan_jamsil_weekday.html">잠실야구장(주중)</a></li>
+              <li><a href="baseball/doosan/doosan_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>LG 트윈스</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/lg/lg_jamsil_weekday.html">잠실야구장(주중)</a></li>
+              <li><a href="baseball/lg/lg_jamsil_weekend.html">잠실야구장(금토일/공휴일)</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>KT wiz</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/ktwiz/ktwiz_suwon_weekday.html">수원 위즈 파크(주중)</a></li>
+              <li><a href="baseball/ktwiz/ktwiz_suwon_weekend.html">수원 위즈 파크(금토일/공휴일)</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>삼성 라이온즈</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/samsung/samsung_daegu_weekday.html">대구 라이온즈 파크(주중)</a></li>
+              <li><a href="baseball/samsung/samsung_daegu_weekend.html">대구 라이온즈 파크(금토일/공휴일)</a></li>
+              <li><a href="baseball/samsung/samsung_pohang.html">포항 야구장</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>SSG 랜더스</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/ssg/ssg_incheon_weekday.html">인천 SSG 랜더스필드(주중)</a></li>
+              <li><a href="baseball/ssg/ssg_incheon_weekend.html">인천 SSG 랜더스필드(금토일/공휴일)</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>한화 이글스</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/hanwha/hanwha_daejeon_weekday.html">대전 한화생명 볼파크(주중)</a></li>
+              <li><a href="baseball/hanwha/hanwha_daejeon_weekend.html">대전 한화생명 볼파크(금토일/공휴일)</a></li>
+              <li><a href="baseball/hanwha/hanwha_cheongju.html">청주 야구장</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>NC 다이노스</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/nc/nc_ulsan_weekday.html">울산 문수 야구장(주중)</a></li>
+              <li><a href="baseball/nc/nc_ulsan_weekend.html">울산 문수 야구장(금토일/공휴일)</a></li>
+              <li><a href="baseball/nc/nc_changwon.html">창원 NC 파크</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>롯데 자이언츠</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/lotte/lotte_busan_weekday.html">부산 사직 야구장(주중)</a></li>
+              <li><a href="baseball/lotte/lotte_busan_weekend.html">부산 사직 야구장(금토일/공휴일)</a></li>
+              <li><a href="baseball/lotte/lotte_ulsan.html">울산 문수 야구장</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>키움 히어로즈</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/kiwoom/kiwoom_gocheok_weekday.html">고척 돔 야구장(주중)</a></li>
+              <li><a href="baseball/kiwoom/kiwoom_gocheok_weekend.html">고척 돔 야구장(금토일/공휴일)</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <span>KIA 타이거즈</span>
+            <ul class="sub-dropdown-menu">
+              <li><a href="baseball/kia/kia_gwangju_weekday.html">광주 챔피언스 필드(주중)</a></li>
+              <li><a href="baseball/kia/kia_gwangju_weekend.html">광주 챔피언스 필드(금토일/공휴일)</a></li>
+            </ul>
+          </li>
+<li><strong>⚽ 축구</strong></li>
 <li><a href="Soccer/fcseoul.html">FC 서울</a></li>
 <li><a href="Soccer/suwonsamsung.html">수원 삼성</a></li>
 <li><a href="Soccer/ulsanhyundai.html">울산 현대</a></li>
