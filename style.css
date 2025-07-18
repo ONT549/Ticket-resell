@@ -284,11 +284,6 @@ textarea {
   --surface:#f9fafb;
 }
 
-/* CTA primary highlight */
-.cta-button.primary{
-  background:var(--primary);
-  color:#fff;
-}
 
 /* Universal hover micro‑motion */
 .cta-button,
