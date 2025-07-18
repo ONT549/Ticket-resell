@@ -329,3 +329,13 @@ textarea {
   opacity:1;
 }
 
+.home-logo{
+  position:relative;
+  top:60px;                     /* ▼ 아래로 내려서 배너와 겹치게 */
+  z-index:10;                   /* 배너 위로 올라오게 */
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));   /* 테두리 또렷 */
+}
+.hero-banner{
+  margin-top:-60px;             /* 간격 보정: 배너를 위로 당김 */
+}
+
