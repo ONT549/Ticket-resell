@@ -333,7 +333,7 @@ textarea {
 .home-logo{
   position:relative;
   width:540px;      /* 가로 */
-  height:60px; 
+  height:auto;
   top:20px;                     /* ▼ 아래로 내려서 배너와 겹치게 */
   z-index:10;                   /* 배너 위로 올라오게 */
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));   /* 테두리 또렷 */
