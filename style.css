@@ -330,15 +330,6 @@ textarea {
   opacity:1;
 }
 
-.home-logo{
-  position:relative;
-  width:100%;          /* 화면·부모폭에 맞춰 자동 확대/축소 */
-  max-width:160px;     /* PC 기준 최대 160 px 까지만 */
-  height:auto;         /* 비율 유지 */
-  top:20px;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
-}
-
 .hero-banner{
   margin-top:-30px;             /* 간격 보정: 배너를 위로 당김 */
 }
@@ -421,3 +412,17 @@ textarea {
 }
 .chip:hover{ background:#e5e7eb; }
 
+/* style.css 맨 아래, 기존 .home-logo 정의 “대신” 넣어주세요 */
+.home-logo{
+  position:relative;
+  width:100%;          /* 화면·부모폭에 맞춰 자동 확대/축소 */
+  max-width:160px;     /* PC 기준 최대 160 px 까지만 */
+  height:auto;         /* 비율 유지 */
+  top:20px;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
+}
+
+/* 가로폭이 넓은 데스크톱에서만 조금 더 키우고 싶다면 */
+@media (min-width:1200px){
+  .home-logo{ max-width:200px; }        /* 필요 시 숫자 조정 */
+}
