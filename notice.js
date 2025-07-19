@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ③ X 버튼: 10 ms 동안만 숨기기(테스트용) */
   bar.querySelector('button').addEventListener('click', () => {
     bar.style.display = 'none';
-    const nextTime = Date.now() + 360;            // 10 ms 뒤 만료
+    const nextTime = Date.now() + 3600;            // 10 ms 뒤 만료
     localStorage.setItem('hideNoticeUntil', String(nextTime));
 
     // 10 ms 뒤에 다시 나타나도록 타이머
