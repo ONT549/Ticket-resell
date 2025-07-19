@@ -220,7 +220,8 @@
       }
 
       const birthDate = new Date(birth);
-      const minDate = new Date("2011-06-28");
+      const minDate = new Date();
+      minDate.setFullYear(minDate.getFullYear() - 14);
       if (birthDate > minDate) {
         result.textContent = "❌ 만 14세 이상만 가입 가능합니다.";
         return;
