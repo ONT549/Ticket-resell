@@ -306,7 +306,7 @@ textarea {
   width:100%;
   max-width:560px;
   padding-right:44px;
-  background:url('search-icon.svg') no-repeat 14px center/18px;
+  background:url('search-icon.svg') no-repeat calc(100% - 14px) center/18px;
   border:2px solid #e5e7eb;
   border-radius:999px;
 }
