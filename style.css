@@ -331,7 +331,7 @@ textarea {
 }
 
 .hero-banner{
-  margin-top:-30px;             /* 간격 보정: 배너를 위로 당김 */
+  margin-top:-10px;             /* 간격 보정: 배너를 위로 당김 */
 }
 
 /* ================== Hero Banner Component ================== */
