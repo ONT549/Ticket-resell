@@ -417,15 +417,10 @@ textarea {
 
   /* ▶︎ 반응형 크기 설정 */
   width:100%;        /* 부모(보통 header) 너비에 맞춰 0 ~ 400 px 사이로 자동 */
-  max-width:400px;   /* PC에서도 400 px 이상은 커지지 않음 */
+  max-width:600px;   /* PC에서도 400 px 이상은 커지지 않음 */
   height:auto;       /* 세로 길이는 비율에 따라 자동 계산 */
 
   /* ▼ 여백·효과 기존 유지 */
   top:20px;
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
-}
-
-/* 필요하다면 데스크톱 범위에서만 조금 더 크게 */
-@media (min-width:1200px){
-  .home-logo{ max-width:680px; }   /* 숫자만 조정 */
 }
