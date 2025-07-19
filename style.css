@@ -332,7 +332,8 @@ textarea {
 
 .home-logo{
   position:relative;
-  width:640px;      /* 숫자만 바꾸면 전체 사이트에서 일괄 변경 */
+  width:640px;      /* 가로 */
+  height:210px; 
   top:20px;                     /* ▼ 아래로 내려서 배너와 겹치게 */
   z-index:10;                   /* 배너 위로 올라오게 */
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));   /* 테두리 또렷 */
