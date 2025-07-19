@@ -397,3 +397,25 @@ textarea {
   cursor:pointer;
   color:inherit;
 }
+
+/* ===== Quick Chips ===== */
+.quick-chips{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:1rem 0 1.25rem;
+}
+
+.chip{
+  padding:.4rem .9rem;
+  background:#f3f4f6;
+  color:#374151;
+  font-size:.85rem;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .15s;
+  user-select:none;
+}
+.chip:hover{ background:#e5e7eb; }
+
