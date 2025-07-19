@@ -412,11 +412,10 @@ textarea {
 }
 .chip:hover{ background:#e5e7eb; }
 
-/* style.css 맨 아래, 기존 .home-logo 정의 “대신” 넣어주세요 */
 .home-logo{
   position:relative;
   width:100%;          /* 화면·부모폭에 맞춰 자동 확대/축소 */
-  max-width:160px;     /* PC 기준 최대 160 px 까지만 */
+  max-width:560px;     /* PC 기준 최대 160 px 까지만 */
   height:auto;         /* 비율 유지 */
   top:20px;
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
