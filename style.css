@@ -305,8 +305,9 @@ textarea {
 #searchInput{
   width:100%;
   max-width:560px;
-  padding-left:44px;
-  background:url('search-icon.svg') no-repeat calc(100% - 14px) center/18px;
+  padding-right:44px;
+  padding-left:16px;
+  background:url('search-icon.svg') no-repeat right 14px center/18px;
   border:2px solid #e5e7eb;
   border-radius:999px;
 }
