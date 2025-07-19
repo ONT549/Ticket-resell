@@ -427,5 +427,5 @@ textarea {
 
 /* 필요하다면 데스크톱 범위에서만 조금 더 크게 */
 @media (min-width:1200px){
-  .home-logo{ max-width:580px; }   /* 숫자만 조정 */
+  .home-logo{ max-width:680px; }   /* 숫자만 조정 */
 }
