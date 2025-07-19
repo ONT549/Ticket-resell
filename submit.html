@@ -72,7 +72,11 @@
 <body>
 <a href="index.html">
     <img src="cover.png" alt="Ticket Zone Logo" class="home-logo" />
-  </a>
+</a>
+<div id="noticeBar" class="notice-bar">
+  ⚠️ 불법 양도·시세 차익 목적 거래는 운영 정책상 제한될 수 있습니다. 
+  <button aria-label="오늘 그만 보기">✕</button>
+</div>
 <nav>
 <ul class="nav-links">
 <li><a href="submit.html">티켓 등록</a></li>
@@ -250,6 +254,7 @@
   );
 </script>
 <script src="stadiumSeats.js"></script>
+<script src="notice.js"></script>
 <script>
 updateSeatOptions("stadium_select", "seat_grade");
 
