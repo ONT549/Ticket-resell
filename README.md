@@ -12,3 +12,15 @@ npm test
 
 The test suite uses **Jest** with the **jsdom** environment. After installing
 dependencies you can execute all tests with the command above.
+
+## Supabase configuration
+
+The Supabase anonymous key has been rotated. Create an `env.js` file in the
+project root containing your new credentials:
+
+```javascript
+export const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
+export const SUPABASE_KEY = '<newly-issued-key>'; // replace with your key
+```
+
+This file is listed in `.gitignore` so it will not be committed.
