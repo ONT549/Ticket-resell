@@ -417,6 +417,15 @@ textarea {
   width:100%;
   max-width:400px;   /* ← 원하는 최대 너비로 조정 */
   height:auto !important;   /* 높이 강제 비율 유지 */
+  top:10px;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
+}
+
+.home-logo_index{
+  position:relative;
+  width:100%;
+  max-width:400px;   /* ← 원하는 최대 너비로 조정 */
+  height:auto !important;   /* 높이 강제 비율 유지 */
   top:50px;
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
 }
