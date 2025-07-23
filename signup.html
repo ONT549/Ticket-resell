@@ -164,7 +164,14 @@
 
 
   <button id="signup-btn">회원가입</button>
+  <script>
+    let captchaToken = null;                // 전역 저장소
   
+    function onTurnstileSuccess(token) {    // Turnstile 콜백
+      captchaToken = token;
+    }
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
   <div id="turnstile-widget"
        class="cf-turnstile"
        data-sitekey="0x4AAAAAABmJgLdT6HNX6brN"
