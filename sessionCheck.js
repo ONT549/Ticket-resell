@@ -28,6 +28,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.log("🔓 로그인되지 않음");
 
     loginBtn.textContent = "로그인 / 회원가입";
+    // redirect unauthenticated users to the login page
     loginBtn.setAttribute("href", "login.html");
     loginBtn.style.backgroundColor = "#007BFF";
     loginBtn.style.color = "white";
