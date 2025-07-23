@@ -1,0 +1,17 @@
+{
+  "name": "ticket-resell",
+  "version": "1.0.0",
+  "description": "코드 수정시 뭐 수정했는지 적어주길 바람",
+  "main": "dropdown.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "*",
+    "@testing-library/dom": "*"
+  }
+}
