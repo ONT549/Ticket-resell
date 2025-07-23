@@ -9,3 +9,6 @@ Install dependencies with `npm install` (requires internet access) and run:
 ```bash
 npm test
 ```
+
+The test suite uses **Jest** with the **jsdom** environment. After installing
+dependencies you can execute all tests with the command above.
