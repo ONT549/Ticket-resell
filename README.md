@@ -15,12 +15,16 @@ dependencies you can execute all tests with the command above.
 
 ## Supabase configuration
 
-The Supabase anonymous key has been rotated. Create an `env.js` file in the
-project root containing your new credentials:
+Copy `env.example.js` to `env.js` and replace the placeholder values with your
+Supabase credentials:
 
-```javascript
-export const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co';
-export const SUPABASE_KEY = '<newly-issued-key>'; // replace with your key
+```bash
+cp env.example.js env.js
 ```
 
-This file is listed in `.gitignore` so it will not be committed.
+```javascript
+export const SUPABASE_URL = '<your-supabase-url>';
+export const SUPABASE_KEY = '<your-supabase-key>';
+```
+
+`env.js` is listed in `.gitignore` so it will not be committed.
