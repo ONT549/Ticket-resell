@@ -204,6 +204,7 @@
 
 <script type="module">
   import { supabase } from './supabaseClient.js';
+  import { createTicketCard } from "./ticketCard.js";
 
   document.addEventListener("DOMContentLoaded", async () => {
     const resultContainer = document.getElementById("ticket-results");
@@ -226,21 +227,10 @@
 
     resultContainer.innerHTML = '';
     data.forEach(ticket => {
-      const card = document.createElement("div");
-      card.className = "ticket-card";
-      card.innerHTML = `
-        <div class="ticket-opponent_team">vs ${ticket.opponent_team}</div>
-        <div class="ticket-location">${ticket.section} | ${ticket.row}열</div>
-        <div class="ticket-subinfo">${ticket.match_date} ${ticket.match_time}</div>
-        <div class="ticket-subinfo">${ticket.seat_grade} / ${ticket.ticket_count}매 / ${ticket.trade_method}</div>
-        <div class="ticket-price">${ticket.price.toLocaleString()}원</div>
-      `;
-      card.addEventListener('click', () => {
-        window.location.href = `/payment.html?ticket_id=${ticket.id}`;
-      });
+      const card = createTicketCard(ticket);
       resultContainer.appendChild(card);
     });
-  });
+    });
 </script>
 </body>
 </html>
