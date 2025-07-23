@@ -433,7 +433,7 @@ const match_time = document.getElementById('match_time').value;
 stadiumSelect.addEventListener("change", () => {
   const seatSelect = document.getElementById("seat_grade");
   const stadiumName = stadiumSelect.value.replace(/\(.*?\)/g, "").trim();
-  seatSelect.innerHTML = '';
+  seatSelect.replaceChildren();
   if (stadiumSeats[stadiumName]) {
     stadiumSeats[stadiumName].forEach(seat => {
       const opt = document.createElement("option");
