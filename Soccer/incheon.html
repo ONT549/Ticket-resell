@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>인천 유나이티드 티켓 목록</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- Supabase client is loaded via ../supabaseClient.js -->
   <link rel="stylesheet" href="../style.css" />
   <style>
     body {
@@ -29,19 +29,15 @@
   
   <div id="ticket-list">불러오는 중...</div>
 
-  <script>
-    const SUPABASE_URL = 'https://dbdnvjbkotlyarsfmtjn.supabase.co'; // 🔁 실제 Supabase URL로 교체
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0'; // 🔁 실제 Supabase KEY로 교체
+  <script type="module">
+    import { supabase } from "../supabaseClient.js";
     const TEAM_NAME = '인천 유나이티드';
-
-    const { createClient } = supabase;
-    const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
 
     async function fetchTickets() {
       const list = document.getElementById('ticket-list');
       list.innerHTML = '불러오는 중...';
 
-      const { data, error } = await supabaseClient
+      const { data, error } = await supabase
         .from('tickets')
         .select('*')
         .eq('team', TEAM_NAME);
