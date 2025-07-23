@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 const { updateSeatOptions, stadiumSeats } = require('../stadiumSeats');
 
 describe('updateSeatOptions', () => {
