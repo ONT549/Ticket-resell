@@ -246,16 +246,11 @@
 <div class="form-group"><label for="trade_description">거래 설명(현장, 기타 선택 시에만):</label></div><div class="form-group"><textarea id="trade_description" name="trade_description" placeholder="상품 및 거래 방법에 대한 설명 입력 (최대 2000자)"></textarea></div><button type="submit">등록</button></form>
 <div id="result"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
-  const supabase = window.supabase.createClient(
-    'https://dbdnvjbkotlyarsfmtjn.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiZG52amJrb3RseWFyc2ZtdGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NTUxNTUsImV4cCI6MjA2MjUzMTE1NX0.cQXd9NQQbEQ5tWAeQ2pJWIoGkQjAbVs4tOQAUeDCET0'
-  );
-</script>
 <script src="stadiumSeats.js"></script>
 <script src="notice.js"></script>
-<script>
+<script type="module">
+import { supabase } from './supabaseClient.js';
+
 updateSeatOptions("stadium_select", "seat_grade");
 
 
