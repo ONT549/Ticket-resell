@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -165,7 +164,14 @@
 
 
   <button id="signup-btn">회원가입</button>
-
+  
+  <div id="turnstile-widget"
+       class="cf-turnstile"
+       data-sitekey="YOUR_SITE_KEY"
+       data-theme="light"
+       data-size="invisible">
+  </div>
+  
   <div class="info-note">※ 가입 후 이메일 인증을 완료해야 로그인 가능합니다.</div>
 
   <div style="margin-top: 10px; text-align: center;">
@@ -250,6 +256,8 @@
     });
 
 </script>
+  
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <a class="home-link" href="index.html">← 홈으로 돌아가기</a>
 </div>
