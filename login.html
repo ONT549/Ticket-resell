@@ -19,7 +19,25 @@
   <input type="email" id="email" placeholder="이메일을 입력하세요" />
   <input type="password" id="password" placeholder="비밀번호를 입력하세요" />
 
+  <div id="turnstile-widget"
+     class="cf-turnstile"
+     data-sitekey="0x4AAAAAABmJgLdT6HNX6brN"
+     data-theme="light"
+     data-size="compact"
+     data-callback="onTurnstileSuccess">
+  </div>
+    
   <button id="login-btn">로그인</button>
+    
+  <script>
+    let captchaToken = null;                // 전역 저장소
+  
+    function onTurnstileSuccess(token) {    // Turnstile 콜백
+      captchaToken = token;
+    }
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+
 
   <hr/>
 
@@ -162,7 +180,7 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await supabase.auth.signInWithPassword({ email, password, options: { captchaToken } });
 
       const result = document.getElementById("result");
       if (error) {
