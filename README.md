@@ -28,3 +28,7 @@ export const SUPABASE_KEY = '<your-supabase-key>';
 ```
 
 `env.js` is listed in `.gitignore` so it will not be committed.
+
+The project loads the Supabase client library from jsDelivr and pins it to a
+specific version for stability. If you update the library, modify
+`supabaseClient.js` to reference the desired version (currently `@supabase/supabase-js@2.39.7`).
