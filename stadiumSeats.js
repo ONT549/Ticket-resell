@@ -284,3 +284,7 @@ function updateSeatOptions(stadiumSelectId, seatSelectId) {
     }
   });
 }
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { updateSeatOptions, stadiumSeats };
+}
