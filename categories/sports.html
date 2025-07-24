@@ -41,45 +41,7 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎟️ Our Ticket</h1>
-    <nav>
-      <span>스포츠</span>
-      <div class="dropdown">
-        <div>
-          <strong>야구</strong><br>
-          <span>두산 베어스</span><button onclick="toggleSubmenu('doosan')">+</button>
-          <div id="doosan" class="submenu">
-            <div>잠실야구장 (주중)</div>
-            <div>잠실야구장 (주말)</div>
-          </div>
-          <span>LG 트윈스</span><button onclick="toggleSubmenu('lg')">+</button>
-          <div id="lg" class="submenu">
-            <div>잠실야구장 (주중)</div>
-            <div>잠실야구장 (주말)</div>
-          </div>
-          <span>KT wiz</span><button onclick="toggleSubmenu('kt')">+</button>
-          <div id="kt" class="submenu">
-            <div>수원KT위즈파크 (주중)</div>
-            <div>수원KT위즈파크 (주말)</div>
-          </div>
-          <!-- 다른 KBO 구단도 동일하게 추가 -->
-        </div>
-        <div>
-          <strong>축구</strong><br>
-          <span>FC 서울</span><button onclick="toggleSubmenu('fcseoul')">+</button>
-          <div id="fcseoul" class="submenu">
-            <div>서울월드컵경기장</div>
-          </div>
-          <span>수원 삼성</span><button onclick="toggleSubmenu('suwon')">+</button>
-          <div id="suwon" class="submenu">
-            <div>수원월드컵경기장</div>
-          </div>
-          <!-- 다른 K리그1 구단도 동일하게 추가 -->
-        </div>
-      </div>
-    </nav>
-  </header>
+<div id="header-placeholder"></div>
 
   <script>
     function toggleSubmenu(id) {
@@ -87,5 +49,9 @@
       el.style.display = el.style.display === 'block' ? 'none' : 'block';
     }
   </script>
+<script type="module">
+  import { loadHeader } from "../headerLoader.js";
+  loadHeader("../commonHeader.html");
+</script>
 </body>
 </html>

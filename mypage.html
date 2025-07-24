@@ -40,17 +40,7 @@
 <body>
 
   
-  <header style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
-    <div>
-      <a href="index.html" style="text-decoration: none; font-size: 24px;">🎟️</a>
-    </div>
-    <h1 style="margin: 0; text-align: center; flex-grow: 1;">마이페이지</h1>
-    <nav class="nav-links" style="display: flex; gap: 10px;">
-      <a href="submit.html">티켓 등록</a>
-      <a href="tickets.html">등록된 티켓</a>
-      <a href="about.html">소개</a>
-    </nav>
-  </header>
+<div id="header-placeholder"></div>
 
 
   
@@ -135,6 +125,10 @@
   <div class="info" id="user-info">불러오는 중...</div>
   <button class="logout-btn" id="logout-btn">로그아웃</button>
   <div class="info" id="account-section">계좌 정보를 불러오는 중...</div>
+<script type="module">
+  import { loadHeader } from "./headerLoader.js";
+  loadHeader("commonHeader.html");
+</script>
 </body>
 
 </html>
