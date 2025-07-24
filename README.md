@@ -24,3 +24,9 @@ Copy `env.js.example` to `env.js` and fill in your own `SUPABASE_URL` and
 The project loads the Supabase client library from jsDelivr and pins it to a
 specific version for stability. If you update the library, modify
 `supabaseClient.js` to reference the desired version (currently `@supabase/supabase-js@2.39.7`).
+
+## Payment configuration
+
+`paymentConfig.js` is also ignored by Git. Copy `paymentConfig.js.example` to
+`paymentConfig.js` and supply your payment SDK client key. The `payment.js`
+module imports this file when initiating the payment widget.
