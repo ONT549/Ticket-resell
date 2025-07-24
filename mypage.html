@@ -40,15 +40,16 @@
 <body>
 
   
-  <header style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+  <header class="header-flex">
     <div>
-      <a href="index.html" style="text-decoration: none; font-size: 24px;">🎟️</a>
+      <a href="index.html" class="logo-link">🎟️</a>
     </div>
-    <h1 style="margin: 0; text-align: center; flex-grow: 1;">마이페이지</h1>
-    <nav class="nav-links" style="display: flex; gap: 10px;">
+    <h1 class="page-title">마이페이지</h1>
+    <nav class="nav-links nav-gap">
       <a href="submit.html">티켓 등록</a>
       <a href="tickets.html">등록된 티켓</a>
       <a href="about.html">소개</a>
+      <a href="account-settings.html">계정 설정</a>
     </nav>
   </header>
 
@@ -118,7 +119,7 @@
       }
 
       ticketList.innerHTML = "<h2>내 티켓 목록</h2>" + data.map(ticket => `
-        <div style="border: 1px solid #ccc; margin: 10px 0; padding: 10px; border-radius: 8px;">
+        <div class="ticket-item">
           <strong>${ticket.team}</strong> vs ${ticket.opponent_team}<br/>
           경기장: ${ticket.stadium}<br/>
           날짜: ${ticket.match_date} ${ticket.match_time}<br/>
