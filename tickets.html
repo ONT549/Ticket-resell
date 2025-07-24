@@ -201,36 +201,63 @@
 </header>
 <h1>티켓 목록</h1>
 <div id="ticket-results">불러오는 중...</div>
+<button id="load-more" style="display:none; margin:20px auto;">더 보기</button>
 
 <script type="module">
-  import { supabase } from './supabaseClient.js';
-  import { createTicketCard } from "./ticketCard.js";
+  import { SUPABASE_URL } from './env.js';
+  import { createTicketCard } from './ticketCard.js';
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    const resultContainer = document.getElementById("ticket-results");
+  const resultContainer = document.getElementById('ticket-results');
+  const loadMoreBtn = document.getElementById('load-more');
+  const PAGE_SIZE = 10;
+  let page = 1;
 
-    const { data, error } = await supabase
-      .from("tickets")
-      .select("*")
-      .order("match_date", { ascending: true });
+  async function fetchTickets() {
+    const params = new URLSearchParams({ page, page_size: PAGE_SIZE });
+    const urlParams = new URLSearchParams(window.location.search);
+    const team = urlParams.get('team');
+    const stadium = urlParams.get('stadium');
+    if (team) params.append('team', team);
+    if (stadium) params.append('stadium', stadium);
 
-    if (error) {
-      console.error('에러:', error.message);
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/tickets?${params}`);
+    if (!res.ok) {
       resultContainer.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
       return;
     }
+    const { data, count } = await res.json();
+
+    if (page === 1) {
+      resultContainer.innerHTML = '';
+    }
 
     if (!data || data.length === 0) {
-      resultContainer.innerHTML = '등록된 티켓이 없습니다.';
+      if (page === 1) {
+        resultContainer.innerHTML = '등록된 티켓이 없습니다.';
+      }
+      loadMoreBtn.style.display = 'none';
       return;
     }
 
-    resultContainer.innerHTML = '';
     data.forEach(ticket => {
       const card = createTicketCard(ticket);
       resultContainer.appendChild(card);
     });
-    });
+
+    const totalPages = Math.ceil(count / PAGE_SIZE);
+    if (page < totalPages) {
+      loadMoreBtn.style.display = 'block';
+    } else {
+      loadMoreBtn.style.display = 'none';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', fetchTickets);
+
+  loadMoreBtn.addEventListener('click', () => {
+    page += 1;
+    fetchTickets();
+  });
 </script>
 </body>
 </html>
