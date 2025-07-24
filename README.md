@@ -15,18 +15,6 @@ dependencies you can execute all tests with the command above.
 
 ## Supabase configuration
 
-Copy `env.example.js` to `env.js` and replace the placeholder values with your
-Supabase credentials:
-
-```bash
-cp env.example.js env.js
-```
-
-```javascript
-export const SUPABASE_URL = '<your-supabase-url>';
-export const SUPABASE_KEY = '<your-supabase-key>';
-```
-
 `env.js` is listed in `.gitignore` so it will not be committed.
 
 The project loads the Supabase client library from jsDelivr and pins it to a
