@@ -39,12 +39,7 @@
 </head>
 <body>
 
-  
 <div id="header-placeholder"></div>
-
-
-  
-  
   
 <div id="ticket-list" class="info">내가 등록한 티켓 목록을 불러오는 중...</div>
 
@@ -108,7 +103,7 @@
       }
 
       ticketList.innerHTML = "<h2>내 티켓 목록</h2>" + data.map(ticket => `
-        <div style="border: 1px solid #ccc; margin: 10px 0; padding: 10px; border-radius: 8px;">
+        <div class="ticket-item">
           <strong>${ticket.team}</strong> vs ${ticket.opponent_team}<br/>
           경기장: ${ticket.stadium}<br/>
           날짜: ${ticket.match_date} ${ticket.match_time}<br/>
