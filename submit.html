@@ -334,21 +334,6 @@ teamSelect.addEventListener('change', () => {
   }
 });
 
-
-teamSelect.addEventListener('change', () => {
-      const team = teamSelect.value;
-      if (stadiums[team]) {
-        stadiumSelect.innerHTML = '';
-        stadiums[team].forEach(stadium => {
-          const opt = document.createElement('option');
-          opt.value = stadium;
-          opt.textContent = stadium;
-          stadiumSelect.appendChild(opt);
-        });
-        stadiumSelect.style.display = 'inline';
-      }
-    });
-
         const form = document.getElementById('ticketForm');
 form.addEventListener('submit', async (e) => {
       e.preventDefault();
