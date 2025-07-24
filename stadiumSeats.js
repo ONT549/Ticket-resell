@@ -271,7 +271,7 @@ function updateSeatOptions(stadiumSelectId, seatSelectId) {
 
   stadiumSelect.addEventListener("change", () => {
     const name = stadiumSelect.value.replace(/\(.*?\)/g, "").trim();
-    seatSelect.innerHTML = "";
+    seatSelect.textContent = "";
     if (stadiumSeats[name]) {
       stadiumSeats[name].forEach(seat => {
         const opt = document.createElement("option");
@@ -280,7 +280,10 @@ function updateSeatOptions(stadiumSelectId, seatSelectId) {
         seatSelect.appendChild(opt);
       });
     } else {
-      seatSelect.innerHTML = '<option value="">선택 가능한 좌석 없음</option>';
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "선택 가능한 좌석 없음";
+      seatSelect.appendChild(opt);
     }
   });
 }
