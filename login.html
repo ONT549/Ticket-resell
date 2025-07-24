@@ -175,6 +175,7 @@
 
   <script type="module">
     import { supabase } from './supabaseClient.js';
+    const isDev = window.location.hostname === 'localhost';
 
     document.getElementById("login-btn").addEventListener("click", async () => {
       const email = document.getElementById("email").value;
@@ -198,7 +199,7 @@
       if (error) {
         console.error("Google 로그인 실패:", error.message);
       } else {
-        console.log("✅ Google 로그인 시도 중...");
+        if (isDev) console.log("✅ Google 로그인 시도 중...");
       }
     });
   </script>
