@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   } else if (user) {
     if (isDev) console.log("✅ 로그인된 유저:", user.email);
 
-    // 확실히 버튼이 갱신되도록 DOM 변경 로그 추가
+    // 로그인 상태에 따라 버튼을 갱신합니다.
     loginBtn.textContent = "마이페이지";
     loginBtn.setAttribute("href", "mypage.html");
     loginBtn.style.backgroundColor = "#28a745";
