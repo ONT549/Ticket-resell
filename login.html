@@ -8,11 +8,7 @@
 <body>
   <div class="login-wrapper">
 
-  <header class="header-simple">
-    <a href="index.html" class="link-home">
-      ← 홈으로 돌아가기
-    </a>
-  </header>
+<div id="header-placeholder"></div>
 
   <h1>로그인</h1>
 
@@ -204,5 +200,9 @@
     });
   </script>
   </div>
+<script type="module">
+  import { loadHeader } from "./headerLoader.js";
+  loadHeader("commonHeader.html");
+</script>
 </body>
 </html>
