@@ -11,7 +11,10 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "jest": "*",
-    "@testing-library/dom": "*"
+    "@testing-library/dom": "*",
+    "jest": "*"
+  },
+  "dependencies": {
+    "jest-environment-jsdom": "^30.0.5"
   }
 }
