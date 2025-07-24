@@ -34,9 +34,42 @@
 <body>
   <h1>티켓 결제</h1>
   <div id="ticket-info">불러오는 중...</div>
-  <button id="purchase-btn" style="display:none;">구매하기</button>
+  <button id="purchase-btn" class="hidden">구매하기</button>
 
-<script src="https://js.tosspayments.com/v1"></script>
-<script type="module" src="payment.js"></script>
+<script type="module">
+import { supabase } from './supabaseClient.js';
+
+const params = new URLSearchParams(window.location.search);
+const ticketId = params.get('ticket_id');
+const infoDiv = document.getElementById('ticket-info');
+const purchaseBtn = document.getElementById('purchase-btn');
+
+if (!ticketId) {
+  infoDiv.textContent = '티켓 정보가 없습니다.';
+} else {
+  const { data, error } = await supabase
+    .from('tickets')
+    .select('*')
+    .eq('id', ticketId)
+    .single();
+
+  if (error || !data) {
+    infoDiv.textContent = '티켓을 불러오는 중 오류가 발생했습니다.';
+  } else {
+    infoDiv.innerHTML = `
+      <h2>${data.team} vs ${data.opponent_team}</h2>
+      <p>${data.stadium}</p>
+      <p>${data.match_date} ${data.match_time}</p>
+      <p>${data.seat_grade} / ${data.section} / ${data.row}</p>
+      <p><strong>${Number(data.price).toLocaleString()}원</strong></p>
+    `;
+    purchaseBtn.classList.remove('hidden');
+  }
+}
+
+purchaseBtn.addEventListener('click', () => {
+  alert('구매가 완료되었습니다. 실제 결제 기능은 구현되어 있지 않습니다.');
+});
+</script>
 </body>
 </html>

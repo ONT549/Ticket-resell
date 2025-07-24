@@ -9,8 +9,8 @@
 }
 
 body {
-  background-color: #f9f9f9;
-  color: #1e1e2f;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
   font-size: 16px;
   padding: 2rem;
@@ -282,6 +282,15 @@ textarea {
   --primary:#1E90FF;
   --accent:#FFB400;
   --surface:#f9fafb;
+  --text-color:#1e1e2f;
+  --bg-color:#f9f9f9;
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --text-color:#f9f9f9;
+    --bg-color:#1e1e2f;
+  }
 }
 
 
@@ -428,4 +437,73 @@ textarea {
   height:auto !important;   /* 높이 강제 비율 유지 */
   top:50px;
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.12));
+}
+
+/* Utility classes */
+.login-button{
+  position:absolute;
+  top:20px;
+  right:20px;
+  padding:10px 16px;
+  background-color:var(--primary);
+  color:#fff;
+  text-decoration:none;
+  border-radius:6px;
+}
+
+.link-reset{ text-decoration:none; color:inherit; }
+
+.header-flex{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+}
+
+.logo-link{ text-decoration:none; font-size:24px; }
+
+.page-title{
+  margin:0;
+  text-align:center;
+  flex-grow:1;
+}
+
+.link-home{
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:bold;
+  font-size:18px;
+}
+
+.nav-gap{ display:flex; gap:10px; }
+
+.header-simple{
+  width:100%;
+  padding:16px 0;
+  border-bottom:1px solid #eee;
+  margin-bottom:24px;
+}
+
+.btn-secondary{
+  background-color:#6c757d;
+  margin-top:0.5rem;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+}
+
+.ticket-item{
+  border:1px solid #ccc;
+  margin:10px 0;
+  padding:10px;
+  border-radius:8px;
+}
+
+.hidden{ display:none !important; }
+
+.flex-gap-20{ display:flex; gap:20px; }
+
+.center-block{
+  margin-top:10px;
+  text-align:center;
 }
