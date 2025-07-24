@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>티켓 결제</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+      text-align: center;
+    }
+    #ticket-info {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>티켓 결제</h1>
+  <div id="ticket-info">불러오는 중...</div>
+  <button id="purchase-btn" style="display:none;">구매하기</button>
+
+<script type="module">
+import { supabase } from './supabaseClient.js';
+
+const params = new URLSearchParams(window.location.search);
+const ticketId = params.get('ticket_id');
+const infoDiv = document.getElementById('ticket-info');
+const purchaseBtn = document.getElementById('purchase-btn');
+
+if (!ticketId) {
+  infoDiv.textContent = '티켓 정보가 없습니다.';
+} else {
+  const { data, error } = await supabase
+    .from('tickets')
+    .select('*')
+    .eq('id', ticketId)
+    .single();
+
+  if (error || !data) {
+    infoDiv.textContent = '티켓을 불러오는 중 오류가 발생했습니다.';
+  } else {
+    infoDiv.innerHTML = `
+      <h2>${data.team} vs ${data.opponent_team}</h2>
+      <p>${data.stadium}</p>
+      <p>${data.match_date} ${data.match_time}</p>
+      <p>${data.seat_grade} / ${data.section} / ${data.row}</p>
+      <p><strong>${Number(data.price).toLocaleString()}원</strong></p>
+    `;
+    purchaseBtn.style.display = 'inline-block';
+  }
+}
+
+purchaseBtn.addEventListener('click', () => {
+  alert('구매가 완료되었습니다. 실제 결제 기능은 구현되어 있지 않습니다.');
+});
+</script>
+</body>
+</html>
