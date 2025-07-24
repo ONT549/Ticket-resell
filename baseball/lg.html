@@ -74,6 +74,8 @@
 
 <script type="module">
   import { supabase } from '../supabaseClient.js';
+  import { createTicketCard } from '../ticketCard.js';
+  import { loadHeader } from '../headerLoader.js';
 
   document.addEventListener("DOMContentLoaded", async () => {
     const resultContainer = document.getElementById("ticket-results");
@@ -86,37 +88,22 @@
 
     if (error) {
       console.error('에러:', error.message);
-      resultContainer.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
+      resultContainer.textContent = '데이터를 불러오는 중 오류가 발생했습니다.';
       return;
     }
 
     if (!data || data.length === 0) {
-      resultContainer.innerHTML = '등록된 티켓이 없습니다.';
+      resultContainer.textContent = '등록된 티켓이 없습니다.';
       return;
     }
 
-    resultContainer.innerHTML = '';
+    resultContainer.textContent = '';
     data.forEach(ticket => {
-      const card = document.createElement("div");
-      card.className = "ticket-card";
-      card.innerHTML = `
-        <div class="ticket-opponent_team">vs ${ticket.opponent_team}</div>
-        <div class="ticket-location">${ticket.section} | ${ticket.row}열</div>
-        <div class="ticket-subinfo">${ticket.match_date} ${ticket.match_time}</div>
-        <div class="ticket-subinfo">${ticket.seat_grade} / ${ticket.ticket_count}매 / ${ticket.trade_method}</div>
-        <div class="ticket-price">${ticket.price.toLocaleString()}원</div>
-      `;
-      card.addEventListener('click', () => {
-        window.location.href = `/payment.html?ticket_id=${ticket.id}`;
-      });
+      const card = createTicketCard(ticket);
       resultContainer.appendChild(card);
     });
   });
-  fetch("../Baseball-header.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("header-placeholder").innerHTML = data;
-    });
+  loadHeader('../Baseball-header.html');
 </script>
 </body>
 </html>
