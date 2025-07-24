@@ -16,6 +16,10 @@ dependencies you can execute all tests with the command above.
 ## Supabase configuration
 
 `env.js` is listed in `.gitignore` so it will not be committed.
+Copy `env.js.example` to `env.js` and fill in your own `SUPABASE_URL` and
+`SUPABASE_KEY` values. The application imports this file in
+`supabaseClient.js`, so when deploying to production you must provide your own
+`env.js` alongside the source.
 
 The project loads the Supabase client library from jsDelivr and pins it to a
 specific version for stability. If you update the library, modify
