@@ -63,3 +63,7 @@ export function createInfoCard(ticket) {
 
   return card;
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { createTicketCard, createInfoCard };
+}

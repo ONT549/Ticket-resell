@@ -26,3 +26,7 @@ export function createSoccerTicket(ticket) {
 
   return container;
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { createSoccerTicket };
+}
