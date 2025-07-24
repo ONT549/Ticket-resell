@@ -321,12 +321,13 @@
 </script>
 <script src="sessionCheck.js" type="module"></script>
 <script type="module">
+  const isDev = window.location.hostname === 'localhost';
   const hash = window.location.hash;
   if (hash && hash.includes("access_token") && hash.includes("type=signup")) {
-    console.log("✅ Supabase 인증 완료 해시 감지됨. verified.html로 이동합니다.");
+    if (isDev) console.log("✅ Supabase 인증 완료 해시 감지됨. verified.html로 이동합니다.");
     window.location.replace("verified.html");
   } else {
-    console.log("🔍 인증 해시 없음 또는 조건 불충족:", hash);
+    if (isDev) console.log("🔍 인증 해시 없음 또는 조건 불충족:", hash);
   }
 </script>
 <script type="module">

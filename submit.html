@@ -250,6 +250,7 @@
 <script src="notice.js"></script>
 <script type="module">
 import { supabase } from './supabaseClient.js';
+const isDev = window.location.hostname === 'localhost';
 
 updateSeatOptions("stadium_select", "seat_grade");
 
@@ -378,7 +379,7 @@ form.addEventListener('submit', async (e) => {
       const match_date = document.getElementById('match_date').value;
       const opponent_team = document.getElementById('opponent_team').value;
 const seat_grade = document.getElementById('seat_grade').value;
-console.log("seat_grade:", seat_grade);
+if (isDev) console.log("seat_grade:", seat_grade);
 if (!seat_grade) {
   result.textContent = '❌ 좌석을 선택해주세요.';
   return;
