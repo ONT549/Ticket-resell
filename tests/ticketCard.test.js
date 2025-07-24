@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { createTicketCard } from '../ticketCard.js';
+import { createTicketCard, createInfoCard } from '../ticketCard.js';
 import { createSoccerTicket } from '../soccerTicket.js';
 
 describe('createTicketCard', () => {
@@ -27,6 +27,37 @@ describe('createTicketCard', () => {
       '2024-08-01 18:00',
       'VIP / 2매 / 직거래',
       '50,000원'
+    ]);
+  });
+});
+
+describe('createInfoCard', () => {
+  test('builds info card with proper fields', () => {
+    const ticket = {
+      match_date: '2024-09-01',
+      match_time: '16:00',
+      seat_grade: 'VIP',
+      section: 'A',
+      row: 5,
+      price: 75000,
+      ticket_count: 3,
+      trade_method: '직거래',
+      trade_description: '테스트'
+    };
+
+    const card = createInfoCard(ticket);
+    expect(card.className).toBe('ticket-card');
+    expect(card.querySelector('h3').textContent).toBe('2024-09-01 16:00');
+
+    const labels = Array.from(card.querySelectorAll('strong')).map(el => el.textContent);
+    expect(labels).toEqual([
+      '좌석 등급:',
+      '구역:',
+      '열:',
+      '가격:',
+      '판매 수량:',
+      '거래 방식:',
+      '설명:'
     ]);
   });
 });
