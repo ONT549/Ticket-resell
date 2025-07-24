@@ -12,7 +12,9 @@
   "type": "commonjs",
   "devDependencies": {
     "@testing-library/dom": "*",
-    "jest": "*",
+    "jest": "*"
+  },
+  "dependencies": {
     "jest-environment-jsdom": "^30.0.5"
   }
 }
