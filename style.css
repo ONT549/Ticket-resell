@@ -9,8 +9,8 @@
 }
 
 body {
-  background-color: #f9f9f9;
-  color: #1e1e2f;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
   font-size: 16px;
   padding: 2rem;
@@ -285,6 +285,15 @@ textarea {
   --primary:#1E90FF;
   --accent:#FFB400;
   --surface:#f9fafb;
+  --text-color:#1e1e2f;
+  --bg-color:#f9f9f9;
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --text-color:#f9f9f9;
+    --bg-color:#1e1e2f;
+  }
 }
 
 
@@ -442,4 +451,5 @@ textarea {
     grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
     padding: 0 .5rem;
   }
+
 }
