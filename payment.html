@@ -34,7 +34,7 @@
 <body>
   <h1>티켓 결제</h1>
   <div id="ticket-info">불러오는 중...</div>
-  <button id="purchase-btn" class="hidden">구매하기</button>
+  <button id="purchase-btn" style="display:none;">구매하기</button>
 
 <script type="module">
 import { supabase } from './supabaseClient.js';
@@ -63,7 +63,7 @@ if (!ticketId) {
       <p>${data.seat_grade} / ${data.section} / ${data.row}</p>
       <p><strong>${Number(data.price).toLocaleString()}원</strong></p>
     `;
-    purchaseBtn.classList.remove('hidden');
+    purchaseBtn.style.display = 'inline-block';
   }
 }
 
