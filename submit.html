@@ -203,8 +203,8 @@
 <option value="">-- 종목을 선택하세요 --</option>
 <option value="야구">야구</option>
 <option value="축구">축구</option>
-</select></div><div class="form-group"><label for="team">팀:</label></div><div class="form-group"><select id="team" name="team"></select></div><div class="form-group"><label>경기장:</label></div><div class="form-group"><select id="stadium_select" name="stadium_select" class="hidden"></select></div><div class="form-group"><input id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" class="hidden" type="text"/></div><div class="form-group"><label for="match_date">경기 날짜:</label></div><div class="form-group"><input id="match_date" name="match_date" type="date"/></div><div class="form-group"><label for="match_time">경기 시간:</label></div><div class="form-group"><input id="match_time" name="match_time" type="time"/></div>
-<div class="form-row flex-gap-20" id="seat-info-group">
+</select></div><div class="form-group"><label for="team">팀:</label></div><div class="form-group"><select id="team" name="team"></select></div><div class="form-group"><label>경기장:</label></div><div class="form-group"><select id="stadium_select" name="stadium_select" style="display:none;"></select></div><div class="form-group"><input id="stadium_input" name="stadium_input" placeholder="경기장을 입력하세요" style="display:none;" type="text"/></div><div class="form-group"><label for="match_date">경기 날짜:</label></div><div class="form-group"><input id="match_date" name="match_date" type="date"/></div><div class="form-group"><label for="match_time">경기 시간:</label></div><div class="form-group"><input id="match_time" name="match_time" type="time"/></div>
+<div class="form-row" id="seat-info-group" style="display: flex; gap: 20px;">
 <div class="form-group">
 <label for="opponent_team">상대팀 선택</label>
 <select id="opponent_team" name="opponent_team"></select>
@@ -293,11 +293,11 @@ updateSeatOptions("stadium_select", "seat_grade");
       }
 
       if (sport === '야구') {
-        stadiumSelect.classList.remove('hidden');
-        stadiumInput.classList.add('hidden');
+        stadiumSelect.style.display = 'inline';
+        stadiumInput.style.display = 'none';
       } else {
-        stadiumSelect.classList.add('hidden');
-        stadiumInput.classList.remove('hidden');
+        stadiumSelect.style.display = 'none';
+        stadiumInput.style.display = 'inline';
       }
     });
 
@@ -316,7 +316,7 @@ teamSelect.addEventListener('change', () => {
       opt.textContent = stadium;
       stadiumSelect.appendChild(opt);
     });
-    stadiumSelect.classList.remove('hidden');
+    stadiumSelect.style.display = 'inline';
   }
 
   // 상대팀 필터링
@@ -409,8 +409,8 @@ const match_time = document.getElementById('match_time').value;
       } else {
         result.textContent = '✅ 티켓이 성공적으로 등록되었습니다!';
         form.reset();
-        stadiumSelect.classList.add('hidden');
-        stadiumInput.classList.add('hidden');
+        stadiumSelect.style.display = 'none';
+        stadiumInput.style.display = 'none';
         teamSelect.innerHTML = '';
       }
     });

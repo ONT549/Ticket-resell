@@ -136,10 +136,17 @@
 .dropdown-wrapper{margin-top:0!important;}
 </style></head>
 <body>
-<a href="login.html" id="login-button" class="login-button">
+<a href="login.html" id="login-button" style="position: absolute; top: 20px; right: 20px;
+  padding: 10px 16px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 6px;">
   로그인 / 회원가입
 </a>
-<div id="header-placeholder"></div>
+<header>
+<a href="index.html">
+<img alt="Ticket Zone Logo" class="home-logo_index" src="cover.png"/>
+</a>
+<nav>
+</nav>
+</header>
 <main><section class="hero-banner"><h2>실시간 티켓 거래, 믿을 수 있는 Ticket Zone</h2>
     <p>야구/축구 티켓을 쉽고 빠르게 등록하고 양도해보세요.</p>
 <div class="cta-group">
@@ -356,9 +363,5 @@ function toggleSub(el) {
     submenu.style.display = submenu.style.display === "block" ? "none" : "block";
   }
 }
-<script type="module">
-  import { loadHeader } from "./headerLoader.js";
-  loadHeader("commonHeader.html");
-</script>
 </script></body>
 </html>
