@@ -200,37 +200,104 @@
       </nav>
 </header>
 <h1>티켓 목록</h1>
+<div id="filters" style="margin-bottom:20px;text-align:center;">
+  <input type="text" id="keyword" placeholder="키워드" style="margin:0 5px;" />
+  <select id="team-select" style="margin:0 5px;">
+    <option value="">전체 팀</option>
+  </select>
+  <input type="date" id="start-date" style="margin:0 5px;" /> ~
+  <input type="date" id="end-date" style="margin:0 5px;" />
+  <input type="number" id="min-price" placeholder="최소 가격" style="margin:0 5px;width:100px;" /> -
+  <input type="number" id="max-price" placeholder="최대 가격" style="margin:0 5px;width:100px;" />
+  <button id="apply-filters" type="button" style="margin:0 5px;">검색</button>
+  <button id="reset-filters" type="button" style="margin:0 5px;">초기화</button>
+</div>
 <div id="ticket-results">불러오는 중...</div>
 
 <script type="module">
   import { supabase } from './supabaseClient.js';
   import { createTicketCard } from "./ticketCard.js";
 
-  document.addEventListener("DOMContentLoaded", async () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const resultContainer = document.getElementById("ticket-results");
+    const teamSelect     = document.getElementById("team-select");
+    const keywordInput   = document.getElementById("keyword");
+    const startDateInput = document.getElementById("start-date");
+    const endDateInput   = document.getElementById("end-date");
+    const minPriceInput  = document.getElementById("min-price");
+    const maxPriceInput  = document.getElementById("max-price");
+    const applyBtn       = document.getElementById("apply-filters");
+    const resetBtn       = document.getElementById("reset-filters");
 
-    const { data, error } = await supabase
-      .from("tickets")
-      .select("*")
-      .order("match_date", { ascending: true });
-
-    if (error) {
-      console.error('에러:', error.message);
-      resultContainer.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
-      return;
+    async function loadTeams() {
+      const { data, error } = await supabase.from('tickets').select('team');
+      if (data) {
+        const teams = [...new Set(data.map(t => t.team).filter(Boolean))];
+        teams.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t;
+          opt.textContent = t;
+          teamSelect.appendChild(opt);
+        });
+      } else {
+        console.error('팀 로드 오류:', error?.message);
+      }
     }
 
-    if (!data || data.length === 0) {
-      resultContainer.innerHTML = '등록된 티켓이 없습니다.';
-      return;
+    async function fetchTickets() {
+      resultContainer.innerHTML = '불러오는 중...';
+      let query = supabase.from('tickets').select('*');
+
+      const team    = teamSelect.value;
+      const keyword = keywordInput.value.trim();
+      const start   = startDateInput.value;
+      const end     = endDateInput.value;
+      const min     = minPriceInput.value;
+      const max     = maxPriceInput.value;
+
+      if (team)    query = query.eq('team', team);
+      if (keyword) query = query.ilike('opponent_team', `%${keyword}%`);
+      if (start)   query = query.gte('match_date', start);
+      if (end)     query = query.lte('match_date', end);
+      if (min)     query = query.gte('price', Number(min));
+      if (max)     query = query.lte('price', Number(max));
+
+      query = query.order('match_date', { ascending: true });
+
+      const { data, error } = await query;
+
+      if (error) {
+        console.error('에러:', error.message);
+        resultContainer.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        resultContainer.innerHTML = '등록된 티켓이 없습니다.';
+        return;
+      }
+
+      resultContainer.innerHTML = '';
+      data.forEach(ticket => {
+        const card = createTicketCard(ticket);
+        resultContainer.appendChild(card);
+      });
     }
 
-    resultContainer.innerHTML = '';
-    data.forEach(ticket => {
-      const card = createTicketCard(ticket);
-      resultContainer.appendChild(card);
+    applyBtn.addEventListener('click', fetchTickets);
+
+    resetBtn.addEventListener('click', () => {
+      keywordInput.value   = '';
+      teamSelect.value     = '';
+      startDateInput.value = '';
+      endDateInput.value   = '';
+      minPriceInput.value  = '';
+      maxPriceInput.value  = '';
+      fetchTickets();
     });
-    });
+
+    loadTeams().then(fetchTickets);
+  });
 </script>
 </body>
 </html>
