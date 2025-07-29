@@ -27,13 +27,14 @@
      data-callback="onTurnstileSuccess">
   </div>
     
-  <button id="login-btn">로그인</button>
+  <button id="login-btn" disabled>로그인</button>
     
   <script>
     let captchaToken = null;                // 전역 저장소
   
     function onTurnstileSuccess(token) {    // Turnstile 콜백
       captchaToken = token;
+      document.getElementById('login-btn').disabled = false;
     }
   </script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
@@ -95,6 +96,11 @@
     background-color: #4a90e2;
     color: white;
     transition: background-color 0.3s ease;
+  }
+
+  #login-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
 
   #login-btn:hover {
@@ -181,9 +187,14 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
+      const result = document.getElementById("result");
+      if (!captchaToken) {
+        result.textContent = "❌ CAPTCHA를 완료해 주세요.";
+        return;
+      }
+
       const { error } = await supabase.auth.signInWithPassword({ email, password, options: { captchaToken } });
 
-      const result = document.getElementById("result");
       if (error) {
         result.textContent = "❌ 로그인 실패: " + error.message;
       } else {
