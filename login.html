@@ -194,6 +194,10 @@
       }
 
       const { error } = await supabase.auth.signInWithPassword({ email, password, options: { captchaToken } });
+      // Turnstile tokens are single-use, so always reset after an attempt
+      turnstile.reset('#turnstile-widget');
+      captchaToken = null;
+      document.getElementById('login-btn').disabled = true;
 
       if (error) {
         result.textContent = "❌ 로그인 실패: " + error.message;
