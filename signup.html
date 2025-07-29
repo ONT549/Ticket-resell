@@ -43,6 +43,11 @@
     cursor: pointer;
     margin-top: 12px;
   }
+
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
   button:hover {
     background-color: #0056b3;
   }
@@ -163,12 +168,13 @@
 </div>
 
 
-  <button id="signup-btn">회원가입</button>
+  <button id="signup-btn" disabled>회원가입</button>
   <script>
     let captchaToken = null;                // 전역 저장소
   
     function onTurnstileSuccess(token) {    // Turnstile 콜백
       captchaToken = token;
+      document.getElementById('signup-btn').disabled = false;
     }
   </script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
@@ -243,6 +249,11 @@
 
       if (password !== passwordConfirm) {
         result.textContent = "❌ 비밀번호가 일치하지 않습니다.";
+        return;
+      }
+
+      if (!captchaToken) {
+        result.textContent = "❌ CAPTCHA를 완료해 주세요.";
         return;
       }
 
