@@ -197,6 +197,11 @@
 
       if (error) {
         result.textContent = "❌ 로그인 실패: " + error.message;
+        if (window.turnstile) {
+          window.turnstile.reset('#turnstile-widget');
+        }
+        captchaToken = null;
+        document.getElementById('login-btn').disabled = true;
       } else {
         result.textContent = "✅ 로그인 성공!";
         window.location.href = "index.html";
