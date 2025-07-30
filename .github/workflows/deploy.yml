@@ -2,7 +2,10 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]          # 기본 브랜치 이름이 main이 아니면 수정
+    branches: [ main ]
+
+permissions:
+  contents: write            # GITHUB_TOKEN 푸시 권한
 
 jobs:
   build-and-deploy:
@@ -17,18 +20,18 @@ jobs:
         with:
           node-version: "20"
 
-      # 3) .env.production 파일 생성 (Secrets 주입)
+      # 3) .env.production 생성
       - name: Generate env file
         run: |
           echo "VITE_SUPABASE_URL=${{ secrets.SUPABASE_URL }}"       >> .env.production
           echo "VITE_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env.production
 
       # 4) 의존성 설치 & 빌드
-      - run: npm ci        # package-lock.json이 없다면 npm install
-      - run: npm run build -- --mode production
+      - run: npm ci
+      - run: npm run build -- --mode production   # Vite이면 이 스크립트가 package.json에 있어야 함
 
-      # 5) gh-pages 브랜치로 배포
+      # 5) gh-pages 브랜치 배포
       - uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GH_PAGES_TOKEN }}
-          publish_dir: ./dist         # Vite 기본 출력 디렉터리
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
