@@ -183,11 +183,27 @@
     import { supabase } from './supabaseClient.js';
     const isDev = window.location.hostname === 'localhost';
 
+    function getLoginErrorMessage(error) {
+      if (!error) return "";
+      if (error.status === 400) {
+        return "❌ 이메일 또는 비밀번호가 잘못되었습니다.";
+      }
+      if (error.message === "Email not confirmed") {
+        return "❌ 이메일 인증이 필요합니다.";
+      }
+      console.error('Unexpected login error:', error);
+      return "❌ 로그인 중 문제가 발생했습니다.";
+    }
+
     document.getElementById("login-btn").addEventListener("click", async () => {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
       const result = document.getElementById("result");
+      if (!email || !password) {
+        result.textContent = "❌ 이메일과 비밀번호를 모두 입력해 주세요.";
+        return;
+      }
       if (!captchaToken) {
         result.textContent = "❌ CAPTCHA를 완료해 주세요.";
         return;
@@ -200,7 +216,7 @@
       document.getElementById('login-btn').disabled = true;
 
       if (error) {
-        result.textContent = "❌ 로그인 실패: " + error.message;
+        result.textContent = getLoginErrorMessage(error);
       } else {
         result.textContent = "✅ 로그인 성공!";
         window.location.href = "index.html";
