@@ -250,6 +250,7 @@
 <script src="notice.js"></script>
 <script type="module">
 import { supabase } from './supabaseClient.js';
+import { validateTicketInputs } from './validateTicketInputs.js';
 const isDev = window.location.hostname === 'localhost';
 
 updateSeatOptions("stadium_select", "seat_grade");
@@ -370,8 +371,15 @@ if (!seat_grade) {
   return;
 }
 const match_time = document.getElementById('match_time').value;
-      const price = parseInt(document.getElementById('price').value);
-      const ticket_count = parseInt(document.getElementById('ticket_count').value);
+      const validation = validateTicketInputs(
+        document.getElementById('price').value,
+        document.getElementById('ticket_count').value,
+        result
+      );
+      if (!validation) {
+        return;
+      }
+      const { price, ticket_count } = validation;
       
       const trade_method = document.getElementById('trade_method').value;
       const trade_description = document.getElementById('trade_description').value;
