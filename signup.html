@@ -1,152 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
-<style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  .container {
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
-  }
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  input[type="email"], input[type="password"], input[type="text"], input[type="date"] {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-  }
-  button {
-    width: 100%;
-    padding: 12px;
-    background-color: #007BFF;
-    border: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 12px;
-  }
-
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  button:hover {
-    background-color: #0056b3;
-  }
-  .home-link {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #007BFF;
-    text-decoration: none;
-  }
-  .home-link:hover {
-    text-decoration: underline;
-  }
-  #result {
-    text-align: center;
-    margin-top: 12px;
-  }
-
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
-}
-.checkbox-group label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.checkbox-group input[type="checkbox"] {
-  margin: 0;
-}
-
-
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
-}
-.checkbox-group label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-}
-.checkbox-group input[type="checkbox"] {
-  margin: 0;
-}
-
-</style>
-
   <meta charset="UTF-8" />
   <title>회원가입</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 480px;
-      margin: 50px auto;
-      padding: 20px;
-      background: #f0f0f0;
-      border-radius: 12px;
-    }
-    h1 {
-      text-align: center;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #007BFF;
-      color: white;
-      cursor: pointer;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-    }
-    .checkbox-group {
-      margin-top: 10px;
-    }
-    .checkbox-group input {
-      width: auto;
-    }
-    .info-note {
-      margin-top: 10px;
-      font-size: 13px;
-      color: #555;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-<div class="container">
+<body class="auth-page signup-page">
+<div class="signup-container">
 
   <h1>회원가입</h1>
 
@@ -192,7 +52,7 @@
     <a href="login.html">이미 계정이 있으신가요? 로그인</a>
   </div>
 
-  <div id="result"></div>
+  <div id="result" class="auth-result"></div>
 
   <script type="module">
     import { supabase } from './supabaseClient.js';
@@ -277,7 +137,7 @@
 
 </script>
 
-<a class="home-link" href="index.html">← 홈으로 돌아가기</a>
+  <a class="auth-home-link" href="index.html">← 홈으로 돌아가기</a>
 </div>
 </body>
 </html>
