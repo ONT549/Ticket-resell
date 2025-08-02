@@ -82,11 +82,18 @@
 
       const section = document.getElementById("account-section");
       if (section) {
+        section.textContent = '';
+        const p = document.createElement('p');
         if (account) {
-          section.innerHTML = `<p>계좌: ${account.bank_name} ${account.account_number} (${account.account_holder})</p>`;
+          p.textContent = `계좌: ${String(account.bank_name)} ${String(account.account_number)} (${String(account.account_holder)})`;
         } else {
-          section.innerHTML = `<p>계좌 미등록 상태입니다. <a href="account.html">등록하기</a></p>`;
+          p.append('계좌 미등록 상태입니다. ');
+          const link = document.createElement('a');
+          link.href = 'account.html';
+          link.textContent = '등록하기';
+          p.appendChild(link);
         }
+        section.appendChild(p);
       }
 
       }
@@ -118,16 +125,42 @@
         return;
       }
 
-      ticketList.innerHTML = "<h2>내 티켓 목록</h2>" + data.map(ticket => `
-        <div style="border: 1px solid #ccc; margin: 10px 0; padding: 10px; border-radius: 8px;">
-          <strong>${ticket.team}</strong> vs ${ticket.opponent_team}<br/>
-          경기장: ${ticket.stadium}<br/>
-          날짜: ${ticket.match_date} ${ticket.match_time}<br/>
-          <strong>좌석</strong><br/>
-          구역(존/블럭): ${ticket.section} 열: ${ticket.row}<br/>
-          가격: ₩${ticket.price} / 수량: ${ticket.ticket_count}
-        </div>
-      `).join("");
+      ticketList.textContent = '';
+      const heading = document.createElement('h2');
+      heading.textContent = '내 티켓 목록';
+      ticketList.appendChild(heading);
+
+      data.forEach(ticket => {
+        const div = document.createElement('div');
+        div.style.border = '1px solid #ccc';
+        div.style.margin = '10px 0';
+        div.style.padding = '10px';
+        div.style.borderRadius = '8px';
+
+        const teamStrong = document.createElement('strong');
+        teamStrong.textContent = String(ticket.team);
+        div.appendChild(teamStrong);
+        div.append(` vs ${String(ticket.opponent_team)}`);
+        div.appendChild(document.createElement('br'));
+
+        div.append(`경기장: ${String(ticket.stadium)}`);
+        div.appendChild(document.createElement('br'));
+
+        div.append(`날짜: ${String(ticket.match_date)} ${String(ticket.match_time)}`);
+        div.appendChild(document.createElement('br'));
+
+        const seatStrong = document.createElement('strong');
+        seatStrong.textContent = '좌석';
+        div.appendChild(seatStrong);
+        div.appendChild(document.createElement('br'));
+
+        div.append(`구역(존/블럭): ${String(ticket.section)} 열: ${String(ticket.row)}`);
+        div.appendChild(document.createElement('br'));
+
+        div.append(`가격: ₩${String(ticket.price)} / 수량: ${String(ticket.ticket_count)}`);
+
+        ticketList.appendChild(div);
+      });
     }
 
     loadUser();

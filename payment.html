@@ -56,13 +56,29 @@ if (!ticketId) {
   if (error || !data) {
     infoDiv.textContent = '티켓을 불러오는 중 오류가 발생했습니다.';
   } else {
-    infoDiv.innerHTML = `
-      <h2>${data.team} vs ${data.opponent_team}</h2>
-      <p>${data.stadium}</p>
-      <p>${data.match_date} ${data.match_time}</p>
-      <p>${data.seat_grade} / ${data.section} / ${data.row}</p>
-      <p><strong>${Number(data.price).toLocaleString()}원</strong></p>
-    `;
+    infoDiv.textContent = '';
+    const title = document.createElement('h2');
+    title.textContent = `${data.team} vs ${data.opponent_team}`;
+    infoDiv.appendChild(title);
+
+    const stadiumP = document.createElement('p');
+    stadiumP.textContent = String(data.stadium);
+    infoDiv.appendChild(stadiumP);
+
+    const dateP = document.createElement('p');
+    dateP.textContent = `${String(data.match_date)} ${String(data.match_time)}`;
+    infoDiv.appendChild(dateP);
+
+    const seatP = document.createElement('p');
+    seatP.textContent = `${String(data.seat_grade)} / ${String(data.section)} / ${String(data.row)}`;
+    infoDiv.appendChild(seatP);
+
+    const priceP = document.createElement('p');
+    const strongPrice = document.createElement('strong');
+    strongPrice.textContent = `${Number(data.price).toLocaleString()}원`;
+    priceP.appendChild(strongPrice);
+    infoDiv.appendChild(priceP);
+
     purchaseBtn.style.display = 'inline-block';
   }
 }

@@ -31,11 +31,13 @@
 
   <script type="module">
     import { supabase } from "../supabaseClient.js";
+    import { createSoccerTicket } from "../soccerTicket.js";
+    import { loadHeader } from "../headerLoader.js";
     const TEAM_NAME = '강원 FC';
 
     async function fetchTickets() {
       const list = document.getElementById('ticket-list');
-      list.innerHTML = '불러오는 중...';
+      list.textContent = '불러오는 중...';
 
       const { data, error } = await supabase
         .from('tickets')
@@ -44,42 +46,25 @@
 
       if (error) {
         console.error('에러:', error.message);
-        list.innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
+        list.textContent = '데이터를 불러오는 중 오류가 발생했습니다.';
         return;
       }
 
       if (!data || data.length === 0) {
-        list.innerHTML = '등록된 티켓이 없습니다.';
+        list.textContent = '등록된 티켓이 없습니다.';
         return;
       }
 
-      list.innerHTML = ''; // 기존 내용 초기화
-
+      list.textContent = '';
       data.forEach(ticket => {
-        const div = document.createElement('div');
-        div.className = 'ticket';
-        div.innerHTML = `
-          <strong>경기 날짜:</strong> ${ticket.match_date} <br>
-          <strong>경기 시간:</strong> ${ticket.match_time}<br>
-          <strong>경기장:</strong> ${ticket.stadium}<br>
-          <strong>좌석 등급:</strong> ${ticket.seat_grade}<br>
-          <strong>좌석 번호:</strong> ${ticket.seat_number}<br>
-          <strong>티켓 당 가격:</strong> ${ticket.price}원<br>
-          <strong>판매 수량:</strong> ${ticket.ticket_count}장<br>
-          <strong>연락처:</strong> ${ticket.contact_method}<br>
-          <strong>추가 설명:</strong> ${ticket.additional_info || '없음'}
-        `;
+        const div = createSoccerTicket(ticket);
         list.appendChild(div);
       });
     }
 
     fetchTickets();
-    
-       fetch("../Soccer-header.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("header-placeholder").innerHTML = data;
-      });
+
+    loadHeader('../Soccer-header.html');
   </script>
 </body>
 </html>

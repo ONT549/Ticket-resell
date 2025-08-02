@@ -18,7 +18,7 @@ export function createSoccerTicket(ticket) {
     const strong = document.createElement('strong');
     strong.textContent = label;
     container.appendChild(strong);
-    container.append(` ${value}`);
+    container.append(` ${String(value ?? '')}`);
     if (index < fields.length - 1) {
       container.appendChild(document.createElement('br'));
     }
