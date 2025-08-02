@@ -32,10 +32,15 @@ deleteForm?.addEventListener('submit', async (e) => {
     result.textContent = '❌ 사용자 정보를 확인할 수 없습니다.';
     return;
   }
+  const response = await fetch('/api/deleteUser', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId: user.id }),
+  });
 
-  const { error: delError } = await supabase.auth.admin.deleteUser(user.id);
-  if (delError) {
-    result.textContent = `❌ ${delError.message}`;
+  const { success, error: delError } = await response.json();
+  if (!success) {
+    result.textContent = `❌ ${delError || '계정 삭제에 실패했습니다.'}`;
     return;
   }
 
