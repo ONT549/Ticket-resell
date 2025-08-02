@@ -2,17 +2,13 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>울산 현대 티켓 목록</title>
-  <!-- Supabase client is loaded via ../supabaseClient.js -->
+  <title>축구 티켓 목록</title>
   <link rel="stylesheet" href="../style.css" />
   <style>
     body {
       font-family: sans-serif;
       padding: 20px;
       background-color: #f9f9f9;
-    }
-    h1 {
-      color: #222;
     }
     .ticket {
       background: #fff;
@@ -26,17 +22,37 @@
 </head>
 <body>
   <div id="header-placeholder"></div>
-  
   <div id="ticket-list">불러오는 중...</div>
-
   <script type="module">
     import { supabase } from "../supabaseClient.js";
     import { createSoccerTicket } from "../soccerTicket.js";
     import { loadHeader } from "../headerLoader.js";
-    const TEAM_NAME = '울산 현대';
+
+    const TEAM_MAP = {
+      fcseoul: "FC 서울",
+      suwonsamsung: "수원 삼성",
+      ulsanhyundai: "울산 현대",
+      jeonbuk: "전북 현대",
+      pohang: "포항 스틸러스",
+      daegu: "대구 FC",
+      gwangju: "광주 FC",
+      jeju: "제주 유나이티드",
+      incheon: "인천 유나이티드",
+      gangwon: "강원 FC"
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const teamKey = params.get('team');
+    const TEAM_NAME = TEAM_MAP[teamKey];
 
     async function fetchTickets() {
       const list = document.getElementById('ticket-list');
+      if (!TEAM_NAME) {
+        list.textContent = '유효한 팀이 지정되지 않았습니다.';
+        return;
+      }
+
+      document.title = `${TEAM_NAME} 티켓 목록`;
       list.textContent = '불러오는 중...';
 
       const { data, error } = await supabase
@@ -57,13 +73,11 @@
 
       list.textContent = '';
       data.forEach(ticket => {
-        const div = createSoccerTicket(ticket);
-        list.appendChild(div);
+        list.appendChild(createSoccerTicket(ticket));
       });
     }
 
     fetchTickets();
-    
     loadHeader('../Soccer-header.html');
   </script>
 </body>
